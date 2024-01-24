@@ -22,6 +22,8 @@ public class SecurityConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		
+		registry.addViewController("/signup").setViewName("signup");
 		registry.addViewController("/home").setViewName("home");
 		registry.addViewController("/member").setViewName("member");
 		registry.addRedirectViewController("/", "/home");
@@ -48,12 +50,11 @@ public class SecurityConfig implements WebMvcConfigurer {
 	SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
 		
 		security.authorizeHttpRequests(request -> {
+			request.requestMatchers("/singup").permitAll();
 			request.anyRequest().fullyAuthenticated();
 		});
 		
-		security.formLogin(form -> {
-			form.defaultSuccessUrl("/home");
-		});
+		security.formLogin(form -> form.loginPage("/signup").defaultSuccessUrl("/"));
 	
 		
 		return security.build();
