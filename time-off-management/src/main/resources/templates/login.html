@@ -1,15 +1,16 @@
-
 <!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="signup.css" rel="stylesheet" >
+    <link  rel="stylesheet" th:href="@{/style/css/signup.css}" >
     <title>Login Form</title>
+    
   </head>
   <body>
   
@@ -17,21 +18,21 @@
         <div class="container-fluid">
         
          
-            <form class="mx-auto">
+            <form class="mx-auto" th:action="@{/login}" method="post">
                
             <div class="user_img">
-                <img src="user.png" alt="" width="70px";>
+                <img th:src="@{/img/GinnIcon.png}" alt="" width="70px";>
             </div>
                 
                 
                 <h4 class="text-center">Login</h4>
                 <div class="mb-3 mt-5">
                   <label for="exampleInputEmail1" class="form-label">User Name</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
+                  <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                   
                 </div>
               

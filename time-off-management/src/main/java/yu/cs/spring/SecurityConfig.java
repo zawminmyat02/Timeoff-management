@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import yu.cs.spring.security.AppUserDetialsService;
@@ -20,14 +20,7 @@ import yu.cs.spring.security.AppUserDetialsService;
 @Configuration
 public class SecurityConfig implements WebMvcConfigurer {
 	
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		
-		registry.addViewController("/signup").setViewName("signup");
-		registry.addViewController("/home").setViewName("home");
-		registry.addViewController("/member").setViewName("member");
-		registry.addRedirectViewController("/", "/home");
-	}
+	
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -47,17 +40,17 @@ public class SecurityConfig implements WebMvcConfigurer {
 	}
 		
 	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
-		security.authorizeHttpRequests(request -> {
-			request.requestMatchers("/singup").permitAll();
-			request.anyRequest().fullyAuthenticated();
-		});
-		
-		security.formLogin(form -> form.loginPage("/signup").defaultSuccessUrl("/"));
+		http.authorizeHttpRequests(request -> {
+			request.requestMatchers("/resources/**","/login","style/css/**").permitAll()
+			.anyRequest().authenticated();
+			
+		}).formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/"));
 	
 		
-		return security.build();
+		
+		return http.build();
 	}
 	
 }
