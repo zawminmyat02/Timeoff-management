@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link  rel="stylesheet" th:href="@{/style/css/signup.css}" >
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link  rel="stylesheet" th:href="@{/css/signup.css}" >
     <title>Login Form</title>
     
   </head>
@@ -18,10 +18,10 @@
         <div class="container-fluid">
         
          
-            <form class="mx-auto" th:action="@{/login}" method="post">
+            <form class="mx-auto" th:action="@{/signup}" method="post">
                
             <div class="user_img">
-                <img th:src="@{/img/GinnIcon.png}" alt="" width="70px";>
+                <img th:src="@{/images/GinnIcon.png}" alt="" width="70px";>
             </div>
                 
                 
@@ -42,7 +42,8 @@
 
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+    <script th:src="@{bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+	
   </body>
 </html>
