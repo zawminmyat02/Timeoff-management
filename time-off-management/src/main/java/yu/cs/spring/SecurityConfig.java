@@ -14,6 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import yu.cs.spring.model.entity.Account.Role;
 import yu.cs.spring.security.AppUserDetialsService;
 
 @EnableWebSecurity
@@ -43,12 +44,12 @@ public class SecurityConfig implements WebMvcConfigurer {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests(request -> {
-			request.requestMatchers("/resources/**","/login","style/css/**").permitAll()
+			request.requestMatchers("/resources/**","/login","/signup","images/**","css/**","bootstrap/css/**","bootstrap/js/**").permitAll()
+			.requestMatchers("/home").hasAuthority(Role.Admin.name())
 			.anyRequest().authenticated();
 			
-		}).formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/"));
+		}).formLogin(form -> form.loginPage("/login").loginProcessingUrl("/signup").defaultSuccessUrl("/home",true));
 	
-		
 		
 		return http.build();
 	}

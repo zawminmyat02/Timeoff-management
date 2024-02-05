@@ -7,14 +7,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import jakarta.transaction.Transactional;
-import yu.cs.spring.model.entity.User;
-import yu.cs.spring.model.repo.UserRepo;
+import yu.cs.spring.model.entity.Account;
+import yu.cs.spring.model.entity.Account.Role;
+import yu.cs.spring.model.repo.AccountRepo;
 
 @Component
 public class AppUserInitializer {
 
 	@Autowired
-	private UserRepo userRepo;
+	private AccountRepo userRepo;
 	
 	@Autowired
 	private PasswordEncoder encoder;
@@ -23,10 +24,11 @@ public class AppUserInitializer {
 	@EventListener(classes =  ContextRefreshedEvent.class)
 	public void createAdmin() {
 		if(userRepo.count()==0) {
-			var user = new User();
-			user.setName("Admin");
-			user.setPassword(encoder.encode("adminpwd"));
-			userRepo.save(user);
+			var account = new Account();
+			account.setName("Admin");
+			account.setPassword(encoder.encode("adminpwd"));
+			account.setRole(Role.Admin);
+			userRepo.save(account);
 		}
 	}
 }

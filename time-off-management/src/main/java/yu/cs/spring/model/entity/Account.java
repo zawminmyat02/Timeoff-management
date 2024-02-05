@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class User implements Serializable {
+public class Account implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -22,6 +22,22 @@ public class User implements Serializable {
 	private String name;
 	@Column(nullable = false)
 	private String password;
+	
+	@Column(nullable = false)
+	private Role role;
+	
+	public enum Role {
+		Admin, Member
+	}
+	
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	public int getId() {
 		return id;
 	}
