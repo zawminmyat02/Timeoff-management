@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import yu.cs.spring.model.form.MemberForm;
 
 @Entity
 @Data
@@ -20,11 +21,25 @@ public class Account implements Serializable {
 	private int id;
 	@Column(nullable = false)
 	private String name;
+	@Column(nullable = false, unique = true)
+	private String email;
 	@Column(nullable = false)
 	private String password;
-	
+	@Column(nullable = false)
+	private String phone;
 	@Column(nullable = false)
 	private Role role;
+	
+	public Account() {
+	}
+	
+	public Account(MemberForm form) {
+		this.name= form.getName();
+		this.email= form.getEmail();
+		this.password= form.getPassword();
+		this.role= Role.Member;
+		this.phone= form.getPhone();
+	}
 	
 	public enum Role {
 		Admin, Member
