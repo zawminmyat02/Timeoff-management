@@ -1,0 +1,17 @@
+.card{
+    background-color: rgb(2, 8, 15);
+}
+
+.form-control{
+	line-height: 2;
+	margin: 5px;
+	color: black;
+	border: 5px solid cornflowerblue;
+}
+
+label{
+	color: aliceblue;
+	margin:5px;
+	margin-top: 10px;
+}
+

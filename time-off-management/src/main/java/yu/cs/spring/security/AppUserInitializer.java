@@ -26,8 +26,10 @@ public class AppUserInitializer {
 		if(userRepo.count()==0) {
 			var account = new Account();
 			account.setName("Admin");
+			account.setEmail("admin@gmail.com");
 			account.setPassword(encoder.encode("adminpwd"));
 			account.setRole(Role.Admin);
+			account.setPhone("09778204234");
 			userRepo.save(account);
 		}
 	}
