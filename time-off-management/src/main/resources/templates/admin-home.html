@@ -10,7 +10,7 @@
 	<header class="margin-left" th:fragement="header">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="m-4">
-                            <h1 class="text-white d-none d-lg-inline mb-4">Leave Requests</h1>
+                            <h1 class="text-white d-lg-inline mb-4">Leave Requests</h1>
                             <h6 class="text-muted d-none d-lg-block mt-3">Approve or reject leave requests</h6>
                         </div>
                         <div class="flex-fill"></div>
@@ -24,7 +24,7 @@
                                         <img th:src="@{/images/profile.jpg}" class="rounded-circle rounded-circle-custom " alt="Face 1">
                                     </div>
                                     <div class="m-3">
-                                        <h5 class="font-bold">John Duck</h5>
+                                        <h5 class="font-bold" style="color:aqua">John Duck</h5>
                                         <h6 class="text-muted mb-0">@johnducky</h6>
                                     </div>
                                 </a>
@@ -34,13 +34,15 @@
                                         <a href="#" class="dropdown-item">User Profile</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="dropdown-item">Logout</a>
+                                        <a th:href="@{/logout}" id="signoutLink" class="dropdown-item">Logout</a>
                                     </li>
                                 </ul>
                             </li>
                         </div>
                     </nav>
                 </header>
+                
+                
 	
 	   <div class="row margin-left">
 
@@ -131,6 +133,8 @@
                     </div>
                     </div>
   </section>
+  
+  
 </body>
 
 </html>

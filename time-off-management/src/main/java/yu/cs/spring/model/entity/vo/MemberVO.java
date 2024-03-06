@@ -10,6 +10,7 @@ public class MemberVO {
 	private String name;
 	private String email;
 	private String phone;
+	private int salary;
 	
 	public MemberVO() {
 	}
@@ -20,6 +21,7 @@ public class MemberVO {
 		this.name = account.getName();
 		this.email = account.getEmail();
 		this.phone=account.getPhone();
+		this.salary = account.getSalary();
 	}
 	
 
@@ -55,6 +57,14 @@ public class MemberVO {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
 	}
 
 	@Override

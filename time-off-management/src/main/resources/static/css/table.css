@@ -42,6 +42,11 @@ th {
     color: white;
 }
 
+.bg-member{
+	background: linear-gradient(90deg, rgba(75,14,154,1) 0%, rgba(75,14,154,1) 35%, rgb(0, 0, 0) 100%);
+	color: white;
+}
+
 
 
 .custom-border {
