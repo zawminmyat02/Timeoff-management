@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  
+</head>
+
+<style>
+	body {
+    background-color: rgb(16, 16, 23);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px;
+}
+
+main{
+	min-height: 100vh;
+}
+
+.list-group {
+    background-color:rgb(16, 16, 23);
+    border-radius: 10px;
+}
+
+.list-group-item {
+
+    background-color: rgb(16, 16, 23);
+    color: white;
+    padding: 10px 35px;
+    margin: 10px;
+}
+
+.rounded-circle-custom {
+    width: 50px;
+    /* Adjust the size as needed */
+    height: 50px;
+
+    /* Adjust the size as needed */
+}
+
+.sidebar {
+    margin-top: 15px;
+
+
+}
+
+.margin-left {
+    margin-left: 30px;
+}
+
+.btn-secondary {
+    color: whitesmoke;
+    background-color: #1e1e1f;
+    border-color: #292a2c;
+}
+
+.btn {
+    line-height: 1rem;
+    border-radius: 10px;
+    font-weight: 300;
+    padding: 9px 15px;
+}
+
+
+
+.form-control:focus {
+    background-color: rgb(26, 26, 27);
+    border-color: #141515;
+    box-shadow: 0 0 0 0.25rem rgba(252, 252, 252, 0.25);
+}
+
+
+
+.search .form-control {
+    padding-left: 2.375rem;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+    color: white;
+    background-color: #141515;
+    border-radius: 10px;
+    line-height: 2.2;
+
+}
+
+.search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 3;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+
+}
+
+
+
+@media (max-width: 576px) {
+    img {
+        margin-left: 30px;
+        /* Adjust the margin for smaller screens */
+    }
+
+
+}
+</style>
+   
+<body>
+
+<div class="container">
+   
+    <div class="row "><!--Main content-->
+        
+        <nav class="col-2">
+
+                <h1 class="h4 text-center text-white-50 py-4">
+
+                    <img th:src="@{/images/Eru.jpg}" class="rounded-circle rounded-circle-custom " alt="Profile Picture">
+                    <span class="d-none d-lg-inline">Linn</span>
+
+
+                </h1>
+
+
+                <div class="list-group text-center text-lg-start">
+
+                    <a th:href="@{/home}" class="list-group-item list-group-item-dark list-group-item-action">
+						<i class="fa-solid fa-paper-plane"></i>
+                        <span class="d-none d-lg-inline">Leave</span>
+                    </a>
+
+                    <a href="department.html" class="list-group-item list-group-item-dark list-group-item-action">
+                        <i class="fa-solid fa-building"></i>
+                        <span class="d-none d-lg-inline">Department</span>
+                    </a>
+
+                   
+                    <a href="salary.html" class="list-group-item  list-group-item-dark list-group-item-action">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="d-none d-lg-inline">Salaries</span>
+                    </a>
+                    <a href="reports.html" class="list-group-item list-group-item-dark list-group-item-action">
+                        <i class="fas fa-flag"></i>
+                        <span class=" d-none d-lg-inline">Reports</span>
+                    </a>
+
+                    <a href="settings.html" class="list-group-item list-group-item-dark list-group-item-action">
+                        <i class="fa-solid fa-bars"></i>
+                        <span class="d-none d-lg-inline">Settings</span>
+                    </a>
+                </div>
+            </nav>
+    
+    	 <main class="col-10">
+
+                <div class="margin-left">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div class="m-4">
+                            <h1 class="text-white d-none d-lg-inline mb-4">Leave Requests</h1>
+                        </div>
+                        <div class="flex-fill"></div>
+
+
+                        <div class="navbar nav">
+                            <li class="nav-item dropdown">
+                                <a href="#" class="d-flex align-items-center nav-link dropdown-toggle"
+                                    data-bs-toggle="dropdown">
+                                      <div class="avatar avatar-xl">
+                                        <img th:src="@{/images/2.jpg}" class="rounded-circle rounded-circle-custom " alt="Face 1">
+                                    </div>
+                                    <div class="m-3">
+                                        <h5 class="font-bold" style="color:aqua">You</h5>
+                                    </div>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#" class="dropdown-item">User Profile</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/logout}" id="signoutLink" class="dropdown-item">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                    </nav>
+                </div>
+
+
+        </div>
+        </main>
+                
+    </div>
+</div>
+
+<script src=" https://kit.fontawesome.com/79c067b319.js" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+	 
+</body>
+</html>

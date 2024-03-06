@@ -31,4 +31,8 @@ public class AccountService {
 		return repo.findAllMembers().stream().map(MemberVO::new).toList();
 	}
 
+	public boolean emailAlreadyExists(String email) {
+		return repo.existsByEmail(email);
+	}
+
 }

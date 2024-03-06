@@ -16,19 +16,21 @@ public class MemberForm implements Serializable{
 	@NotBlank(message = "Enter Password.")
 	private String password;
 	@NotBlank(message = "Enter Phone.")
-	private String phone;	
+	private String phone;
+	@NotBlank(message = "Enter Phone.")
+	private int salary;	
 	
 	public MemberForm() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public MemberForm(String name,String email,String phone) {
+	public MemberForm(String name,String email,String phone,int salary) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
+		this.salary=salary;
 	}
-
 
 
 	public String getPhone() {
@@ -64,11 +66,20 @@ public class MemberForm implements Serializable{
 		this.password = password;
 	}
 
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
 	@Override
 	public String toString() {
 		return "SignUpForm [name=" + name + ", loginId=" + email + ", password=" + password + "]";
 	}
 
+	
 	
 
 }

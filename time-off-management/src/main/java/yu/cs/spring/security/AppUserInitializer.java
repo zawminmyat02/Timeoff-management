@@ -30,6 +30,7 @@ public class AppUserInitializer {
 			account.setPassword(encoder.encode("adminpwd"));
 			account.setRole(Role.Admin);
 			account.setPhone("09778204234");
+			account.setSalary(10000000);
 			userRepo.save(account);
 		}
 	}

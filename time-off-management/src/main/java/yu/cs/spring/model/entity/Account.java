@@ -7,13 +7,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
 import yu.cs.spring.model.form.MemberForm;
 
 @Entity
-@Data
 public class Account implements Serializable {
 
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -21,12 +20,14 @@ public class Account implements Serializable {
 	private int id;
 	@Column(nullable = false)
 	private String name;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true )
 	private String email;
 	@Column(nullable = false)
 	private String password;
 	@Column(nullable = false)
 	private String phone;
+	@Column(nullable = false)
+	private int salary;
 	@Column(nullable = false)
 	private Role role;
 	
@@ -39,6 +40,7 @@ public class Account implements Serializable {
 		this.password= form.getPassword();
 		this.role= Role.Member;
 		this.phone= form.getPhone();
+		this.salary= form.getSalary();
 	}
 	
 	public enum Role {
@@ -71,4 +73,31 @@ public class Account implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	
+	
+	
 }

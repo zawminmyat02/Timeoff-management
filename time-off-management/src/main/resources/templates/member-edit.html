@@ -18,7 +18,7 @@
 		</nav>
 		</header>
 	    <div class="row ">
-            <div class="col-md-6 col-12">
+            <div class="col-md-5 col-9">
 		<div class="card">
                    
                     <div class="card-content">
@@ -29,31 +29,41 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="name">Name</label>
-                                                <input type="text" id="name" th:field="*{name}" class="form-control"
+                                                <input type="text" id="name" th:field="*{name}" class="form-control custom-form-control"
                                                     name="fname" placeholder="First Name">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="email">Email</label>
-                                                <input type="email" id="email" th:field="*{email}" class="form-control"
+                                                <input type="email" id="email" th:field="*{email}" class="form-control custom-form-control"
                                                     name="email" placeholder="Email">
+                                                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: aqua;">Incorrect email</p>
+                                                
                                             </div>
                                         </div>
                                         
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input type="password" id="password" th:field="*{password}" class="form-control"
+                                                <input type="password" id="password" th:field="*{password}" class="form-control custom-form-control"
                                                     name="password" placeholder="Password">
                                             </div>
                                         </div>
                                         
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label for="password">Phone</label>
-                                                <input type="tel" id="phone" class="form-control"
+                                                <label for="phone">Phone</label>
+                                                <input type="tel" id="phone" class="form-control custom-form-control"
                                                     name="phone" th:field="*{phone}" placeholder="Phone">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="salary">Salary</label>
+                                                <input type="number" id="salary" class="form-control custom-form-control"
+                                                    name="salary" th:field="*{salary}" placeholder="Salary">
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -79,5 +89,18 @@
                </div>
                </div>
 	</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  // Check for changes in input fields
+  $(document).ready(function() {
+    $('.custom-form-control').on('input', function() {
+      if ($(this).val() !== '') {
+        $(this).addClass('autofilled');
+      } else {
+        $(this).removeClass('autofilled');
+      }
+    });
+  });
+</script>
 </body>
 </html>

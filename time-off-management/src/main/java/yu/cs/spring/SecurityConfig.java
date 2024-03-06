@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import yu.cs.spring.model.entity.Account.Role;
@@ -43,13 +43,23 @@ public class SecurityConfig implements WebMvcConfigurer {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
+		
 		http.authorizeHttpRequests(request -> {
 			request.requestMatchers("/resources/**","/login","/signup","images/**","css/**","bootstrap/css/**","bootstrap/js/**").permitAll()
-			.requestMatchers("/home").hasAuthority(Role.Admin.name())
+			.requestMatchers("/home").hasAnyAuthority(Role.Admin.name(),Role.Member.name())
+			.requestMatchers("/member/**").hasAnyAuthority(Role.Admin.name())
 			.anyRequest().authenticated();
-			
-		}).formLogin(form -> form.loginPage("/login").loginProcessingUrl("/signup").defaultSuccessUrl("/home",true));
 	
+			
+		}).formLogin(form -> 
+		form.loginPage("/login").loginProcessingUrl("/signup")
+		.defaultSuccessUrl("/home",true));
+		
+		http.logout(a -> a.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").deleteCookies("JSESSIONID")
+				.invalidateHttpSession(true));
+		
+
+		
 		
 		return http.build();
 	}

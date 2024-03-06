@@ -13,6 +13,7 @@ public interface AccountRepo extends JpaRepositoryImplementation<Account, Intege
 	Optional<Account> findByEmail(String username);
 	
 	  @Query("SELECT a FROM Account a WHERE a.role = 1")
-	   List<Account> findAllMembers();
+	  List<Account> findAllMembers();
 
+	  boolean existsByEmail(String email);
 }
