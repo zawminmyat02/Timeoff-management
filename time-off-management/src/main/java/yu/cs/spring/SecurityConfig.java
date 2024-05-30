@@ -14,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import yu.cs.spring.model.entity.Account.Role;
+import yu.cs.spring.model.master.entity.Account.Role;
 import yu.cs.spring.security.AppUserDetialsService;
 
 @EnableWebSecurity
@@ -46,7 +46,7 @@ public class SecurityConfig implements WebMvcConfigurer {
 		
 		http.authorizeHttpRequests(request -> {
 			request.requestMatchers("/resources/**","/login","/signup","images/**","css/**","bootstrap/css/**","bootstrap/js/**").permitAll()
-			.requestMatchers("/home").hasAnyAuthority(Role.Admin.name(),Role.Member.name())
+			.requestMatchers("/home").hasAnyAuthority(Role.Admin.name(),Role.Employee.name())
 			.requestMatchers("/member/**").hasAnyAuthority(Role.Admin.name())
 			.anyRequest().authenticated();
 	

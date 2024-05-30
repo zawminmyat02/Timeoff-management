@@ -1,0 +1,51 @@
+package yu.cs.spring.controller;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import jakarta.validation.Valid;
+import yu.cs.spring.model.master.entity.Department;
+import yu.cs.spring.model.master.input.DepartmentFormForCreate;
+import yu.cs.spring.model.master.output.DepartmentInfo;
+import yu.cs.spring.model.master.service.DepartmentService;
+
+@Controller
+public class DepartmentController {
+
+	@Autowired
+    private DepartmentService departmentService;
+
+    @GetMapping("/departments/new")
+    public String showCreateDepartmentForm(Model model) {
+        model.addAttribute("departmentForm", new DepartmentFormForCreate("", "", ""));
+        return "create-department";
+    }
+
+    @PostMapping("/departments")
+    public String createDepartment(@Valid @ModelAttribute("departmentForm") DepartmentFormForCreate departmentForm, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "createDepartment";
+        }
+        Department department = departmentForm.entity();
+        departmentService.saveDepartment(department);
+        return "redirect:/departments";
+    }
+
+    @GetMapping("/departments")
+    public String showDepartmentList(Model model) {
+        List<Department> departmentList = departmentService.findAll();
+        List<DepartmentInfo> departmentInfoList = departmentList.stream()
+                .map(DepartmentInfo::from)
+                .collect(Collectors.toList());
+        model.addAttribute("departments", departmentInfoList);
+        return "department-list";
+    }
+}

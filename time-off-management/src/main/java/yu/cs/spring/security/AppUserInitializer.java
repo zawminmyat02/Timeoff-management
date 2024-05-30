@@ -1,37 +1,35 @@
 package yu.cs.spring.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
-import jakarta.transaction.Transactional;
-import yu.cs.spring.model.entity.Account;
-import yu.cs.spring.model.entity.Account.Role;
-import yu.cs.spring.model.repo.AccountRepo;
+import yu.cs.spring.model.master.entity.Account;
+import yu.cs.spring.model.master.entity.Account.Role;
+import yu.cs.spring.model.master.repo.AccountRepo;
 
-@Component
+@Configuration
 public class AppUserInitializer {
-
-	@Autowired
-	private AccountRepo userRepo;
 	
+	@Autowired
+	private AccountRepo repo;
 	@Autowired
 	private PasswordEncoder encoder;
-	
-	@Transactional
-	@EventListener(classes =  ContextRefreshedEvent.class)
-	public void createAdmin() {
-		if(userRepo.count()==0) {
-			var account = new Account();
-			account.setName("Admin");
-			account.setEmail("admin@gmail.com");
-			account.setPassword(encoder.encode("adminpwd"));
-			account.setRole(Role.Admin);
-			account.setPhone("09778204234");
-			account.setSalary(10000000);
-			userRepo.save(account);
-		}
+
+	@Bean
+	ApplicationRunner applicationRunner() {
+		return args -> {
+			if(repo.count() == 0L) {
+				var admin = new Account();
+				admin.setName("Admin User");
+				admin.setUsername("admin");
+				admin.setPassword(encoder.encode("adminpass"));
+				admin.setRole(Role.Admin);
+				admin.setActivated(true);
+				repo.save(admin);
+			}
+		};
 	}
 }

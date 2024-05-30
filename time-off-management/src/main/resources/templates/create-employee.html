@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/admin-board.html}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/form.css}">
+</head>
+<body>
+
+	<section layout:fragment="content">
+		<header class="margin-left" th:fragement="header">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="m-4">
+					<h1 class="text-white d-lg-inline mb-4">Team Members</h1>
+				</div>
+				<div class="flex-fill"></div>
+
+
+			</nav>
+		</header>
+
+		<div class="row px-5 mt-4">
+
+			<div class="col-9 form-group search">
+				<span class="fa fa-search form-control-feedback"></span> <input
+					type="text" class="form-control"
+					placeholder="Search for team members"
+					style="background-color: #2d3340;">
+			</div>
+
+			<div class="col-3">
+				<a th:href="@{/member/edit}">
+					<button type="button" class="btn btn-outline-info"
+						style="height: 50px">
+						<i class="fa-sharp fa-solid fa-plus fa-xl"></i>
+					</button>
+				</a>
+			</div>
+
+
+		</div>
+
+
+		<h1>Create Employee</h1>
+		<form th:action="@{/employees}" th:object="${employeeForm}"
+			method="post">
+			<div>
+				<label for="name">Name:</label> <input type="text" id="name"
+					th:field="*{name}" required> <span
+					th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Please
+					enter employee name.</span>
+			</div>
+			<div>
+				<label for="department">Department:</label> <input type="text"
+					id="department" th:field="*{department}">
+			</div>
+			<div>
+				<label for="position">Position:</label> <select id="position"
+					name="position" th:field="*{position}">
+					<option value="MGR">Manager</option>
+					<option value="ASM">Assistant Manager</option>
+					<option value="SPV">Supervisor</option>
+					<option value="ASS">Assistant Supervisor</option>
+					<option value="EMP">Employee</option>
+				</select>
+			</div>
+			<div>
+				<label for="phone">Phone:</label> <input type="text" id="phone"
+					th:field="*{phone}" required> <span
+					th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Please
+					enter phone.</span>
+			</div>
+			<div>
+				<label for="email">Email:</label> <input type="email" id="email"
+					th:field="*{email}" required> <span
+					th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Please
+					enter email.</span>
+			</div>
+			<div>
+				<label for="gender">Gender:</label> <select id="gender"
+					th:field="*{gender}" required>
+					<option th:each="gen : ${genders}" th:value="${gen}"
+						th:text="${gen}">Gender</option>
+				</select> <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Please
+					select gender.</span>
+			</div>
+			<div>
+				<label for="dob">Date of Birth:</label> <input type="date" id="dob"
+					th:field="*{dob}" required> <span
+					th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}">Please
+					enter date of birth.</span>
+			</div>
+			<div>
+				<label for="assignDate">Assign Date:</label> <input type="date"
+					id="assignDate" th:field="*{assignDate}" required> <span
+					th:if="${#fields.hasErrors('assignDate')}"
+					th:errors="*{assignDate}">Please enter assign date.</span>
+			</div>
+			<div>
+				<label for="status">Status:</label> <select id="status"
+					th:field="*{status}" required>
+					<option th:each="stat : ${statuses}" th:value="${stat}"
+						th:text="${stat}">Status</option>
+				</select> <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}">Please
+					select status.</span>
+			</div>
+			<div>
+				<label for="remark">Remark:</label>
+				<textarea id="remark" th:field="*{remark}"></textarea>
+			</div>
+			<div>
+				<button type="submit">Create Employee</button>
+			</div>
+		</form>
+
+	</section>
+
+</body>
+</html>
+
