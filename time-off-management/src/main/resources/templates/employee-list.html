@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/admin-board.html}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section layout:fragment = "content">
+		<header class="margin-left" th:fragement="header">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div class="m-4">
+                            <h1 class="text-white d-lg-inline mb-4">Team Members</h1>
+                        </div>
+                        <div class="flex-fill"></div>
+                        
+                       
+		</nav>
+		</header>
+		
+		  <div class="row px-5 mt-4">
+		  
+                    <div class="col-9 form-group search">
+                        <span class="fa fa-search form-control-feedback"></span>
+                        <input type="text" class="form-control" placeholder="Search for team members" style="background-color: #2d3340;">
+                    </div>
+                    
+                     <div class="col-3">
+                    
+                    </div>
+                    
+                   
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Status</th>
+                <th>Assign Date</th>
+                <th>Probation Pass Date</th>
+                <th>Retired At</th>
+                <th>Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.code}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.phone}"></td>
+                <td th:text="${employee.department}"></td>
+                <td th:text="${employee.getPositionName()}"></td>
+                <td th:text="${employee.status}"></td>
+                <td th:text="${employee.assignAt}"></td>
+                <td th:text="${employee.probationPassAt}"></td>
+                <td th:text="${employee.retiredAt}"></td>
+                <td th:text="${employee.remark}"></td>
+            </tr>
+        </tbody>
+    </table>
+                    
+
+           </div>
+       </section>
+</body>
+</html>

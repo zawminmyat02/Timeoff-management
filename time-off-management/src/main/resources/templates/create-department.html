@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Department</title>
+</head>
+<body>
+    <h1>Create Department</h1>
+    <form th:action="@{/departments}" th:object="${departmentForm}" method="post">
+        <div>
+            <label for="code">Code:</label>
+            <input type="text" id="code" th:field="*{code}" required>
+            <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}">Department code is already used.</span>
+        </div>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" required>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Please enter department name.</span>
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}"></textarea>
+        </div>
+        <div>
+            <button type="submit">Create Department</button>
+        </div>
+    </form>
+</body>
+</html>

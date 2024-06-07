@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import yu.cs.spring.model.repo.AccountRepo;
+import yu.cs.spring.model.master.repo.AccountRepo;
 
 @Service
 public class AppUserDetialsService implements UserDetailsService{
@@ -19,7 +19,7 @@ public class AppUserDetialsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		return userRepo.findByEmail(username)
+		return userRepo.findByUsername(username)
 				.map(user -> User.withUsername(username)
 						.password(user.getPassword())
 						.authorities(AuthorityUtils.createAuthorityList(user.getRole().name()))
