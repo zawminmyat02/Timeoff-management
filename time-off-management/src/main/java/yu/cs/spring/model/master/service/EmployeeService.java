@@ -45,7 +45,7 @@ public class EmployeeService {
 		 
 		 PositionPk positionPk = new PositionPk();
 		 positionPk.setDepartmentCode(form.department());
-		 positionPk.setPositionCode(form.position());
+		 positionPk.setPositionCode(form.positionCode());
 		 Optional<Position> position = positionRepo.findById(positionPk);
 
 		 entity.setDepartment(department.get());

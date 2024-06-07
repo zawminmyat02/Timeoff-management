@@ -1,49 +1,136 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mysterious Dark Mode Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #000000);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
-    <link  rel="stylesheet" th:href="@{/css/login.css}" >
-    <title>Login Form</title>
-    
-  </head>
-  <body>
-  
+        .login-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.5s ease-in-out;
+        }
 
-        <div class="container-fluid">
-        
-         
-            <form class="mx-auto" th:action="@{/signup}" method="post">
-               
-            <div class="user_img mb-3">
-                <img th:src="@{/images/login.jpg}" alt="">
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-container input {
+            width: 100%;
+            padding: 15px 20px;
+            padding-left: 50px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .input-container input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(98, 0, 234, 0.7);
+        }
+
+        .input-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6200ea;
+        }
+
+        .login-container button[type="submit"] {
+            background: linear-gradient(45deg, #6200ea, #b388ff);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-container button[type="submit"]:hover {
+            background: linear-gradient(45deg, #b388ff, #6200ea);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(98, 0, 234, 0.3);
+        }
+
+        .login-container button[type="submit"]:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(98, 0, 234, 0.2);
+        }
+
+        .login-container .input-container input::placeholder {
+            color: #cccccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <h1>Login</h1>
+        <form th:action="@{/signup}" method="post">
+            <div class="input-container">
+                <i class="fas fa-user icon"></i>
+                <input type="text" id="username" name="username" placeholder="Username" required>
             </div>
-                
-                
-                <h4 class="text-center">Login</h4>
-                <div class="mb-3 mt-5">
-                  <label for="exampleInputEmail1" class="form-label">User Name</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" name="password">
-                  
-                </div>
-              
-                <button type="submit" class="btn btn-primary mt-5 mr-10">Login</button>
-              </form>
-        </div>
+            <div class="input-container">
+                <i class="fas fa-lock icon"></i>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 
+</body>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script th:src="@{bootstrap/js/bootstrap.bundle.min.js}"></script>
-	<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
-	
-  </body>
 </html>

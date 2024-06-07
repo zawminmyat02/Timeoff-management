@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+	.rounded-circle{
+		width: 50px;
+		height: 50px;
+	}
+</style>
 <body>
 	<section layout:fragment="content">
 	
@@ -21,7 +27,7 @@
                                 <a href="#" class="d-flex align-items-center nav-link dropdown-toggle"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-xl">
-                                        <img th:src="@{/images/profile.jpg}" class="rounded-circle rounded-circle-custom " alt="Face 1">
+                                        <img th:src="@{/images/profile.jpg}" class="rounded-circle " alt="Face 1" style="width: 50px; height: 50px;">
                                     </div>
                                     <div class="m-3">
                                         <h5 class="font-bold" style="color:aqua">John Duck</h5>
@@ -66,7 +72,7 @@
                 </div>
 
                 <div class="mt-5 px-4 mx-3  " style="margin-left: 0px;">
-                    <div class="tbl-container bdr   custom-border">
+                    <div class="tbl-container">
                         <!-- <== overflow: hidden applied to parent -->
                         <table class="table table-hover table-responsive-sm table-borderless" style="padding: auto;">
                             <thead class="bg-red">

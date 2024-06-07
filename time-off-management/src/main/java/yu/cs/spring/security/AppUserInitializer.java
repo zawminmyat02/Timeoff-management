@@ -21,7 +21,7 @@ public class AppUserInitializer {
 	@Bean
 	ApplicationRunner applicationRunner() {
 		return args -> {
-			if(repo.count() == 0L) {
+			if(repo.count() != 0L) {
 				var admin = new Account();
 				admin.setName("Admin User");
 				admin.setUsername("admin");

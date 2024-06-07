@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/admin-board.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #d3d3d3;
+        }
+
+        .header {
+            color: #d3d3d3;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .brand-title {
+            font-size: 24px;
+            color: #4da8da;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            margin: 15px;
+            width: calc(33.333% - 30px);
+            background-color: #2d2d2d;
+            color: #d3d3d3;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #4da8da;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .card-text strong {
+            color: #4da8da;
+        }
+
+        .card-text span {
+            color: #e0e0e0;
+        }
+
+        .icon {
+            margin-right: 10px;
+            color: #4da8da;
+        }
+
+        .card-header {
+            background-color: #333;
+            color: #4da8da;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            font-size: 18px;
+        }
+
+        .btn-add {
+            background-color: #4da8da;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-add:hover {
+            background-color: #388bb5;
+            transform: scale(1.05);
+        }
+
+        .btn-add i {
+            margin-right: 8px;
+        }
+
+        .add-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <section layout:fragment="content">
+        <div class="container mt-4">
+            <header class="header mb-5">
+                <h1 class="brand-title">Positions</h1>
+            </header>
+            <div class="add-container">
+                <a href="/positions/new" class="btn-add"><i class="fas fa-plus-circle"></i> Add New Position</a>
+            </div>
+            <div class="card-container">
+                <div class="card" th:each="position : ${positions}">
+                    <div class="card-header">Position Details</div>
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-briefcase icon"></i> Position Info</h5>
+                        <p class="card-text"><strong><i class="fas fa-code icon"></i> Code:</strong> <span th:text="${position.getCode()}"></span></p>
+                        <p class="card-text"><strong><i class="fas fa-id-badge icon"></i> Position Code:</strong> <span th:text="${position.getPositionCode()}"></span></p>
+                        <p class="card-text"><strong><i class="fas fa-user-tag icon"></i> Position Name:</strong> <span th:text="${position.getPositionName()}"></span></p>
+                        <p class="card-text"><strong><i class="fas fa-building icon"></i> Department Code:</strong> <span th:text="${position.departmentCode}"></span></p>
+                        <p class="card-text"><strong><i class="fas fa-building icon"></i> Department Name:</strong> <span th:text="${position.departmentName}"></span></p>
+                        <p class="card-text"><strong><i class="fas fa-money-bill icon"></i> Basic Salary:</strong> <span th:text="${position.basicSalary}"></span></p>
+                        <p class="card-text"><strong><i class="fas fa-clock icon"></i> OT Fees Per Hour:</strong> <span th:text="${position.otFeesPerHour}"></span></p>
+                        <p class="card-text"><strong><i class="fas fa-calendar-alt icon"></i> Annual Leaves:</strong> <span th:text="${position.anualLeaves}"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
