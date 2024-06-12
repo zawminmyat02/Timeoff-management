@@ -21,42 +21,45 @@ import yu.cs.spring.model.master.repo.PositionRepo;
 @Service
 public class EmployeeService {
 
-	 @Autowired
-	 private EmployeeRepo employeeRepo;
-	 
-	 @Autowired
-	 private EmployeeCodeGenerator codeGenerator;
-	 
-	 @Autowired
-	 private PasswordEncoder encoder;
-	 
-	 @Autowired
-	 private DepartmentRepo departmentRepo;
-	 
-	 @Autowired
-	 private PositionRepo positionRepo;
+	@Autowired
+	private EmployeeRepo employeeRepo;
 
-	 public void saveEmployee(EmployeeFormForCreate form) {
-			
-		 var code = codeGenerator.next(form.department());
-		 var password = encoder.encode("123456");
-			
-		 var entity = form.entity(code, password);
-		 Optional<Department>  department = departmentRepo.findById(form.department());
-		 
-		 PositionPk positionPk = new PositionPk();
-		 positionPk.setDepartmentCode(form.department());
-		 positionPk.setPositionCode(form.positionCode());
-		 Optional<Position> position = positionRepo.findById(positionPk);
+	@Autowired
+	private EmployeeCodeGenerator codeGenerator;
 
-		 entity.setDepartment(department.get());
-		 entity.setPosition(position.get());
-		 employeeRepo.saveAndFlush(entity);
-	 }
+	@Autowired
+	private PasswordEncoder encoder;
 
-	 public List<Employee> findAll() {
-	    return employeeRepo.findAll();
-	 }
+	@Autowired
+	private DepartmentRepo departmentRepo;
 
-	
+	@Autowired
+	private PositionRepo positionRepo;
+
+	public void saveEmployee(EmployeeFormForCreate form) {
+
+		var code = codeGenerator.next(form.department());
+		var password = encoder.encode("123456");
+
+		var entity = form.entity(code, password);
+		Optional<Department> department = departmentRepo.findById(form.department());
+
+		PositionPk positionPk = new PositionPk();
+		positionPk.setDepartmentCode(form.department());
+		positionPk.setPositionCode(form.positionCode());
+		Optional<Position> position = positionRepo.findById(positionPk);
+
+		entity.setDepartment(department.get());
+		entity.setPosition(position.get());
+		employeeRepo.saveAndFlush(entity);
+	}
+
+	public List<Employee> findAll() {
+		return employeeRepo.findAll();
+	}
+
+	public Employee getEmployeeByUsername(String username) {
+		return employeeRepo.findByAccountUsername(username);
+	}
+
 }

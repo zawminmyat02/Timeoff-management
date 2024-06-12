@@ -32,6 +32,6 @@ public class ChangePasswordController {
         }
 
         accountService.changePassword(user.getUsername(), newPassword);
-        return "redirect:/home";
+        return "redirect:/leave-application";
     }
 }

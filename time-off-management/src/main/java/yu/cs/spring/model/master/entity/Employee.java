@@ -47,7 +47,6 @@ public class Employee {
 	private LocalDate assignDate;
 	
 	private LocalDate probationPassDate;
-	private LocalDate retireDate;
 	
 	private String remark;
 	
