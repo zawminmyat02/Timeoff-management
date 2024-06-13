@@ -19,7 +19,7 @@ public record EmployeeFormForCreate(
 		@DepartmentCodeForValid
 		String department,
 		@NotNull(message = "Please select position.")
-		PositionCode position,
+		PositionCode positionCode,
 		@NotBlank(message = "Please enter phone.")
 		String phone,
 		@NotBlank(message = "Please enter email.")

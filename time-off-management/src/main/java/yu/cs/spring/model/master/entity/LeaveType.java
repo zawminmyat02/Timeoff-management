@@ -19,9 +19,5 @@ public class LeaveType {
 	
 	private int paidDays;
 	private String remark;
-	private Status status;
 	
-	public enum Status{
-		Approved, Pending
-	}
 }

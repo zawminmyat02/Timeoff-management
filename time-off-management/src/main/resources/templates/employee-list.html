@@ -1,67 +1,157 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/admin-board.html}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/admin-board.html}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employees</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+}
+
+.header {
+	color: gray;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.brand-title {
+	font-size: 24px;
+}
+
+.search-container {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.search-container input {
+	background-color: #2d3340;
+	color: white;
+	padding-left: 40px; /* Adjust the padding to make space for the icon */
+	width: 100%;
+	height: 40px; /* Adjust the height as needed */
+	border: none;
+	border-radius: 5px;
+}
+
+.search-container .fas {
+	position: absolute;
+	left: 23px;
+	color: white;
+}
+
+#employee-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 35px;
+	color: #fff;
+	background-color: #2d3340;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+#employee-table th, #employee-table td {
+	border: 1px solid #444;
+	padding: 25px 15px;
+	text-align: left;
+}
+
+#employee-table th {
+	background-color: #6200ea;
+	color: #ffffff;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+#employee-table tbody tr:nth-child(odd) {
+	background-color: #3b4351;
+}
+
+#employee-table tbody tr:nth-child(even) {
+	background-color: #2d3340;
+}
+
+#employee-table tbody tr:hover {
+	background-color: #6200ea;
+	color: #ffffff;
+	cursor: pointer;
+}
+
+.btn-create {
+	margin-left: 10px;
+	background-color: #4e5d6c;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+}
+
+.btn-create:hover {
+	background-color: #2d3340;
+	color: white;
+	transform: scale(1.05);
+}
+
+.btn-create i {
+	margin-right: 8px;
+}
+</style>
 </head>
 <body>
-	<section layout:fragment = "content">
-		<header class="margin-left" th:fragement="header">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <div class="m-4">
-                            <h1 class="text-white d-lg-inline mb-4">Team Members</h1>
-                        </div>
-                        <div class="flex-fill"></div>
-                        
-                       
-		</nav>
-		</header>
-		
-		  <div class="row px-5 mt-4">
-		  
-                    <div class="col-9 form-group search">
-                        <span class="fa fa-search form-control-feedback"></span>
-                        <input type="text" class="form-control" placeholder="Search for team members" style="background-color: #2d3340;">
-                    </div>
-                    
-                     <div class="col-3">
-                    
-                    </div>
-                    
-                   
-    <table>
-        <thead>
-            <tr>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Department</th>
-                <th>Position</th>
-                <th>Status</th>
-                <th>Assign Date</th>
-                <th>Probation Pass Date</th>
-                <th>Retired At</th>
-                <th>Remark</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="employee : ${employees}">
-                <td th:text="${employee.code}"></td>
-                <td th:text="${employee.name}"></td>
-                <td th:text="${employee.phone}"></td>
-                <td th:text="${employee.department}"></td>
-                <td th:text="${employee.getPositionName()}"></td>
-                <td th:text="${employee.status}"></td>
-                <td th:text="${employee.assignAt}"></td>
-                <td th:text="${employee.probationPassAt}"></td>
-                <td th:text="${employee.retiredAt}"></td>
-                <td th:text="${employee.remark}"></td>
-            </tr>
-        </tbody>
-    </table>
-                    
-
-           </div>
-       </section>
+	<section layout:fragment="content">
+		<div class="container mt-4">
+			<header class="header">
+				<h1>Linn</h1>
+				<h2 class="brand-title">Employee Management</h2>
+			</header>
+			<div class="row mb-4">
+				<div class="col-9 form-group search-container">
+					<i class="fas fa-search"></i> <input type="text"
+						class="form-control" placeholder="Search for team members">
+				</div>
+				<div class="col-3 text-right py-2">
+					<a th:href="@{/employees/new}" class="btn-create"><i
+						class="fas fa-plus-circle"></i> Create</a>
+				</div>
+			</div>
+			<table id="employee-table">
+				<thead>
+					<tr>
+						<th>Code</th>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>Department</th>
+						<th>Position</th>
+						<th>Status</th>
+						<th>Assign Date</th>		
+						<th>Remark</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="employee : ${employees}">
+						<td th:text="${employee.code}"></td>
+						<td th:text="${employee.name}"></td>
+						<td th:text="${employee.phone}"></td>
+						<td th:text="${employee.department}"></td>
+						<td th:text="${employee.getPositionName()}"></td>
+						<td th:text="${employee.status}"></td>
+						<td th:text="${employee.assignAt}"></td>
+						<td th:text="${employee.remark}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
 </body>
 </html>

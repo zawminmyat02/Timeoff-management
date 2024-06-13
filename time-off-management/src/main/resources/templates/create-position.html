@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/admin-board.html}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add New Position</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #1e1e1e;
+	color: #d3d3d3;
+}
+
+.header {
+	color: #d3d3d3;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.brand-title {
+	font-size: 24px;
+	color: #4da8da;
+}
+
+.form-container {
+	background-color: #2d2d2d;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	max-width: 600px;
+	margin: auto;
+}
+
+.form-group label {
+	color: #4da8da;
+}
+
+.form-control {
+	background-color: #333;
+	border: 1px solid #4da8da;
+	color: #d3d3d3;
+}
+
+.form-control:hover {
+	background-color: gray;
+}
+
+.form-control:focus {
+	background-color: gray;
+}
+
+.btn-submit {
+	background-color: #4da8da;
+	color: white;
+	border: none;
+	padding: 12px 30px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.btn-submit:hover {
+	background-color: #388bb5;
+	transform: scale(1.05);
+}
+
+.btn-back {
+	background-color: #333;
+	color: #d3d3d3;
+	border: none;
+	padding: 12px 30px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.btn-back:hover {
+	background-color: #444;
+	transform: scale(1.05);
+}
+
+.btn-container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+</style>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="container mt-4">
+			<header class="header">
+				<h1 class="brand-title">Enter new position details</h1>
+			</header>
+			<div class="form-container">
+				<form th:action="@{/positions}" th:object="${positionForm}"
+					method="post">
+					<div class="form-group">
+						<label for="department">Department</label> <select id="department"
+							th:field="*{department}" class="form-control" required>
+							<option value="">Select Department</option>
+							<option th:each="dept : ${departments}" th:value="${dept.code}"
+								th:text="${dept.name}"></option>
+						</select>
+						<div th:if="${#fields.hasErrors('department')}"
+							th:errors="*{department}" class="text-danger"></div>
+					</div>
+					  <div class="form-group">
+                    <label for="position">Position Code</label>
+                    <select id="position" th:field="*{position}" class="form-control" required>
+                        <option value="">Select Position Code</option>
+                        <option th:each="code : ${positionCode}" th:value="${code}" th:text="${code.value}"></option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('position')}" th:errors="*{position}" class="text-danger"></div>
+                </div>
+					<div class="form-group">
+						<label for="basicSalary">Basic Salary</label> <input type="number"
+							id="basicSalary" th:field="*{basicSalary}" class="form-control"
+							required>
+						<div th:if="${#fields.hasErrors('basicSalary')}"
+							th:errors="*{basicSalary}" class="text-danger"></div>
+					</div>
+					<div class="form-group">
+						<label for="otPerHour">OT Fees Per Hour</label> <input
+							type="number" id="otPerHour" th:field="*{otPerHour}"
+							class="form-control" required>
+						<div th:if="${#fields.hasErrors('otPerHour')}"
+							th:errors="*{otPerHour}" class="text-danger"></div>
+					</div>
+					<div class="form-group">
+						<label for="anualLeaves">Annual Leaves</label> <input
+							type="number" id="anualLeaves" th:field="*{anualLeaves}"
+							class="form-control" required>
+						<div th:if="${#fields.hasErrors('anualLeaves')}"
+							th:errors="*{anualLeaves}" class="text-danger"></div>
+					</div>
+					<div class="btn-container">
+						<button type="submit" class="btn-submit">
+							<i class="fas fa-save"></i> Save
+						</button>
+						<a href="/positions" class="btn-back"><i
+							class="fas fa-arrow-left"></i> Back</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,140 +1,129 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/admin-board.html}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/admin-board.html}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<meta charset="UTF-8">
+<title>Title</title>
+
 </head>
+<style>
+.rounded-circle {
+	width: 50px;
+	height: 50px;
+}
+</style>
 <body>
 	<section layout:fragment="content">
-	
-	<header class="margin-left" th:fragement="header">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <div class="m-4">
-                            <h1 class="text-white d-lg-inline mb-4">Leave Requests</h1>
-                            <h6 class="text-muted d-none d-lg-block mt-3">Approve or reject leave requests</h6>
+
+		<header class="margin-left" th:fragement="header">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="m-4">
+					<h1 class="text-white d-lg-inline mb-4">Leave Requests</h1>
+					<h6 class="text-muted d-none d-lg-block mt-3">Approve or
+						reject leave requests</h6>
+				</div>
+				<div class="flex-fill"></div>
+
+
+				<div class="navbar nav">
+					<li class="nav-item dropdown"><a href="#"
+						class="d-flex align-items-center nav-link dropdown-toggle"
+						data-bs-toggle="dropdown">
+							<div class="avatar avatar-xl">
+								<img th:src="@{/images/profile.jpg}" class="rounded-circle "
+									alt="Face 1" style="width: 50px; height: 50px;">
+							</div>
+							<div class="m-3">
+								<h5 class="font-bold" style="color: aqua">Admin</h5>
+								<h6 class="text-muted mb-0">@admin</h6>
+							</div>
+					</a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#" class="dropdown-item">User Profile</a></li>
+							<li><a th:href="@{/logout}" id="signoutLink"
+								class="dropdown-item">Logout</a></li>
+						</ul></li>
+				</div>
+			</nav>
+		</header>
+
+
+		<div class="row px-5 mt-4">
+			<div class="form-group search">
+				<input type="text" class="form-control" placeholder="Search leaves">
+			</div>
+
+		</div>
+
+		<div class="mt-5 px-4 mx-3  " style="margin-left: 0px;">
+
+			 <div class="container">
+        <div class="row">
+            <div class="col-md-4" th:each="leaveApplication : ${leaveApplications}">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Leave Request #<span th:text="${leaveApplication.id}"></span></h5>
+                        <p class="card-text"><strong>Apply At:</strong> <span th:text="${leaveApplication.applyAt}"></span></p>
+                        <p class="card-text"><strong>Employee:</strong> <span th:text="${leaveApplication.employeeName}"></span></p>
+                        <p class="card-text"><strong>Leave Type:</strong> <span th:text="${leaveApplication.leaveTypeName}"></span></p>
+                        <p class="card-text"><strong>Start Date:</strong> <span th:text="${leaveApplication.startDate}"></span></p>
+                        <p class="card-text"><strong>End Date:</strong> <span th:text="${leaveApplication.endDate}"></span></p>
+                        <p class="card-text"><strong>Remark:</strong> <span th:text="${leaveApplication.remark}"></span></p>
+                        <p class="card-text"><strong>Status:</strong> <span th:text="${leaveApplication.status}"></span></p>
+                        <div class="status-dropdown">
+                            <label for="statusSelect">Change Status:</label>
+                            <select id="statusSelect" class="form-control" th:data-id="${leaveApplication.id}" onchange="changeStatus(this)">
+                                <option value="PENDING" th:selected="${leaveApplication.status == 'PENDING'}">PENDING</option>
+                                <option value="APPROVED" th:selected="${leaveApplication.status == 'APPROVED'}">APPROVED</option>
+                                <option value="REJECTED" th:selected="${leaveApplication.status == 'REJECTED'}">REJECTED</option>
+                            </select>
                         </div>
-                        <div class="flex-fill"></div>
-
-
-                        <div class="navbar nav">
-                            <li class="nav-item dropdown">
-                                <a href="#" class="d-flex align-items-center nav-link dropdown-toggle"
-                                    data-bs-toggle="dropdown">
-                                    <div class="avatar avatar-xl">
-                                        <img th:src="@{/images/profile.jpg}" class="rounded-circle rounded-circle-custom " alt="Face 1">
-                                    </div>
-                                    <div class="m-3">
-                                        <h5 class="font-bold" style="color:aqua">John Duck</h5>
-                                        <h6 class="text-muted mb-0">@johnducky</h6>
-                                    </div>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#" class="dropdown-item">User Profile</a>
-                                    </li>
-                                    <li>
-                                        <a th:href="@{/logout}" id="signoutLink" class="dropdown-item">Logout</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </div>
-                    </nav>
-                </header>
-                
-                
-	
-	   <div class="row margin-left">
-
-                    <div class=" mx-lg-2 mt-2 col-4 col-xl-4 col-lg-6 col-md-4 col-sm-2      ">
-                        <div class="d-flex justify-content-between mb-2 flex-wrap">
-                            <button type="button" class="mb-2 btn btn-secondary">All</button>
-                            <button type="button" class="mb-2 btn btn-secondary">Pending</button>
-                            <button type="button" class="mb-2 btn btn-secondary">Approved</button>
-                            <button type="button" class="mb-2 btn btn-secondary">Rejected</button>
-                        </div>
-
                     </div>
                 </div>
-             
-                <div class="row px-5 mt-4">
-                    <div class="form-group search">
-                        <span class="fa fa-search form-control-feedback"></span>
-                        <input type="text" class="form-control" placeholder="Search by employee">
-                    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+    function getCsrfToken() {
+        return document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    }
 
-                </div>
+    function getCsrfHeaderName() {
+        return document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+    }
 
-                <div class="mt-5 px-4 mx-3  " style="margin-left: 0px;">
-                    <div class="tbl-container bdr   custom-border">
-                        <!-- <== overflow: hidden applied to parent -->
-                        <table class="table table-hover table-responsive-sm table-borderless" style="padding: auto;">
-                            <thead class="bg-red">
-                                <tr class="custom-border">
+    function changeStatus(selectElement) {
+        const leaveApplicationId = selectElement.getAttribute('data-id');
+        const newStatus = selectElement.value;
+        const csrfToken = getCsrfToken();
+        const csrfHeaderName = getCsrfHeaderName();
 
-                                    <th scope="col" style="width: 3%">Employee</th>
-                                    <th scope="col" style="width: 3%">Type</th>
-                                    <th scope="col" style="width: 3%">Dates</th>
-                                    <th scope="col" style="width: 3%">Status</th>
-                                    <th scope="col" style="width: 3%">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="custom-border">
-                                    <td>Christine Wood</td>
-                                    <td>Sick Leave</td>
-                                    <td>Sep 1</td>
-                                    <td>Pending</td>
-                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
-                                </tr>
-                                <tr class="custom-border">
-                                    <td>John Smith</td>
-                                    <td>Vacation</td>
-                                    <td>Sep 12</td>
-                                    <td>Approved</td>
-                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
+        fetch(`/changeStatus/${leaveApplicationId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                [csrfHeaderName]: csrfToken // Include CSRF token header
+            },
+            body: JSON.stringify({ status: newStatus })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Status updated successfully');
+            } else {
+                alert('Failed to update status');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
 
-                                </tr>
-                                <tr class="last-row">
-                                    <td>Cathy Black</td>
-                                    <td>Maternity Leave</td>
-                                    <td>Oct 2</td>
-                                    <td>Pending</td>
-                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
+	</section>
 
-                                </tr>
 
-                                <tr class="custom-border">
-                                    <td>Christine Wood</td>
-                                    <td>Sick Leave</td>
-                                    <td>Sep 1</td>
-                                    <td>Approved</td>
-                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
-
-                                </tr>
-                                <tr class="custom-border">
-                                    <td>John Smith</td>
-                                    <td>Vacation</td>
-                                    <td>Sep 12</td>
-                                    <td>Approved</td>
-                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
-
-                                </tr>
-                                <tr class="last-row">
-                                    <td>Cathy Black</td>
-                                    <td>Maternity Leave</td>
-                                    <td>Oct 2</td>
-                                    <td>Pending</td>
-                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    </div>
-  </section>
-  
-  
 </body>
 
 </html>

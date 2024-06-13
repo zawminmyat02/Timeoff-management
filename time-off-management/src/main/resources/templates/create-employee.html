@@ -4,119 +4,184 @@
 	layout:decorate="~{/layouts/admin-board.html}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" th:href="@{/css/form.css}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Employee</title>
+
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #1c1e22;
+	color: #d3d4d6;
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	max-width: 800px;
+	margin: auto;
+	padding: 20px;
+}
+
+.header {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.header h1 {
+	color: #d3d4d6;
+	font-size: 36px;
+	margin-bottom: 10px;
+}
+
+.header h2 {
+	color: #d3d4d6;
+	font-size: 24px;
+}
+
+.form-container {
+	background-color: #2d3340;
+	border-radius: 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	padding: 40px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-group label {
+	font-weight: bold;
+	display: block;
+	margin-bottom: 5px;
+	color: #d3d4d6;
+}
+
+.form-control {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #444950;
+	border-radius: 5px;
+	transition: border-color 0.3s;
+	background-color: #1c1e22;
+	color: #d3d4d6;
+}
+
+.form-control:focus {
+	outline: none;
+	border-color: #6c757d;
+	background-color: gray;
+}
+
+select.form-control {
+	height: 40px; /* Adjust this value as needed */
+}
+
+.btn-save {
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btn-save:hover {
+	background-color: #0056b3;
+}
+
+.btn-save i {
+	margin-right: 10px;
+}
+
+.text-danger {
+	color: #dc3545;
+}
+</style>
 </head>
 <body>
-
 	<section layout:fragment="content">
-		<header class="margin-left" th:fragement="header">
-			<nav class="navbar navbar-expand-lg navbar-light">
-				<div class="m-4">
-					<h1 class="text-white d-lg-inline mb-4">Team Members</h1>
-				</div>
-				<div class="flex-fill"></div>
-
-
-			</nav>
-		</header>
-
-		<div class="row px-5 mt-4">
-
-			<div class="col-9 form-group search">
-				<span class="fa fa-search form-control-feedback"></span> <input
-					type="text" class="form-control"
-					placeholder="Search for team members"
-					style="background-color: #2d3340;">
+		<div class="container">
+			<div class="header">
+				<h2>Enter employee details below</h2>
 			</div>
+			<div class="form-container">
+				<form th:action="@{/employees}" th:object="${employeeForm}"
+					method="post">
+					<div class="form-group">
+						<label for="name">Name:</label> <input type="text" id="name"
+							name="name" class="form-control" th:field="*{name}" required>
+					</div>
+					<div class="form-group">
+						<label for="department">Department</label> <select id="department"
+							th:field="*{department}" class="form-control" required>
+							<option value="">Select Department</option>
+							<option th:each="dept : ${departments}" th:value="${dept.code}"
+								th:text="${dept.name}"></option>
+						</select>
+						<div th:if="${#fields.hasErrors('department')}"
+							th:errors="*{department}" class="text-danger"></div>
+					</div>
+					<div class="form-group">
+						<label for="positionCode">Position Code</label> <select
+							id="positionCode" th:field="*{positionCode}" class="form-control"
+							required>
+							<option value="">Select Position Code</option>
+							<!-- Options will be dynamically populated -->
+						</select>
+						<div th:if="${#fields.hasErrors('positionCode')}"
+							th:errors="*{positionCode}" class="text-danger"></div>
+					</div>
 
-			<div class="col-3">
-				<a th:href="@{/member/edit}">
-					<button type="button" class="btn btn-outline-info"
-						style="height: 50px">
-						<i class="fa-sharp fa-solid fa-plus fa-xl"></i>
-					</button>
-				</a>
+					<div class="form-group">
+						<label for="phone">Phone:</label> <input type="tel" id="phone"
+							name="phone" class="form-control" th:field="*{phone}" required>
+					</div>
+					<div class="form-group">
+						<label for="email">Email:</label> <input type="email" id="email"
+							name="email" class="form-control" th:field="*{email}" required>
+					</div>
+					<div class="form-group">
+						<label for="gender">Gender:</label> <select id="gender"
+							class="form-control" th:field="*{gender}" required>
+							<option th:each="gen : ${genders}" th:value="${gen}"
+								th:text="${gen}">Gender</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="dob">Date of Birth:</label> <input type="date"
+							id="dob" name="dob" class="form-control" th:field="*{dob}"
+							required>
+					</div>
+					<div class="form-group">
+						<label for="assignDate">Assign Date:</label> <input type="date"
+							id="assignDate" name="assignDate" class="form-control"
+							th:field="*{assignDate}" required>
+					</div>
+					<div class="form-group">
+						<label for="status">Status:</label> <select id="status"
+							class="form-control" th:field="*{status}" required>
+							<option th:each="stat : ${statuses}" th:value="${stat}"
+								th:text="${stat}">Status</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="remark">Remark:</label>
+						<textarea id="remark" name="remark" class="form-control"
+							th:field="*{remark}"></textarea>
+					</div>
+					<div class="text-center">
+						<button type="submit" class="btn-save">
+							<i class="fas fa-save"></i> Create Employee
+						</button>
+					</div>
+				</form>
 			</div>
-
-
 		</div>
 
 
-		<h1>Create Employee</h1>
-		<form th:action="@{/employees}" th:object="${employeeForm}"
-			method="post">
-			<div>
-				<label for="name">Name:</label> <input type="text" id="name"
-					th:field="*{name}" required> <span
-					th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Please
-					enter employee name.</span>
-			</div>
-			<div>
-				<label for="department">Department:</label> <input type="text"
-					id="department" th:field="*{department}">
-			</div>
-			<div>
-				<label for="position">Position:</label> <select id="position"
-					name="position" th:field="*{position}">
-					<option value="MGR">Manager</option>
-					<option value="ASM">Assistant Manager</option>
-					<option value="SPV">Supervisor</option>
-					<option value="ASS">Assistant Supervisor</option>
-					<option value="EMP">Employee</option>
-				</select>
-			</div>
-			<div>
-				<label for="phone">Phone:</label> <input type="text" id="phone"
-					th:field="*{phone}" required> <span
-					th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Please
-					enter phone.</span>
-			</div>
-			<div>
-				<label for="email">Email:</label> <input type="email" id="email"
-					th:field="*{email}" required> <span
-					th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Please
-					enter email.</span>
-			</div>
-			<div>
-				<label for="gender">Gender:</label> <select id="gender"
-					th:field="*{gender}" required>
-					<option th:each="gen : ${genders}" th:value="${gen}"
-						th:text="${gen}">Gender</option>
-				</select> <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Please
-					select gender.</span>
-			</div>
-			<div>
-				<label for="dob">Date of Birth:</label> <input type="date" id="dob"
-					th:field="*{dob}" required> <span
-					th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}">Please
-					enter date of birth.</span>
-			</div>
-			<div>
-				<label for="assignDate">Assign Date:</label> <input type="date"
-					id="assignDate" th:field="*{assignDate}" required> <span
-					th:if="${#fields.hasErrors('assignDate')}"
-					th:errors="*{assignDate}">Please enter assign date.</span>
-			</div>
-			<div>
-				<label for="status">Status:</label> <select id="status"
-					th:field="*{status}" required>
-					<option th:each="stat : ${statuses}" th:value="${stat}"
-						th:text="${stat}">Status</option>
-				</select> <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}">Please
-					select status.</span>
-			</div>
-			<div>
-				<label for="remark">Remark:</label>
-				<textarea id="remark" th:field="*{remark}"></textarea>
-			</div>
-			<div>
-				<button type="submit">Create Employee</button>
-			</div>
-		</form>
-
 	</section>
+
 
 </body>
 </html>
-

@@ -10,10 +10,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import yu.cs.spring.model.master.entity.Department;
 import yu.cs.spring.model.master.input.DepartmentFormForCreate;
+import yu.cs.spring.model.master.input.DepartmentFormForManagerChanges;
 import yu.cs.spring.model.master.output.DepartmentInfo;
 import yu.cs.spring.model.master.service.DepartmentService;
 
@@ -46,6 +48,20 @@ public class DepartmentController {
                 .map(DepartmentInfo::from)
                 .collect(Collectors.toList());
         model.addAttribute("departments", departmentInfoList);
+        
         return "department-list";
     }
+    
+    @PostMapping("/update-manager")
+    public String updateManager(@RequestParam("departmentCode") String departmentCode,
+                                DepartmentFormForManagerChanges form,
+                                BindingResult bindingResult,
+                                Model model) {
+      
+    	departmentService.update(departmentCode, form);
+       
+        return "redirect:/departments"; // Replace with the appropriate page
+    }
+    
+    
 }
