@@ -101,7 +101,7 @@ main {
 
 .card {
 	background-color: #353535;
-	border: none;
+	border:1px solid whitesmoke;
 	margin-bottom: 20px;
 	border-radius: 15px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -118,14 +118,14 @@ main {
 }
 
 .card-title {
-	color:  black;
+	color: black;
 	font-weight: bold;
 	font-size: 1.25rem;
 	margin-bottom: 15px;
 }
 
 .card-text strong {
-	color:  #ecf0f1;
+	color: #ecf0f1;
 }
 
 .status-dropdown {
@@ -135,7 +135,7 @@ main {
 .custom-select {
 	background-color: #3a3a3a;
 	color: #e0e0e0;
-	border: 1px solid  #9b59b6;
+	border: 1px solid #9b59b6;
 	border-radius: 5px;
 }
 
@@ -147,8 +147,8 @@ main {
 }
 
 .btn-primary:hover {
-	background-color:  #9b59b6;
-	border-color:  #9b59b6;
+	background-color: #9b59b6;
+	border-color: #9b59b6;
 }
 
 .container h1 {
@@ -159,5 +159,20 @@ main {
 }
 
 #statusSelect:focus {
-	color:  #9b59b6;
+	background-color: antiquewhite;
+	color: black;
+}
+
+#statusSelect.form-control{
+	background-color: #6200ea;
+	color: #ffffff;
+
+}
+.text-container {
+    cursor: pointer;
+    width: 80px;
+}
+
+.dropdown-menu{
+	background-color: lightgray;
 }

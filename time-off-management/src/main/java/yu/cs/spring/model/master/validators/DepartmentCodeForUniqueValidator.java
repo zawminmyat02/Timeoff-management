@@ -9,14 +9,26 @@ import jakarta.validation.ConstraintValidatorContext;
 import yu.cs.spring.model.master.repo.DepartmentRepo;
 
 @Component
-@Transactional(readOnly = true)
 public class DepartmentCodeForUniqueValidator implements ConstraintValidator<DepartmentCodeForUnique, String>{
 
 	@Autowired
 	private DepartmentRepo repo;
-	
-	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
-		return repo.countByCode(value) == 0L;
-	}
+
+    @Override
+    public void initialize(DepartmentCodeForUnique constraintAnnotation) {
+        // Optional initialization, if needed
+    }
+
+    @Override
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        if (value == null) {
+            return true; // Null values should be validated separately if required
+        }
+        
+        // Perform the check if the code already exists in the database
+        boolean isUnique = repo.countByCode(value) == 0;
+        
+        // Return true if the code is unique (valid), false otherwise
+        return isUnique;
+    }
 }

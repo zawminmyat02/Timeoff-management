@@ -16,4 +16,7 @@ public interface AccountRepo extends JpaRepositoryImplementation<Account, Intege
 	  List<Account> findAllMembers();
 
 	  boolean existsByUsername(String email);
+	  
+	  @Query("SELECT a.name FROM Account a WHERE a.username = :username")
+	  String getNameByUsername(String username);
 }

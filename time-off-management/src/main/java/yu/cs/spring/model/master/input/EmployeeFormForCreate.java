@@ -41,7 +41,7 @@ public record EmployeeFormForCreate(
 		employee.setCode(code);
 		
 		var account = new Account();
-		account.setUsername(code);
+		account.setUsername(email);
 		account.setRole(Role.Employee);
 		account.setPassword(password);
 		account.setName(name);

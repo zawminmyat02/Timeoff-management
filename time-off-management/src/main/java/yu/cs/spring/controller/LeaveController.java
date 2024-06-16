@@ -41,6 +41,6 @@ public class LeaveController {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     	var employee = employeeService.getEmployeeByUsername(auth.getName());
         leaveApplicationService.createLeaveApplication(leaveApplicationForm, employee);
-        return "redirect:/leave-application/success";
+        return "redirect:/home";
     }
 }
