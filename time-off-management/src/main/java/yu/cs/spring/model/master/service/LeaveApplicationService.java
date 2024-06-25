@@ -37,14 +37,19 @@ public class LeaveApplicationService {
 		return leaveApplicationRepository.findAll();
 	}
 
+	public List<LeaveApplication> getLeaveApplicationsByUsername(String username) {
+		return leaveApplicationRepository.findByEmployeeAccountUsername(username);
+	}
+
 	public boolean updateStatus(Long id, String status) {
-        Optional<LeaveApplication> optionalLeaveApplication = leaveApplicationRepository.findById(id);
-        if (optionalLeaveApplication.isPresent()) {
-            LeaveApplication leaveApplication = optionalLeaveApplication.get();
-            leaveApplication.setStatus(Status.valueOf(status));
-            leaveApplicationRepository.save(leaveApplication);
-            return true;
-        }
-        return false;
-    }
+		Optional<LeaveApplication> optionalLeaveApplication = leaveApplicationRepository.findById(id);
+		if (optionalLeaveApplication.isPresent()) {
+			LeaveApplication leaveApplication = optionalLeaveApplication.get();
+			leaveApplication.setStatus(Status.valueOf(status));
+			leaveApplicationRepository.save(leaveApplication);
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -31,19 +31,29 @@
 						class="d-flex align-items-center nav-link dropdown-toggle"
 						data-bs-toggle="dropdown">
 							<div class="avatar avatar-xl">
-								<img th:src="@{/images/profile.jpg}" class="rounded-circle "
+								<img th:src="@{/images/profile.jpg}" class="rounded-circle"
 									alt="Face 1" style="width: 50px; height: 50px;">
 							</div>
-							<div class="m-3">
-								<h5 class="font-bold" style="color: aqua">Admin</h5>
-								<h6 class="text-muted mb-0">@admin</h6>
+							<div class="m-3 text-container">
+								<div class="text-content">
+									
+									<h5 class="font-bold text-truncate" style="color: white">
+										<span th:text="${name}"></span>
+									</h5>
+									<h6 class="text-muted mb-0 text-truncate">
+										<span th:text="${email}"></span>
+									</h6>
+								</div>
 							</div>
 					</a>
 
 						<ul class="dropdown-menu">
-							<li><a href="#" class="dropdown-item">User Profile</a></li>
+							<li>
+								<h6 class="dropdown-item" th:text="${email}"></h6>
+							</li>
+
 							<li><a th:href="@{/logout}" id="signoutLink"
-								class="dropdown-item">Logout</a></li>
+								class="dropdown-item">Log out</a></li>
 						</ul></li>
 				</div>
 			</nav>
@@ -59,34 +69,65 @@
 
 		<div class="mt-5 px-4 mx-3  " style="margin-left: 0px;">
 
-			 <div class="container">
-        <div class="row">
-            <div class="col-md-4" th:each="leaveApplication : ${leaveApplications}">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Leave Request #<span th:text="${leaveApplication.id}"></span></h5>
-                        <p class="card-text"><strong>Apply At:</strong> <span th:text="${leaveApplication.applyAt}"></span></p>
-                        <p class="card-text"><strong>Employee:</strong> <span th:text="${leaveApplication.employeeName}"></span></p>
-                        <p class="card-text"><strong>Leave Type:</strong> <span th:text="${leaveApplication.leaveTypeName}"></span></p>
-                        <p class="card-text"><strong>Start Date:</strong> <span th:text="${leaveApplication.startDate}"></span></p>
-                        <p class="card-text"><strong>End Date:</strong> <span th:text="${leaveApplication.endDate}"></span></p>
-                        <p class="card-text"><strong>Remark:</strong> <span th:text="${leaveApplication.remark}"></span></p>
-                        <p class="card-text"><strong>Status:</strong> <span th:text="${leaveApplication.status}"></span></p>
-                        <div class="status-dropdown">
-                            <label for="statusSelect">Change Status:</label>
-                            <select id="statusSelect" class="form-control" th:data-id="${leaveApplication.id}" onchange="changeStatus(this)">
-                                <option value="PENDING" th:selected="${leaveApplication.status == 'PENDING'}">PENDING</option>
-                                <option value="APPROVED" th:selected="${leaveApplication.status == 'APPROVED'}">APPROVED</option>
-                                <option value="REJECTED" th:selected="${leaveApplication.status == 'REJECTED'}">REJECTED</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    <script>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4"
+						th:each="leaveApplication : ${leaveApplications}">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Leave Request</h5>
+								<p class="card-text">
+									<strong>Apply At:</strong> <span
+										th:text="${leaveApplication.applyAt}"></span>
+								</p>
+								<p class="card-text">
+									<strong>Employee:</strong> <span
+										th:text="${leaveApplication.employeeName}"></span>
+								</p>
+								<p class="card-text">
+									<strong>Leave Type:</strong> <span
+										th:text="${leaveApplication.leaveTypeName}"></span>
+								</p>
+								<p class="card-text">
+									<strong>Start Date:</strong> <span
+										th:text="${leaveApplication.startDate}"></span>
+								</p>
+								<p class="card-text">
+									<strong>End Date:</strong> <span
+										th:text="${leaveApplication.endDate}"></span>
+								</p>
+								<p class="card-text">
+									<strong>Remark:</strong> <span
+										th:text="${leaveApplication.remark}"></span>
+								</p>
+								<p class="card-text">
+									<strong>Status:</strong> <span
+										th:text="${leaveApplication.status}"></span>
+								</p>
+								<div class="status-dropdown">
+									<label for="statusSelect">Change Status:</label> <select
+										id="statusSelect" class="form-control"
+										th:data-id="${leaveApplication.id}"
+										onchange="changeStatus(this)">
+										<option value="PENDING"
+											th:selected="${leaveApplication.status == 'PENDING'}">PENDING</option>
+										<option value="APPROVED"
+											th:selected="${leaveApplication.status == 'APPROVED'}">APPROVED</option>
+										<option value="REJECTED"
+											th:selected="${leaveApplication.status == 'REJECTED'}">REJECTED</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<script>
+		
+
     function getCsrfToken() {
         return document.querySelector('meta[name="_csrf"]').getAttribute('content');
     }
@@ -102,7 +143,7 @@
         const csrfHeaderName = getCsrfHeaderName();
 
         fetch(`/changeStatus/${leaveApplicationId}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 [csrfHeaderName]: csrfToken // Include CSRF token header
@@ -112,7 +153,6 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert('Status updated successfully');
             } else {
                 alert('Failed to update status');
             }

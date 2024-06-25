@@ -29,4 +29,8 @@ public class AccountService {
 		account.setActivated(true);
 		repo.save(account);
 	}
+	
+	public String getNameByUserName(String email) {
+		return repo.getNameByUsername(email);
+	}
 }

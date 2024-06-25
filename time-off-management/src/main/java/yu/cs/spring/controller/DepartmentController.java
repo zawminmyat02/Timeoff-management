@@ -32,9 +32,9 @@ public class DepartmentController {
     }
 
     @PostMapping("/departments")
-    public String createDepartment(@Valid @ModelAttribute("departmentForm") DepartmentFormForCreate departmentForm, BindingResult result, Model model) {
+    public String createDepartment( @ModelAttribute("departmentForm")  @Valid DepartmentFormForCreate departmentForm, BindingResult result) {
         if (result.hasErrors()) {
-            return "createDepartment";
+            return "create-department";
         }
         Department department = departmentForm.entity();
         departmentService.saveDepartment(department);

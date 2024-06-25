@@ -23,8 +23,8 @@ public class AppUserInitializer {
 		return args -> {
 			if(repo.count() != 0L) {
 				var admin = new Account();
-				admin.setName("Admin User");
-				admin.setUsername("admin");
+				admin.setName("Admin");
+				admin.setUsername("admin@gmail.com");
 				admin.setPassword(encoder.encode("adminpass"));
 				admin.setRole(Role.Admin);
 				admin.setActivated(true);
