@@ -52,7 +52,7 @@ body {
 	border-collapse: collapse;
 	margin-top: 35px;
 	color: #fff;
-	background-color: #2d3340;
+	background-color: #6200ea;
 	border-radius: 10px;
 	overflow: hidden;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -103,8 +103,64 @@ body {
 	transform: scale(1.05);
 }
 
+.btn-delete {
+	margin-left: 10px;
+	background-color: #4e5d6c;
+	color: white;
+	border: none;
+	padding: 8px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+}
+
+.btn-select {
+	margin-left: 10px;
+	background-color: #4e5d6c;
+	color: white;
+	border: none;
+	padding: 8px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+}
+
 .btn-create i {
 	margin-right: 8px;
+}
+
+.checkbox-column {
+	display: none;
+}
+
+.checkbox-column {
+	display: none;
+}
+
+.btn-delete {
+	display: none;
+}
+
+.btn-select-active {
+	background-color: #6200ea; /* Highlight color */
+}
+
+.btn-create {
+	margin-left: 10px;
+	background-color: #4e5d6c;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+}
+
+.btn-create-hidden {
+	display: none;
 }
 </style>
 </head>
@@ -121,37 +177,60 @@ body {
 						class="form-control" placeholder="Search for team members">
 				</div>
 				<div class="col-3 text-right py-2">
-					<a th:href="@{/employees/new}" class="btn-create"><i
-						class="fas fa-plus-circle"></i> Create</a>
+					<a id="create-button" th:href="@{/employees/new}"
+						class="btn-create"><i class="fas fa-plus-circle"></i> Create</a>
+
+					<button id="delete-button" onclick="submitDeleteForm()"
+						class="btn-delete">
+						<i class="fas fa-trash"></i> Delete
+					</button>
+					<button id="select-button" onclick="toggleCheckboxes()"
+						class="btn-select">
+						<i class="fa-solid fa-bars"></i> Select
+					</button>
+
 				</div>
+				<form id="delete-form" th:action="@{/delete}" method="post">
+					<input type="hidden" id="employee-ids" name="employeeIds">
+					<table id="employee-table">
+						<thead>
+							<tr>
+								<th>Code</th>
+								<th>Name</th>
+								<th>Phone</th>
+								<th>Department</th>
+								<th>Position</th>
+								<th>Status</th>
+								<th>Assign Date</th>
+								<th>Remark</th>
+								<th>Update</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="employee : ${employees}">
+								<td th:text="${employee.code}"></td>
+								<td th:text="${employee.name}"></td>
+								<td th:text="${employee.phone}"></td>
+								<td th:text="${employee.department}"></td>
+								<td th:text="${employee.getPositionName()}"></td>
+								<td th:text="${employee.status}"></td>
+								<td th:text="${employee.assignAt}"></td>
+								<td th:text="${employee.remark}"></td>
+								<td><a th:href="@{/employees/edit/{id}(id=${employee.code})}">
+										<i class="fas fa-edit"></i>
+								</a></td>
+
+								<td class="checkbox-column"><input type="checkbox"
+									name="employeeCode" th:value="${employee.code}"
+									onchange="checkSelected()"></td>
+
+							</tr>
+						</tbody>
+					</table>
+				</form>
 			</div>
-			<table id="employee-table">
-				<thead>
-					<tr>
-						<th>Code</th>
-						<th>Name</th>
-						<th>Phone</th>
-						<th>Department</th>
-						<th>Position</th>
-						<th>Status</th>
-						<th>Assign Date</th>		
-						<th>Remark</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="employee : ${employees}">
-						<td th:text="${employee.code}"></td>
-						<td th:text="${employee.name}"></td>
-						<td th:text="${employee.phone}"></td>
-						<td th:text="${employee.department}"></td>
-						<td th:text="${employee.getPositionName()}"></td>
-						<td th:text="${employee.status}"></td>
-						<td th:text="${employee.assignAt}"></td>
-						<td th:text="${employee.remark}"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
 	</section>
 </body>
+
+
 </html>

@@ -10,4 +10,6 @@ public interface EmployeeRepo extends BaseRepository<Employee, String>{
 
 	@Query("SELECT e FROM Employee e WHERE e.account.username = :username")
     Employee findByAccountUsername(@Param("username") String username);
+	
+	Employee findByCode(String code);
 }

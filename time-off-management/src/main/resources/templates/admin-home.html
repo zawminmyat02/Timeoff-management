@@ -12,6 +12,7 @@
 	width: 50px;
 	height: 50px;
 }
+
 </style>
 <body>
 	<section layout:fragment="content">
@@ -36,7 +37,7 @@
 							</div>
 							<div class="m-3 text-container">
 								<div class="text-content">
-									
+
 									<h5 class="font-bold text-truncate" style="color: white">
 										<span th:text="${name}"></span>
 									</h5>
@@ -74,14 +75,17 @@
 					<div class="col-md-4"
 						th:each="leaveApplication : ${leaveApplications}">
 						<div class="card">
-							<div class="card-body">
+							<div class="card-header">
+								<img src="https://th.bing.com/th/id/OIP.7-nrY0zazKLS9ishJd-17wHaGh?w=164&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="User Icon">
 								<h5 class="card-title">Leave Request</h5>
+							</div>
+							<div class="card-body">
 								<p class="card-text">
 									<strong>Apply At:</strong> <span
 										th:text="${leaveApplication.applyAt}"></span>
 								</p>
 								<p class="card-text">
-									<strong>Employee:</strong> <span
+									<strong>Name:</strong> <span
 										th:text="${leaveApplication.employeeName}"></span>
 								</p>
 								<p class="card-text">
@@ -100,12 +104,9 @@
 									<strong>Remark:</strong> <span
 										th:text="${leaveApplication.remark}"></span>
 								</p>
-								<p class="card-text">
-									<strong>Status:</strong> <span
-										th:text="${leaveApplication.status}"></span>
-								</p>
+								<div class="card-footer">
 								<div class="status-dropdown">
-									<label for="statusSelect">Change Status:</label> <select
+									<select
 										id="statusSelect" class="form-control"
 										th:data-id="${leaveApplication.id}"
 										onchange="changeStatus(this)">
@@ -117,11 +118,14 @@
 											th:selected="${leaveApplication.status == 'REJECTED'}">REJECTED</option>
 									</select>
 								</div>
+								</div>
 							</div>
+							
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 
 
