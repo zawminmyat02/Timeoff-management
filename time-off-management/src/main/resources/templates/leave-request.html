@@ -18,7 +18,7 @@
 				<div class="m-4">
 					<h1 class="text-white d-lg-inline mb-4">Leave Requests</h1>
 					<h6 class="text-muted d-none d-lg-block mt-3">Here're your
-						 leave requests</h6>
+						leave requests</h6>
 				</div>
 				<div class="flex-fill"></div>
 
@@ -33,7 +33,8 @@
 							</div>
 							<div class="m-3 text-container">
 								<div class="text-content">
-									<h5 class="font-bold text-truncate" style="color: white; font-size: 14px">
+									<h5 class="font-bold text-truncate"
+										style="color: white; font-size: 14px">
 										<span th:text="${name}"></span>
 									</h5>
 									<h6 class="text-muted mb-0 text-truncate">
@@ -44,13 +45,14 @@
 					</a>
 
 						<ul class="dropdown-menu">
-							
+
 							<li>
-								<h6 class="dropdown-item" th:text="${email}" style=" font-size: 14px"></h6>
+								<h6 class="dropdown-item" th:text="${email}"
+									style="font-size: 14px"></h6>
 							</li>
 
-							<li><a th:href="@{/logout}" id="signoutLink" style=" font-size: 14px"
-								class="dropdown-item">Log out</a></li>
+							<li><a th:href="@{/logout}" id="signoutLink"
+								style="font-size: 14px" class="dropdown-item">Log out</a></li>
 						</ul></li>
 				</div>
 			</nav>
@@ -71,8 +73,11 @@
 					<div class="col-md-4"
 						th:each="leaveApplication : ${leaveApplications}">
 						<div class="card">
-							<div class="card-body">
+							<div class="card-header">
+								<img src="https://th.bing.com/th/id/OIP.7-nrY0zazKLS9ishJd-17wHaGh?w=164&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="User Icon">
 								<h5 class="card-title">Leave Request</h5>
+							</div>
+							<div class="card-body">
 								<p class="card-text">
 									<strong>Apply At:</strong> <span
 										th:text="${leaveApplication.applyAt}"></span>
@@ -97,11 +102,12 @@
 									<strong>Remark:</strong> <span
 										th:text="${leaveApplication.remark}"></span>
 								</p>
-								<p class="card-text">
+								<div class="card-footer">
+									<p class="card-text">
 									<strong>Status:</strong> <span
 										th:text="${leaveApplication.status}"></span>
 								</p>
-
+								</div>
 							</div>
 						</div>
 					</div>

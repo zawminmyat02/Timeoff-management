@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import yu.cs.spring.model.master.entity.Department;
@@ -39,29 +41,29 @@ public class EmployeeController {
 	private PositionService poService;
 
 	@GetMapping("/employees/new")
-	 public String showCreateEmployeeForm(Model model) {
-        model.addAttribute("employeeForm", new EmployeeFormForCreate("", "", null, "", "", null, null, null, null, ""));
-        model.addAttribute("genders", Arrays.asList(Gender.values()));
-        model.addAttribute("statuses", Arrays.asList(Status.values()));
+	public String showCreateEmployeeForm(Model model) {
+		model.addAttribute("employeeForm", new EmployeeFormForCreate("", "", null, "", "", null, null, null, null, ""));
+		model.addAttribute("genders", Arrays.asList(Gender.values()));
+		model.addAttribute("statuses", Arrays.asList(Status.values()));
 
-        List<Department> departments = deService.findAll();
-        model.addAttribute("departments", departments);
+		List<Department> departments = deService.findAll();
+		model.addAttribute("departments", departments);
 
-        // Create an empty list for position codes
-        List<PositionCode> positionCodes = new ArrayList<>();
+		// Create an empty list for position codes
+		List<PositionCode> positionCodes = new ArrayList<>();
 
-        // Assuming there's a method to get positions for a department
-        for (Department department : departments) {
-            List<Position> positions = department.getPositions(); 
-            for (Position position : positions) {
-                positionCodes.add(position.getId().getPositionCode());
-            }
-        }
+		// Assuming there's a method to get positions for a department
+		for (Department department : departments) {
+			List<Position> positions = department.getPositions();
+			for (Position position : positions) {
+				positionCodes.add(position.getId().getPositionCode());
+			}
+		}
 
-        model.addAttribute("positionCode", positionCodes);
+		model.addAttribute("positionCode", positionCodes);
 
-        return "create-employee";
-    }
+		return "create-employee";
+	}
 
 	@PostMapping("/employees")
 	public String createEmployee(@Valid @ModelAttribute("employeeForm") EmployeeFormForCreate employeeForm,
@@ -85,4 +87,51 @@ public class EmployeeController {
 		model.addAttribute("employees", employeeInfoList);
 		return "employee-list";
 	}
+
+	@PostMapping("/delete")
+	public String deleteEmployees(@RequestParam("employeeIds") String employeeIds) {
+		List<String> ids = Arrays.asList(employeeIds.split(","));
+		ids.forEach(employeeService::deleteById);
+		return "redirect:/employees";
+	}
+	
+	@GetMapping("/employees/edit/{id}")
+	public String showEditEmployeeForm(@PathVariable("id") String id, Model model) {
+	    Employee employee = employeeService.findById(id);
+	    EmployeeFormForCreate employeeForm = new EmployeeFormForCreate(
+	        employee.getAccount().getName(),
+	        employee.getDepartment().toString(),
+	        employee.getPosition().getId().getPositionCode(),
+	        employee.getPhone(),
+	        employee.getEmail(),
+	        employee.getGender(),
+	        employee.getDateOfBirth(),
+	        
+	        employee.getAssignDate(),
+	        employee.getStatus(),
+	        employee.getRemark()
+	    );
+	    model.addAttribute("employeeForm", employeeForm);
+	    model.addAttribute("genders", Arrays.asList(Gender.values()));
+	    model.addAttribute("statuses", Arrays.asList(Status.values()));
+
+	    List<Department> departments = deService.findAll();
+	    model.addAttribute("departments", departments);
+
+	    // Create an empty list for position codes
+	    List<PositionCode> positionCodes = new ArrayList<>();
+
+	    // Assuming there's a method to get positions for a department
+	    for (Department department : departments) {
+	        List<Position> positions = department.getPositions();
+	        for (Position position : positions) {
+	            positionCodes.add(position.getId().getPositionCode());
+	        }
+	    }
+
+	    model.addAttribute("positionCode", positionCodes);
+
+	    return "create-employee";
+	}
+
 }

@@ -62,4 +62,13 @@ public class EmployeeService {
 		return employeeRepo.findByAccountUsername(username);
 	}
 
+	public void deleteById(String id) {
+        employeeRepo.deleteById(id);
+    }
+
+	public Employee findById(String id) {
+		return employeeRepo.findByCode(id);
+	}
+
+
 }
