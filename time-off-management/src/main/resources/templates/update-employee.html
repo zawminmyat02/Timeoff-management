@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Employee</title>
+<title>Edit Employee</title>
 
 <style>
 body {
@@ -106,34 +106,17 @@ select.form-control {
 				<h2>Enter employee details below</h2>
 			</div>
 			<div class="form-container">
-				<form th:action="@{/employees}" th:object="${employeeForm}"
-					method="post">
-					    <input type="hidden" th:field="*{code}"/>
-					
+				<form id="employee-form"
+					th:action="@{/employees/{id}(id=${employeeForm.code})}"
+					th:object="${employeeForm}" method="post">
+					<input type="hidden" th:field="*{code}" />
+					<input type="hidden" name="_method" value="put" />
+
 					<div class="form-group">
 						<label for="name">Name:</label> <input type="text" id="name"
 							name="name" class="form-control" th:field="*{name}" required>
 					</div>
-					<div class="form-group">
-						<label for="department">Department</label> <select id="department"
-							th:field="*{department}" class="form-control" required>
-							<option value="">Select Department</option>
-							<option th:each="dept : ${departments}" th:value="${dept.code}"
-								th:text="${dept.name}"></option>
-						</select>
-						<div th:if="${#fields.hasErrors('department')}"
-							th:errors="*{department}" class="text-danger"></div>
-					</div>
-					<div class="form-group">
-						<label for="positionCode">Position Code</label> <select
-							id="positionCode" th:field="*{positionCode}" class="form-control"
-							required>
-							<option value="">Select Position Code</option>
-							<!-- Options will be dynamically populated -->
-						</select>
-						<div th:if="${#fields.hasErrors('positionCode')}"
-							th:errors="*{positionCode}" class="text-danger"></div>
-					</div>
+
 
 					<div class="form-group">
 						<label for="phone">Phone:</label> <input type="tel" id="phone"
@@ -143,23 +126,8 @@ select.form-control {
 						<label for="email">Email:</label> <input type="email" id="email"
 							name="email" class="form-control" th:field="*{email}" required>
 					</div>
-					<div class="form-group">
-						<label for="gender">Gender:</label> <select id="gender"
-							class="form-control" th:field="*{gender}" required>
-							<option th:each="gen : ${genders}" th:value="${gen}"
-								th:text="${gen}">Gender</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="dob">Date of Birth:</label> <input type="date"
-							id="dob" name="dob" class="form-control" th:field="*{dob}"
-							required>
-					</div>
-					<div class="form-group">
-						<label for="assignDate">Assign Date:</label> <input type="date"
-							id="assignDate" name="assignDate" class="form-control"
-							th:field="*{assignDate}" required>
-					</div>
+
+
 					<div class="form-group">
 						<label for="status">Status:</label> <select id="status"
 							class="form-control" th:field="*{status}" required>
@@ -173,10 +141,11 @@ select.form-control {
 							th:field="*{remark}"></textarea>
 					</div>
 					<div class="text-center">
-						<button type="submit" class="btn-save">
-							<i class="fas fa-save"></i> Create Employee
+						<button type="submit"  class="btn-save">
+							<i class="fas fa-save"></i> Update Employee
 						</button>
 					</div>
+
 				</form>
 			</div>
 		</div>
@@ -184,6 +153,6 @@ select.form-control {
 
 	</section>
 
-
 </body>
 </html>
+
