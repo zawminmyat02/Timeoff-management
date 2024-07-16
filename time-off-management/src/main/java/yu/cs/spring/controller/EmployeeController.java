@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
@@ -23,10 +24,10 @@ import yu.cs.spring.model.master.entity.Employee.Status;
 import yu.cs.spring.model.master.entity.Position;
 import yu.cs.spring.model.master.entity.PositionPk.PositionCode;
 import yu.cs.spring.model.master.input.EmployeeFormForCreate;
+import yu.cs.spring.model.master.input.EmployeeFormForUpdate;
 import yu.cs.spring.model.master.output.EmployeeInfo;
 import yu.cs.spring.model.master.service.DepartmentService;
 import yu.cs.spring.model.master.service.EmployeeService;
-import yu.cs.spring.model.master.service.PositionService;
 
 @Controller
 public class EmployeeController {
@@ -37,8 +38,6 @@ public class EmployeeController {
 	@Autowired
 	private DepartmentService deService;
 
-	@Autowired
-	private PositionService poService;
 
 	@GetMapping("/employees/new")
 	public String showCreateEmployeeForm(Model model) {
@@ -94,44 +93,32 @@ public class EmployeeController {
 		ids.forEach(employeeService::deleteById);
 		return "redirect:/employees";
 	}
-	
+
 	@GetMapping("/employees/edit/{id}")
-	public String showEditEmployeeForm(@PathVariable("id") String id, Model model) {
-	    Employee employee = employeeService.findById(id);
-	    EmployeeFormForCreate employeeForm = new EmployeeFormForCreate(
-	        employee.getAccount().getName(),
-	        employee.getDepartment().toString(),
-	        employee.getPosition().getId().getPositionCode(),
-	        employee.getPhone(),
-	        employee.getEmail(),
-	        employee.getGender(),
-	        employee.getDateOfBirth(),
-	        
-	        employee.getAssignDate(),
-	        employee.getStatus(),
-	        employee.getRemark()
-	    );
-	    model.addAttribute("employeeForm", employeeForm);
-	    model.addAttribute("genders", Arrays.asList(Gender.values()));
-	    model.addAttribute("statuses", Arrays.asList(Status.values()));
+	public String showEditEmployeeForm(@PathVariable("id") String id,
+			Model model) {
+		Employee employee = employeeService.findById(id); // Assuming findById now uses the string ID
+		EmployeeFormForUpdate updateForm =  EmployeeFormForUpdate.from(employee);
 
-	    List<Department> departments = deService.findAll();
-	    model.addAttribute("departments", departments);
+		model.addAttribute("employeeForm", updateForm);
+		
+		model.addAttribute("status", updateForm.status());
+		model.addAttribute("statuses", Arrays.asList(Status.values()));
 
-	    // Create an empty list for position codes
-	    List<PositionCode> positionCodes = new ArrayList<>();
 
-	    // Assuming there's a method to get positions for a department
-	    for (Department department : departments) {
-	        List<Position> positions = department.getPositions();
-	        for (Position position : positions) {
-	            positionCodes.add(position.getId().getPositionCode());
-	        }
-	    }
+		return "update-employee";
+	}
 
-	    model.addAttribute("positionCode", positionCodes);
+	@PutMapping("/employees/{id}")
+	public String updateEmployee(@PathVariable("id") String id,
+			@Valid @ModelAttribute("employeeForm") EmployeeFormForUpdate employeeForm, BindingResult result,
+			Model model) {
+		if (result.hasErrors()) {
+			return "update-employee";
+		}
 
-	    return "create-employee";
+		employeeService.updateEmployee(id, employeeForm);
+		return "redirect:/employees";
 	}
 
 }

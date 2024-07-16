@@ -60,6 +60,7 @@ public class SecurityConfig implements WebMvcConfigurer {
         http.csrf(csrf -> csrf
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
         
+        
 		http.logout(a -> a.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
 				.deleteCookies("JSESSIONID").invalidateHttpSession(true));
 

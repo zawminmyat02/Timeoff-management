@@ -8,12 +8,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import jakarta.validation.Valid;
 import yu.cs.spring.model.master.EmployeeCodeGenerator;
 import yu.cs.spring.model.master.entity.Department;
 import yu.cs.spring.model.master.entity.Employee;
 import yu.cs.spring.model.master.entity.Position;
 import yu.cs.spring.model.master.entity.PositionPk;
 import yu.cs.spring.model.master.input.EmployeeFormForCreate;
+import yu.cs.spring.model.master.input.EmployeeFormForUpdate;
 import yu.cs.spring.model.master.repo.DepartmentRepo;
 import yu.cs.spring.model.master.repo.EmployeeRepo;
 import yu.cs.spring.model.master.repo.PositionRepo;
@@ -70,5 +72,20 @@ public class EmployeeService {
 		return employeeRepo.findByCode(id);
 	}
 
+	public void updateEmployee(String id, @Valid EmployeeFormForUpdate employeeForm) {
+		    Employee existingEmployee = employeeRepo.findById(id)
+		            .orElseThrow(() -> new RuntimeException("Employee not found"));
+		    
+		    existingEmployee.getAccount().setName(employeeForm.name());
+		    existingEmployee.setPhone(employeeForm.phone());
+		    existingEmployee.setEmail(employeeForm.email());
+		    existingEmployee.setStatus(employeeForm.status());
+		    existingEmployee.setRemark(employeeForm.remark());
+		    
+		    employeeRepo.save(existingEmployee);
+		}
 
-}
+	}
+
+
+
