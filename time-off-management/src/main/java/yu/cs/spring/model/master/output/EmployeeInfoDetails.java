@@ -22,7 +22,6 @@ public record EmployeeInfoDetails(
 		PositionCode position,
 		Status status,
 		LocalDate assignAt,
-		LocalDate provationPassAt,
 		String remark
 		) {
 	
@@ -44,7 +43,6 @@ public record EmployeeInfoDetails(
 			entity.getPosition().getId().getPositionCode(), 
 			entity.getStatus(), 
 			entity.getAssignDate(), 
-			entity.getProbationPassDate(),
 			entity.getRemark());
 	}
 }

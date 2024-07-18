@@ -1,43 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-	<section layout:fragment="sidebar" >
-	
-    <nav th:fragment="usersidebar"  class="sidebar ">
-    	
-        <div class="brand">
-            <img th:src="@{/images/Eru.jpg}" class="brand-logo" alt="Profile Picture">
-            <span class="brand-name" style="color: gray;">Linn</span>
-        </div>
-        
-     
-        <ul class="menu-items">
-            <li>
-                <a th:href="@{/home}" th:classappend="${page == 'home' ? 'active' : ''}" class="menu-item">
-                    <i class="fas fa-home"></i>
-                    <span>Requests</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/leave-application}" th:classappend="${page == 'form' ? 'active' : ''}" class="menu-item">
-                    <i class="fa-solid fa-plus"></i>
-                    <span>Leave Form</span>
-                </a>
-            </li>
-            <li>
-          
-            <li>
-                <a th:href="@{/reports}" th:classappend="${page == 'reports' ? 'active' : ''}" class="menu-item">
-                    <i class="fas fa-flag"></i>
-                    <span>Reports</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/settings}" th:classappend="${page == 'settings' ? 'active' : ''}" class="menu-item">
-                    <i class="fa-solid fa-bars"></i>
-                    <span>Settings</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    </section>
+<section layout:fragment="sidebar">
+
+	<nav th:fragment="usersidebar" class="sidebar ">
+
+		<div class="brand">
+			<img th:src="@{/images/Eru.jpg}" class="brand-logo"
+				alt="Profile Picture"> <span class="brand-name"
+				style="color: gray;">Linn</span>
+		</div>
+
+
+		<ul class="menu-items">
+			<li><a th:href="@{/home}"
+				th:classappend="${page == 'home' ? 'active' : ''}" class="menu-item">
+					<i class="fas fa-home"></i> <span>Requests</span>
+			</a></li>
+			<li><a th:href="@{/leave-application}"
+				th:classappend="${page == 'form' ? 'active' : ''}" class="menu-item">
+					<i class="fa-solid fa-plus"></i> <span>Leave Form</span>
+			</a></li>
+			<li>
+			<li><a th:href="@{/reports}"
+				th:classappend="${page == 'reports' ? 'active' : ''}"
+				class="menu-item"> <i class="fa-solid fa-coins"></i> <span>Salaries</span>
+			</a></li>
+
+		</ul>
+	</nav>
+</section>
 </html>

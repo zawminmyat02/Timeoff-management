@@ -56,10 +56,6 @@ public record EmployeeFormForCreate(
 		employee.setStatus(status);
 		employee.setAssignDate(assignDate);
 		
-		if(status == Status.Permanent) {
-			employee.setProbationPassDate(assignDate);
-		}
-		
 		employee.setRemark(remark);
 		
 		return employee;

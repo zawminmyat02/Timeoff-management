@@ -5,7 +5,7 @@
     <nav th:fragment="sidebar"  class="sidebar ">
     	
         <div class="brand">
-            <img th:src="@{/images/Eru.jpg}" class="brand-logo" alt="Profile Picture">
+            <img th:src="@{/images/letter-l-icon-17.jpg}" class="brand-logo" alt="Profile Picture">
             <span class="brand-name" style="color: gray;">Linn</span>
         </div>
         
@@ -35,18 +35,7 @@
                     <span>Positions</span>
                 </a>
             </li>
-            <li>
-                <a th:href="@{/reports}" th:classappend="${page == 'reports' ? 'active' : ''}" class="menu-item">
-                    <i class="fas fa-flag"></i>
-                    <span>Reports</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/settings}" th:classappend="${page == 'settings' ? 'active' : ''}" class="menu-item">
-                    <i class="fa-solid fa-bars"></i>
-                    <span>Settings</span>
-                </a>
-            </li>
+           
         </ul>
     </nav>
     </section>
