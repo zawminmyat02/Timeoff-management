@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/admin-board.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+	<section layout:fragment="content">
+	
+	<header class="margin-left" th:fragement="header">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div class="m-4">
+                            <h1 class="text-white d-lg-inline mb-4">Leave Requests</h1>
+                            <h6 class="text-muted d-none d-lg-block mt-3">Approve or reject leave requests</h6>
+                        </div>
+                        <div class="flex-fill"></div>
+
+
+                        <div class="navbar nav">
+                            <li class="nav-item dropdown">
+                                <a href="#" class="d-flex align-items-center nav-link dropdown-toggle"
+                                    data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-xl">
+                                        <img th:src="@{/images/profile.jpg}" class="rounded-circle rounded-circle-custom " alt="Face 1">
+                                    </div>
+                                    <div class="m-3">
+                                        <h5 class="font-bold" style="color:aqua">John Duck</h5>
+                                        <h6 class="text-muted mb-0">@johnducky</h6>
+                                    </div>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#" class="dropdown-item">User Profile</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/logout}" id="signoutLink" class="dropdown-item">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                    </nav>
+                </header>
+                
+                
+	
+	   <div class="row margin-left">
+
+                    <div class=" mx-lg-2 mt-2 col-4 col-xl-4 col-lg-6 col-md-4 col-sm-2      ">
+                        <div class="d-flex justify-content-between mb-2 flex-wrap">
+                            <button type="button" class="mb-2 btn btn-secondary">All</button>
+                            <button type="button" class="mb-2 btn btn-secondary">Pending</button>
+                            <button type="button" class="mb-2 btn btn-secondary">Approved</button>
+                            <button type="button" class="mb-2 btn btn-secondary">Rejected</button>
+                        </div>
+
+                    </div>
+                </div>
+             
+                <div class="row px-5 mt-4">
+                    <div class="form-group search">
+                        <span class="fa fa-search form-control-feedback"></span>
+                        <input type="text" class="form-control" placeholder="Search by employee">
+                    </div>
+
+                </div>
+
+                <div class="mt-5 px-4 mx-3  " style="margin-left: 0px;">
+                    <div class="tbl-container bdr   custom-border">
+                        <!-- <== overflow: hidden applied to parent -->
+                        <table class="table table-hover table-responsive-sm table-borderless" style="padding: auto;">
+                            <thead class="bg-red">
+                                <tr class="custom-border">
+
+                                    <th scope="col" style="width: 3%">Employee</th>
+                                    <th scope="col" style="width: 3%">Type</th>
+                                    <th scope="col" style="width: 3%">Dates</th>
+                                    <th scope="col" style="width: 3%">Status</th>
+                                    <th scope="col" style="width: 3%">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="custom-border">
+                                    <td>Christine Wood</td>
+                                    <td>Sick Leave</td>
+                                    <td>Sep 1</td>
+                                    <td>Pending</td>
+                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
+                                </tr>
+                                <tr class="custom-border">
+                                    <td>John Smith</td>
+                                    <td>Vacation</td>
+                                    <td>Sep 12</td>
+                                    <td>Approved</td>
+                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
+
+                                </tr>
+                                <tr class="last-row">
+                                    <td>Cathy Black</td>
+                                    <td>Maternity Leave</td>
+                                    <td>Oct 2</td>
+                                    <td>Pending</td>
+                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
+
+                                </tr>
+
+                                <tr class="custom-border">
+                                    <td>Christine Wood</td>
+                                    <td>Sick Leave</td>
+                                    <td>Sep 1</td>
+                                    <td>Approved</td>
+                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
+
+                                </tr>
+                                <tr class="custom-border">
+                                    <td>John Smith</td>
+                                    <td>Vacation</td>
+                                    <td>Sep 12</td>
+                                    <td>Approved</td>
+                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
+
+                                </tr>
+                                <tr class="last-row">
+                                    <td>Cathy Black</td>
+                                    <td>Maternity Leave</td>
+                                    <td>Oct 2</td>
+                                    <td>Pending</td>
+                                    <td><button type="button" class="btn btn-outline-dark button-3d">Click</button></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+  </section>
+  
+  
+</body>
+
+</html>

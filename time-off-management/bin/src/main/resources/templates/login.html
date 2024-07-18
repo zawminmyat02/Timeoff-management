@@ -1,0 +1,49 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link  rel="stylesheet" th:href="@{/css/login.css}" >
+    <title>Login Form</title>
+    
+  </head>
+  <body>
+  
+
+        <div class="container-fluid">
+        
+         
+            <form class="mx-auto" th:action="@{/signup}" method="post">
+               
+            <div class="user_img mb-3">
+                <img th:src="@{/images/login.jpg}" alt="">
+            </div>
+                
+                
+                <h4 class="text-center">Login</h4>
+                <div class="mb-3 mt-5">
+                  <label for="exampleInputEmail1" class="form-label">User Name</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                  
+                </div>
+              
+                <button type="submit" class="btn btn-primary mt-5 mr-10">Login</button>
+              </form>
+        </div>
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script th:src="@{bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+	
+  </body>
+</html>

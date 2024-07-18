@@ -108,7 +108,6 @@ select.form-control {
 			<div class="form-container">
 				<form th:action="@{/employees}" th:object="${employeeForm}"
 					method="post">
-					    <input type="hidden" th:field="*{code}"/>
 					
 					<div class="form-group">
 						<label for="name">Name:</label> <input type="text" id="name"

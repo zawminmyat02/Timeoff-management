@@ -1,6 +1,7 @@
 package yu.cs.spring.model.master.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -30,7 +31,7 @@ public class Employee {
 	private Position position;
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<LeaveApplication> leaveApplications;
+	private List<LeaveApplication> leaveApplications = new ArrayList<>();
 
 	@Column(nullable = false)
 	private String phone;

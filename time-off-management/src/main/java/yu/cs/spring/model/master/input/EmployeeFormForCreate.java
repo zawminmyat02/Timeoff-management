@@ -11,6 +11,7 @@ import yu.cs.spring.model.master.entity.Employee.Gender;
 import yu.cs.spring.model.master.entity.Employee.Status;
 import yu.cs.spring.model.master.entity.PositionPk.PositionCode;
 import yu.cs.spring.model.master.validators.DepartmentCodeForValid;
+import yu.cs.spring.model.transaction.entity.LeaveApplication;
 
 
 public record EmployeeFormForCreate(
@@ -32,7 +33,8 @@ public record EmployeeFormForCreate(
 		LocalDate assignDate,
 		@NotNull(message = "Please select status.")
 		Status status,
-		String remark
+		String remark,
+		LeaveApplication leaveapplication
 		) {
 
 	

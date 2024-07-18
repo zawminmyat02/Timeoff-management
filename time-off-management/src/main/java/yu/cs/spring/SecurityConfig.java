@@ -57,8 +57,9 @@ public class SecurityConfig implements WebMvcConfigurer {
 		})
 		.formLogin(form -> form.loginPage("/login").loginProcessingUrl("/signup").defaultSuccessUrl("/home", true)
 				.successHandler(authenticationSuccessHandler()));
-        http.csrf(csrf -> csrf
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
+       
+        
+        http.csrf( c-> c.disable());
         
         
 		http.logout(a -> a.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")

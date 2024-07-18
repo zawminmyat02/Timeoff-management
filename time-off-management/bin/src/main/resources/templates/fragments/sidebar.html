@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    
+      
+            <nav th:fragment="sidebar"><!--sidebar-->
+
+                <h1 class="h4 text-center text-white-50 py-4">
+
+                    <img th:src="@{/images/Eru.jpg}" class="rounded-circle rounded-circle-custom " alt="Profile Picture">
+                    <span class="d-none d-lg-inline">Linn</span>
+
+
+                </h1>
+
+
+                <div class="list-group text-center text-lg-start">
+
+                    <a th:href="@{/home}" class="list-group-item list-group-item-dark list-group-item-action">
+                        <i class="fas fa-home"></i>
+                        <span class="d-none d-lg-inline">Requests</span>
+                    </a>
+
+                    <a th:href="@{/departments}" class="list-group-item list-group-item-dark list-group-item-action">
+                        <i class="fa-solid fa-building"></i>
+                        <span class="d-none d-lg-inline">Department</span>
+                    </a>
+
+                    <a th:href="@{/employees}" class="list-group-item  list-group-item-dark list-group-item-action">
+                        <i class="fas fa-users"></i>
+                        <span class="d-none d-lg-inline">Employees</span>
+                    </a>
+                    <a href="salary.html" class="list-group-item  list-group-item-dark list-group-item-action">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="d-none d-lg-inline">Salaries</span>
+                    </a>
+                    <a href="reports.html" class="list-group-item list-group-item-dark list-group-item-action">
+                        <i class="fas fa-flag"></i>
+                        <span class=" d-none d-lg-inline">Reports</span>
+                    </a>
+
+                    <a href="settings.html" class="list-group-item list-group-item-dark list-group-item-action">
+                        <i class="fa-solid fa-bars"></i>
+                        <span class="d-none d-lg-inline">Settings</span>
+                    </a>
+                </div>
+            </nav>
+
+</html>

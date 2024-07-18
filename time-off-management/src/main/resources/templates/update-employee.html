@@ -103,14 +103,14 @@ select.form-control {
 	<section layout:fragment="content">
 		<div class="container">
 			<div class="header">
-				<h2>Enter employee details below</h2>
+				<h2>Enter employee details</h2>
 			</div>
 			<div class="form-container">
 				<form id="employee-form"
 					th:action="@{/employees/{id}(id=${employeeForm.code})}"
-					th:object="${employeeForm}" method="post">
-					<input type="hidden" th:field="*{code}" />
-					<input type="hidden" name="_method" value="put" />
+					th:object="${employeeForm}" th:method="put">
+					<input type="hidden" name="_method" value="put" /> <input
+						type="hidden" th:field="*{code}" />
 
 					<div class="form-group">
 						<label for="name">Name:</label> <input type="text" id="name"
@@ -141,7 +141,7 @@ select.form-control {
 							th:field="*{remark}"></textarea>
 					</div>
 					<div class="text-center">
-						<button type="submit"  class="btn-save">
+						<button type="submit" class="btn-save">
 							<i class="fas fa-save"></i> Update Employee
 						</button>
 					</div>

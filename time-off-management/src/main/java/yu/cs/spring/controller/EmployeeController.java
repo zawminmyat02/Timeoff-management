@@ -41,7 +41,7 @@ public class EmployeeController {
 
 	@GetMapping("/employees/new")
 	public String showCreateEmployeeForm(Model model) {
-		model.addAttribute("employeeForm", new EmployeeFormForCreate("", "", null, "", "", null, null, null, null, ""));
+		model.addAttribute("employeeForm", new EmployeeFormForCreate("", "", null, "", "", null, null, null, null, "",null));
 		model.addAttribute("genders", Arrays.asList(Gender.values()));
 		model.addAttribute("statuses", Arrays.asList(Status.values()));
 
@@ -109,7 +109,7 @@ public class EmployeeController {
 		return "update-employee";
 	}
 
-	@PutMapping("/employees/{id}")
+	@PostMapping("/employees/{id}")
 	public String updateEmployee(@PathVariable("id") String id,
 			@Valid @ModelAttribute("employeeForm") EmployeeFormForUpdate employeeForm, BindingResult result,
 			Model model) {
