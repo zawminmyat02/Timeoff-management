@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.validation.Valid;
 import yu.cs.spring.model.master.entity.Department;
 import yu.cs.spring.model.master.entity.Position;
-import yu.cs.spring.model.master.entity.PositionPk;
 import yu.cs.spring.model.master.entity.PositionPk.PositionCode;
 import yu.cs.spring.model.master.input.PositionFormForCreate;
+import yu.cs.spring.model.master.input.PositionSearch;
 import yu.cs.spring.model.master.output.PositionInfo;
 import yu.cs.spring.model.master.service.DepartmentService;
 import yu.cs.spring.model.master.service.PositionService;
@@ -28,16 +28,20 @@ import yu.cs.spring.model.master.service.PositionService;
 public class PositionController {
 
 	@Autowired
-	private PositionService position;
+	private PositionService positionService;
 
 	@Autowired
 	private DepartmentService deService;
 
 	@GetMapping("/positions")
-	public String showPositionList(Model model) {
-		List<Position> positions = position.findAll();
-		List<PositionInfo> positionInfos = positions.stream().map(PositionInfo::from).collect(Collectors.toList());
-		model.addAttribute("positions", positionInfos);
+	public String search(@RequestParam(required = false) String department,
+			@RequestParam(required = false) String position, Model model) {
+		
+		PositionSearch search = new PositionSearch(department, position);
+		List<PositionInfo> results = positionService.search(search);
+		model.addAttribute("search", search);
+		model.addAttribute("positions", results);
+	
 		return "position-list";
 	}
 
@@ -52,12 +56,11 @@ public class PositionController {
 		return "create-position";
 	}
 
-	 @GetMapping("/positions/codes")
-	    @ResponseBody
-	    public List<PositionPk.PositionCode> getPositionCodesByDepartment(@RequestParam("department") String department) {
-	        return position.getPositionCodesByDepartment(department);
-	    }
-
+	@GetMapping("/positions/codes")
+	@ResponseBody
+	public List<String> getPositionCodesByDepartment(@RequestParam("department") String department) {
+		return positionService.getPositionCodesByDepartment(department);
+	}
 
 	@PostMapping("/positions")
 	public String savePosition(@Valid @ModelAttribute("positionForm") PositionFormForCreate form,
@@ -66,7 +69,7 @@ public class PositionController {
 			return "new-position-form";
 		}
 		Position entity = form.entity();
-		position.save(entity);
+		positionService.save(entity);
 		return "redirect:/positions";
 	}
 

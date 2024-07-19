@@ -23,7 +23,6 @@ public record EmployeeInfo(
 		PositionCode position,
 		Status status,
 		LocalDate assignAt,
-		LocalDate probationPassAt,
 		String remark) {
 	
 	public String getPositionName() {
@@ -39,7 +38,6 @@ public record EmployeeInfo(
 			root.get(Employee_.position).get(Position_.id).get(PositionPk_.positionCode),
 			root.get(Employee_.status),
 			root.get(Employee_.assignDate),
-			root.get(Employee_.probationPassDate),
 			root.get(Employee_.remark)
 		);
 	}
@@ -53,7 +51,6 @@ public record EmployeeInfo(
 			entity.getPosition().getId().getPositionCode(), 
 			entity.getStatus(), 
 			entity.getAssignDate(), 
-			entity.getProbationPassDate(),
 			entity.getRemark());
 	}
 }

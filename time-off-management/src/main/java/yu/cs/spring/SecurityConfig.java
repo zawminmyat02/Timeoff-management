@@ -54,14 +54,11 @@ public class SecurityConfig implements WebMvcConfigurer {
 					.requestMatchers("/home").hasAnyAuthority(Role.Admin.name(), Role.Employee.name()).anyRequest()
 					.authenticated();
 
-		})
-		.formLogin(form -> form.loginPage("/login").loginProcessingUrl("/signup").defaultSuccessUrl("/home", true)
+		}).formLogin(form -> form.loginPage("/login").loginProcessingUrl("/signup").defaultSuccessUrl("/home", true)
 				.successHandler(authenticationSuccessHandler()));
-       
-        
-        http.csrf( c-> c.disable());
-        
-        
+
+		http.csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
+
 		http.logout(a -> a.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
 				.deleteCookies("JSESSIONID").invalidateHttpSession(true));
 

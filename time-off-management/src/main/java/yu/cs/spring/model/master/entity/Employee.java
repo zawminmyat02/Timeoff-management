@@ -51,8 +51,6 @@ public class Employee {
 	@Column(nullable = false, name = "assign_date")
 	private LocalDate assignDate;
 
-	private LocalDate probationPassDate;
-
 	private String remark;
 
 	public enum Gender {
@@ -60,6 +58,6 @@ public class Employee {
 	}
 
 	public enum Status {
-		Probation, Permanent, Retired
+		Probation, Permanent
 	}
 }
