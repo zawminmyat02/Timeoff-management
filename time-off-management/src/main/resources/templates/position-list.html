@@ -12,8 +12,8 @@
 <style>
 body {
 	font-family: Arial, sans-serif;
-	background-color: #1e1e1e;
-	color: #d3d3d3;
+	background-color: #d8efd3;
+	color: #55ad9b;
 }
 
 .header {
@@ -24,7 +24,7 @@ body {
 
 .brand-title {
 	font-size: 24px;
-	color: #4da8da;
+	color: #55ad9b;
 }
 
 .card-container {
@@ -36,8 +36,8 @@ body {
 .card {
 	margin: 15px;
 	width: calc(33.333% - 30px);
-	background-color: #2d2d2d;
-	color: #d3d3d3;
+	background-color: #d8efd3;
+	color: #55ad9b;
 	border: none;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -57,7 +57,7 @@ body {
 	margin-bottom: 15px;
 	font-size: 20px;
 	font-weight: bold;
-	color: #4da8da;
+	color: #55ad9b;
 }
 
 .card-text {
@@ -66,31 +66,31 @@ body {
 }
 
 .card-text strong {
-	color: #4da8da;
+	color: #55ad9b;
 }
 
 .card-text span {
-	color: #e0e0e0;
+	color: #55ad9b;
 }
 
 .icon {
 	margin-right: 10px;
-	color: #4da8da;
+	color: #000;
 }
 
 .card-header {
-	background-color: #333;
-	color: #4da8da;
+	background-color: #d8efd3;
+	color: #55ad9b;
 	padding: 10px;
-	border-bottom: 1px solid #444;
+	border-bottom: 1px solid #000;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	font-size: 18px;
 }
 
 .btn-add {
-	background-color: #4da8da;
-	color: white;
+	background-color: #d8efd3;
+	color: #55ad9b;
 	border: none;
 	padding: 12px 30px;
 	border-radius: 5px;
@@ -102,7 +102,8 @@ body {
 }
 
 .btn-add:hover {
-	background-color: #388bb5;
+	background-color: #000;
+	color: #fff;
 	transform: scale(1.05);
 }
 
@@ -117,8 +118,8 @@ body {
 
 .btn-create {
 	margin-left: 10px;
-	background-color: #4e5d6c;
-	color: white;
+	background-color: #d8efd3;
+	color: #55ad9b;
 	border: none;
 	padding: 10px 20px;
 	border-radius: 5px;
@@ -128,7 +129,7 @@ body {
 }
 
 .btn-create:hover {
-	background-color: #2d3340;
+	background-color: #000;
 	color: white;
 	transform: scale(1.05);
 }
@@ -136,21 +137,38 @@ body {
 .custom-row {
 	width: 70%;
 }
+
+.form-control{
+	background-color: #d8efd3;
+}
+
+.form-control:focus {
+		background-color: #d8efd3;
+
+    border-color: #55ad98;
+    box-shadow: 0 0 0 0.25rem rgb(98 0 234 / 25%);
+    }
+  
+    .btn-secondary {
+    color: whitesmoke;
+    background-color: #55ad9b;
+    border-color: #292a2c;
+    border-radius: 10px;
 </style>
 </head>
 <body>
 	<section layout:fragment="content">
 		<div class="container mt-4">
 			<header class="header">
-				<h1>Linn</h1>
-				<h2 class="brand-title">Position Management</h2>
+				<h1 style="color:#000">TIME-OFF</h1>
 			</header>
 			<div class="row mb-4">
-				<div class="col-9">
+			<div class="col-2"></div>
+				<div class="col-10">
 					<form th:action="@{/positions}" method="get">
 
     <div class="row align-items-center">
-        <div class="col-md-5 mb-2">
+        <div class="col-md-4 mb-2">
             <div class="input-group">
                
                 <input type="text" class="form-control" id="department" name="department"
@@ -158,7 +176,7 @@ body {
                        placeholder="Search by Department Code" />
             </div>
         </div>
-        <div class="col-md-5 mb-2">
+        <div class="col-md-4 mb-2">
             <div class="input-group">
               
                 <input type="text" class="form-control" id="position" name="position"
@@ -167,11 +185,18 @@ body {
             </div>
         </div>
 
-        <div class="col-md-2 mb-2">
+        <div class="col-md-1 mb-2">
             <div class="text-center">
-                <button id="search-button" class="btn btn-primary" type="submit">Search</button>
+                <button id="search-button" class="btn btn-secondary" type="submit">Search</button>
             </div>
         </div>
+        
+        
+				<div class="col-md-3 mb-2 text-right ">
+					<a id="create-button" class="btn btn-secondary" th:href="@{/positions/new}"
+						><i class="fas fa-plus-circle"></i>
+						Create</a>
+				</div>
     </div>
 
 </form>
@@ -179,15 +204,10 @@ body {
 
 				</div>
 
-				<div class="col-3 text-right py-2">
-					<a id="create-button" th:href="@{/positions/new}"
-						class="btn btn-success"><i class="fas fa-plus-circle"></i>
-						Create</a>
-				</div>
 			</div>
 			<div class="card-container">
 				<div class="card" th:each="position : ${positions}">
-					<div class="card-header">Position Details</div>
+					<div class="card-header" style="color:#55ab9b;">Position Details</div>
 					<div class="card-body">
 						<h5 class="card-title">
 							<i class="fas fa-briefcase icon"></i> Position Info

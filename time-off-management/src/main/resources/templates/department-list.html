@@ -13,8 +13,8 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Roboto', sans-serif;
-	background: linear-gradient(135deg, #2c3e50, #000000);
-	color: #ffffff;
+	background: #d8efd3;
+	color: #55ad9b;
 }
 
 main {
@@ -32,37 +32,37 @@ main {
 	width: 100%;
 	border-collapse: collapse;
 	margin-top: 20px;
-	color: #fff;
-	background-color: #2d3340;
+	color: #000;
+	background-color: #d8efd3;
 	border-radius: 10px;
 	overflow: hidden;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 #department-table th, #department-table td {
-	border: 1px solid #444;
+	border: 1px solid #55ad9b;
 	padding: 20px;
 	text-align: left;
 }
 
 #department-table th {
-	background-color: #6200ea;
-	color: #ffffff;
+	background-color: #55ad9b;
+	color: #000;
 	font-weight: 500;
 	text-transform: uppercase;
 }
 
 #department-table tbody tr:nth-child(odd) {
-	background-color: #3b4351;
+	background-color: #d8efd3;
 }
 
 #department-table tbody tr:nth-child(even) {
-	background-color: #2d3340;
+	background-color: #d8efd3;
 }
 
 #department-table tbody tr:hover {
-	background-color: #6200ea;
-	color: #ffffff;
+	background-color: #d8efd3;
+	color: #000;
 	cursor: pointer;
 }
 
@@ -71,19 +71,26 @@ main {
 	left: 15px;
 	top: 50%;
 	transform: translateY(-50%);
-	color: #6200ea;
+	color: #55ad9b;
 }
 
 .form-control:focus {
 	background-color: rgb(26, 26, 27);
-	border-color: #6200ea;
+	border-color: dark;
 	box-shadow: 0 0 0 0.25rem rgba(98, 0, 234, 0.25);
 }
 
 .btn-secondary {
-	color: whitesmoke;
-	background-color: #1e1e1f;
-	border-color: #292a2c;
+	color: #000;
+	background-color: #55ad9b;
+	border-color: #55ad9b;
+	border-radius: 10px;
+}
+
+.btn-secondary:focus{
+	color: #000;
+	background-color: #55ad9b;
+	border-color: #55ad9b;
 	border-radius: 10px;
 }
 
@@ -98,17 +105,17 @@ main {
 	margin: 5px;
 	padding: 10px;
 	border-radius: 5px;
-	border: 1px solid #444;
-	background-color: #141515;
-	color: #ffffff;
+	border: 1px solid dark;
+	background-color: #d8efd3;
+	color: #000;
 	width: 100%;
 	max-width: 400px;
 }
 
 .update-manager-form button {
 	padding: 10px 20px;
-	background-color: #6200ea;
-	color: #ffffff;
+	background-color: #d8efd3;
+	color: #000;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
@@ -116,12 +123,12 @@ main {
 }
 
 .update-manager-form button:hover {
-	background-color: #4b00b2;
+	background-color: #d8efd3;
 }
 
 .modal-content {
-	background-color: #343a40; /* Set a gray background color */
-	color: #ffffff; /* Set the text color to white for contrast */
+	background-color: #d8efd3; /* Set a gray background color */
+	color: #000; /* Set the text color to white for contrast */
 	border-radius: 10px; /* Add rounded corners */
 	border: none; /* Remove the default border */
 	max-height: 70vh; /* Limit the height */
@@ -129,7 +136,7 @@ main {
 }
 
 .modal-header, .modal-footer {
-	border-bottom: 1px solid #444; /* Add a border for separation */
+	border-bottom: 1px solid dark; /* Add a border for separation */
 	border-top: none; /* Remove the top border */
 }
 
@@ -147,24 +154,24 @@ main {
             align-items: center;
         }
         .search-container input {
-            background-color: #2d3340;
-            color: white;
+            background-color: #d8efd3;
+            color: #000;
             padding-left: 40px; /* Adjust the padding to make space for the icon */
             width: 100%;
             height: 40px; /* Adjust the height as needed */
-            border: none;
-            border-radius: 5px;
+            border: 1px solid #000;
+            border-radius: 10px;
         }
         .search-container .fas {
             position: absolute;
             left: 23px;
-            color: white;
+            color: #000;
         }
         
          .btn-create {
             margin-left: 10px;
-            background-color: #4e5d6c;
-            color: white;
+            background-color: #95d2b3;
+            color: #000;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
@@ -183,7 +190,7 @@ main {
         }
         
         input#headCode.form-control:focus{
-        	color: white;
+        	color: #000;
         }
 </style>
 </head>
@@ -191,8 +198,8 @@ main {
 	<section layout:fragment="content">
 		<div class="row px-5 mt-4">
 			<header class="col-12 text-center mb-4">
-				<h1 style="color: gray;">Linn</h1>
-				<h2 class="brand-title">Department Management</h2>
+				<h1 style="color: #000;">TIME-OFF</h1>
+				<h2 class="brand-title" style="color:#000">Department Management</h2>
 			</header>
 		</div>
 
@@ -246,8 +253,8 @@ main {
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Update HOD</h5>
-										<button type="button" class="btn-close"
+										<h5 class="modal-title" style="color:#000" id="exampleModalLabel">Update HOD</h5>
+										<button type="button" class="btn-close btn btn-secondary"
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
@@ -257,10 +264,10 @@ main {
 												<input type="hidden" id="departmentCode"
 													name="departmentCode" th:value="${department.code}">
 												<div class="form-group mb-3">
-													<h5 class="px-2" style="color: white">HOD Code</h5>
+													<h5 class="px-2" style="color: #000">HOD Code</h5>
 													<input type="text" class="form-control" id="headCode" name="headCode" th:value="${headCode}" placeholder="Code">
 												</div>
-												<button type="submit" class="btn btn-primary">Save changes</button>
+												<button type="submit" class="btn btn-primary" style="background-color:#55ad9b">Save changes</button>
 											</form>
 										</div>
 									</div>

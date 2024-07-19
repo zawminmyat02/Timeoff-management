@@ -4,7 +4,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Roboto', sans-serif;
-	background: linear-gradient(135deg, #2c3e50, #000000);
+	background:#d8efd3;
 	color: #ffffff;
 }
 
@@ -88,7 +88,7 @@ main {
 
 .form-control:focus {
 	background-color: rgb(26, 26, 27);
-	border-color: #6200ea;
+	border-color: #55ad98;
 	box-shadow: 0 0 0 0.25rem rgba(98, 0, 234, 0.25);
 }
 
@@ -102,13 +102,13 @@ main {
 
         .card {
             position: relative;
-            background: #1e1e1e;
+            background: #d8efd3;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             width: 300px;
-            border: 1px solid #6200ea;
+            border: 1px solid dark;
         }
 
         .card:hover {
@@ -121,7 +121,7 @@ main {
             align-items: center;
             background: #6200ea;
             padding: 15px;
-            border-bottom: 1px solid #6200ea;
+            border-bottom: 1px solid dark;
         }
 
         .card-header img {
@@ -145,11 +145,11 @@ main {
         .card-text {
             font-size: 14px;
             margin-bottom: 10px;
-            color: #d1d1d1;
+            color: #000;
         }
 
         .card-text strong {
-            color: #9b59b6;
+            color: #000;
         }
 
         .dropdown {
@@ -168,7 +168,7 @@ main {
         .card-footer {
             padding: 10px 15px;
             background: #1e1e1e;
-            border-top: 1px solid #6200ea;
+            border-top: 1px solid dark;
             text-align: right;
         }
 
@@ -223,7 +223,7 @@ main {
 }
 
 #statusSelect.form-control{
-	background-color: #6200ea;
+	background-color: #55ad98;
 	color: #ffffff;
 
 }
