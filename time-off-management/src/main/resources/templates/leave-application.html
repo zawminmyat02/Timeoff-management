@@ -23,7 +23,7 @@
 	background-color: #d8efd3;
 	padding: 10px;
 	text-align: center;
-	color: #55ad9b;
+	color: #000;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 	margin-bottom: 20px;
 }
@@ -52,7 +52,7 @@ h1 {
 label {
 	display: block;
 	margin-top: 20px;
-	color: #55ad9b;
+	color: #000;
 	font-weight: 700;
 }
 
@@ -63,7 +63,7 @@ input, select, textarea {
 	background-color: #d8efd3;
 	border: 1px solid #000;
 	border-radius: 8px;
-	color: #55ad9b;
+	color: #000;
 	font-size: 16px;
 	transition: background-color 0.3s, border-color 0.3s;
 }
@@ -104,7 +104,7 @@ input:focus, select:focus, textarea:focus {
 	visibility: hidden;
 	width: 200px;
 	background-color: #d8efd3;
-	color: #55ad9b;
+	color: #000;
 	text-align: center;
 	border-radius: 6px;
 	padding: 5px 0;
@@ -134,10 +134,11 @@ button {
 	font-weight: 700;
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.3s;
+	font-weight: 400;
 }
 
 button:hover {
-	background-color: #000;
+	background-color: #55ad9b;
 	transform: translateY(-2px);
 }
 
@@ -151,7 +152,7 @@ button:active {
 	padding: 20px;
 	border-radius: 8px;
 	margin: 10px 0;
-	color: #55ad9b;
+	color: #000;
 }
 
 .leave-balance h2, .recent-leaves h2 {
@@ -200,12 +201,12 @@ button:active {
 }
 
 #step2 h2 {
-	color: #55ad9b;
+	color: #000;
 	margin-bottom: 15px;
 }
 
 #step2 p {
-	color: #95d2b3;
+	color: #000;
 	margin-bottom: 20px;
 }
 
@@ -229,24 +230,37 @@ button:active {
 	cursor: pointer;
 	font-size: 16px;
 	transition: background-color 0.3s ease, box-shadow 0.3s ease;
-	color: #55adb3;
+	color: #000;
+	
 }
-
+h2,h4,p{
+	color : #000;
+}
 .btn-secondary {
 	background: #d8efd3;
+	color: #000;
+	border : 2px solid #000;
+	margin-top:10px;
 }
 
 .btn-secondary:hover {
-	background: #000;
+	background: #d8efd4;
+	color: #000;
+	border : 2px solid #000;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		margin-top:10px;
+	
 }
 
 .btn-primary {
-	background: #000;
+	background: #55ad9b;
+	color:#000;
 }
 
 .btn-primary:hover {
-	background: #000;
+	background: #55ad9c;
+	
+	color:#000;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -256,7 +270,7 @@ button:active {
 	border: 1px solid #000;
 	border-radius: 4px;
 	margin-bottom: 20px;
-	color: #55ad9b;
+	color: #000;
 }
 
 .alert {
@@ -314,6 +328,7 @@ button:active {
 
 					<!-- Step 3: Submit -->
 					<div id="step3" class="step-content" style="display: none;">
+						<div class="mb-5"></div>
 						<h2>Confirmation</h2>
 						<p>Your leave request is about to submit!!</p>
 						<!-- Additional confirmation message or summary can be added here -->

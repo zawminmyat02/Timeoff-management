@@ -32,51 +32,13 @@ main {
 
 .search .form-control {
 	padding-left: 2.375rem;
-	color: white;
-	background-color: #141515;
+	color: #000;
+	background-color: #d8efd3;
 	border-radius: 10px;
 	line-height: 2.2;
-	border: 1px solid #444;
+	border: 1px solid #000;
 }
 
-#employee-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
-	color: #fff;
-	background-color: #2d3340;
-	border-radius: 10px;
-	overflow: hidden;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-#employee-table th,
-#employee-table td {
-	border: 1px solid #444;
-	padding: 10px;
-	text-align: left;
-}
-
-#employee-table th {
-	background-color: #6200ea;
-	color: #ffffff;
-	font-weight: 500;
-	text-transform: uppercase;
-}
-
-#employee-table tbody tr:nth-child(odd) {
-	background-color: #3b4351;
-}
-
-#employee-table tbody tr:nth-child(even) {
-	background-color: #2d3340;
-}
-
-#employee-table tbody tr:hover {
-	background-color: #6200ea;
-	color: #ffffff;
-	cursor: pointer;
-}
 
 .input-container i {
 	position: absolute;
@@ -87,7 +49,7 @@ main {
 }
 
 .form-control:focus {
-	background-color: rgb(26, 26, 27);
+	background-color: white;
 	border-color: #55ad98;
 	box-shadow: 0 0 0 0.25rem rgba(98, 0, 234, 0.25);
 }
@@ -119,7 +81,7 @@ main {
         .card-header {
             display: flex;
             align-items: center;
-            background: #6200ea;
+            background: #55ad98;
             padding: 15px;
             border-bottom: 1px solid dark;
         }
@@ -159,7 +121,7 @@ main {
         .dropdown select {
             background: #1e1e1e;
             color: #d1d1d1;
-            border: 1px solid #6200ea;
+            border: 1px solid #55ad98;
             padding: 5px;
             border-radius: 5px;
             width: 100%;
@@ -167,13 +129,12 @@ main {
 
         .card-footer {
             padding: 10px 15px;
-            background: #1e1e1e;
-            border-top: 1px solid dark;
+            background: #55ad98;
             text-align: right;
         }
 
         .card-footer button {
-            background-color: #6200ea;
+            background-color: #55ad98;
             color: #fff;
             border: none;
             padding: 5px 10px;
