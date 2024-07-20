@@ -4,6 +4,8 @@
 	layout:decorate="~{/layouts/admin-board.html}">
 <head>
 <meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 <title>Title</title>
 
 </head>
@@ -111,11 +113,11 @@
 										th:data-id="${leaveApplication.id}"
 										onchange="changeStatus(this)">
 										<option value="PENDING"
-											th:selected="${leaveApplication.status == 'PENDING'}">PENDING</option>
+											th:selected="${leaveApplication.status.name() == 'PENDING'}">PENDING</option>
 										<option value="APPROVED"
-											th:selected="${leaveApplication.status == 'APPROVED'}">APPROVED</option>
+											th:selected="${leaveApplication.status.name() == 'APPROVED'}">APPROVED</option>
 										<option value="REJECTED"
-											th:selected="${leaveApplication.status == 'REJECTED'}">REJECTED</option>
+											th:selected="${leaveApplication.status.name() == 'REJECTED'}">REJECTED</option>
 									</select>
 								</div>
 								</div>
@@ -125,7 +127,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 
 

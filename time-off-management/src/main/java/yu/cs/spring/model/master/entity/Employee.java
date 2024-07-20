@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 import yu.cs.spring.model.transaction.entity.LeaveApplication;
 

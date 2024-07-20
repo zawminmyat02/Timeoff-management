@@ -43,6 +43,16 @@ public class PositionPk implements Serializable{
 		
 	}
 	
+	
+	public static PositionCode fromString(String text) {
+        for (PositionCode b : PositionCode.values()) {
+            if (b.value.equalsIgnoreCase(text)) {
+                return b;
+            }
+        }
+        throw new IllegalArgumentException("No constant with value " + text + " found");
+    }
+	
 	public String getCode() {
 		return "%s-%s".formatted(departmentCode, positionCode.name());
 	}

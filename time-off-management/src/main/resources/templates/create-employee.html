@@ -100,6 +100,10 @@ select.form-control {
 .text-danger {
 	color: #dc3545;
 }
+
+.error{
+	color:red;
+}
 </style>
 </head>
 <body>
@@ -144,6 +148,8 @@ select.form-control {
 					<div class="form-group">
 						<label for="email">Email:</label> <input type="email" id="email"
 							name="email" class="form-control" th:field="*{email}" required>
+							<span class="error"
+							th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email has been taken</span>
 					</div>
 					<div class="form-group">
 						<label for="gender">Gender:</label> <select id="gender"

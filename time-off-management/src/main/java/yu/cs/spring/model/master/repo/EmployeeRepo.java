@@ -12,4 +12,8 @@ public interface EmployeeRepo extends BaseRepository<Employee, String>{
     Employee findByAccountUsername(@Param("username") String username);
 	
 	Employee findByCode(String code);
+	
+	boolean existsByEmail(String email);
+	
+	long countByEmail(String value);
 }

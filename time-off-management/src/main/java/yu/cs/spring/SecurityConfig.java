@@ -50,8 +50,9 @@ public class SecurityConfig implements WebMvcConfigurer {
 
 		http.authorizeHttpRequests(request -> {
 			request.requestMatchers("/resources/**", "/login", "images/**", "css/**", "bootstrap/css/**",
-					"bootstrap/js/**", "/change-password", "/changeStatus/**", "/home/**").permitAll()
-					.requestMatchers("/home").hasAnyAuthority(Role.Admin.name(), Role.Employee.name()).anyRequest()
+					"bootstrap/js/**", "/change-password", "/changeStatus/**", "/home").permitAll()
+					.requestMatchers("/home").hasAnyAuthority(Role.Admin.name(), Role.Employee.name())
+					.requestMatchers("/employees/**","departments/**","/positions/**").hasAuthority(Role.Admin.name()).anyRequest()
 					.authenticated();
 
 		}).formLogin(form -> form.loginPage("/login").loginProcessingUrl("/signup").defaultSuccessUrl("/home", true)
