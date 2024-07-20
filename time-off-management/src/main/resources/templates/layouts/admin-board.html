@@ -28,7 +28,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
         $(document).ready(function() {
-            $('#department').change(function() {
+            $('#department').click(function() {
                 var departmentCode = $(this).val();
                 $.ajax({
                     url: '/positions/codes',

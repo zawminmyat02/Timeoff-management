@@ -15,4 +15,8 @@ public class EmployeeCodeSeq {
 	public String next() {
 		return "%s-%04d".formatted(department, ++ seqNumber);
 	}
+	
+	public void setSeqNumber(int seqNumber) {
+        this.seqNumber = seqNumber;
+    }
 }

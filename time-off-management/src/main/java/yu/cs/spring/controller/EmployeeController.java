@@ -68,9 +68,14 @@ public class EmployeeController {
 	public String createEmployee(@Valid @ModelAttribute("employeeForm") EmployeeFormForCreate employeeForm,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			model.addAttribute("positions", Arrays.asList(PositionCode.values()));
 			model.addAttribute("genders", Arrays.asList(Gender.values()));
 			model.addAttribute("statuses", Arrays.asList(Status.values()));
+
+			List<Department> departments = deService.findAll();
+			model.addAttribute("departments", departments);
+
+			
+
 			return "create-employee";
 		}
 

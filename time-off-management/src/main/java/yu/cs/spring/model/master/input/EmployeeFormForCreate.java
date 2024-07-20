@@ -9,8 +9,8 @@ import yu.cs.spring.model.master.entity.Account.Role;
 import yu.cs.spring.model.master.entity.Employee;
 import yu.cs.spring.model.master.entity.Employee.Gender;
 import yu.cs.spring.model.master.entity.Employee.Status;
-import yu.cs.spring.model.master.entity.PositionPk.PositionCode;
 import yu.cs.spring.model.master.validators.DepartmentCodeForValid;
+import yu.cs.spring.model.master.validators.EmployeeEmailForUnique;
 import yu.cs.spring.model.transaction.entity.LeaveApplication;
 
 
@@ -20,10 +20,11 @@ public record EmployeeFormForCreate(
 		@DepartmentCodeForValid
 		String department,
 		@NotNull(message = "Please select position.")
-		PositionCode positionCode,
+		String positionCode,
 		@NotBlank(message = "Please enter phone.")
 		String phone,
 		@NotBlank(message = "Please enter email.")
+		@EmployeeEmailForUnique(message = "Email is already used.")
 		String email,
 		@NotNull(message = "Please select gender.")
 		Gender gender,
@@ -60,4 +61,6 @@ public record EmployeeFormForCreate(
 		
 		return employee;
 	}
+	
+	
 }

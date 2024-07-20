@@ -3,6 +3,7 @@ package yu.cs.spring.model.master.input;
 import jakarta.validation.constraints.NotBlank;
 import yu.cs.spring.model.master.entity.Employee;
 import yu.cs.spring.model.master.entity.Employee.Status;
+import yu.cs.spring.model.master.validators.EmployeeEmailForUnique;
 
 public record EmployeeFormForUpdate(
 		String code,
@@ -10,8 +11,6 @@ public record EmployeeFormForUpdate(
 		String name,
 		@NotBlank(message = "Please enter phone.")
 		String phone,
-		@NotBlank(message = "Please enter email.")
-		String email,		
 		Status status,
 		String remark) {
 
@@ -20,7 +19,6 @@ public record EmployeeFormForUpdate(
 				entity.getCode(),
 				entity.getAccount().getName(), 
 				entity.getPhone(), 
-				entity.getEmail(), 
 				entity.getStatus(),
 				entity.getRemark());
 	}

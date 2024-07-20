@@ -40,3 +40,7 @@ INSERT INTO leave_type (paid_days, name, remark) VALUES (5, 'Personal Leave', 'P
 INSERT INTO leave_type (paid_days, name, remark) VALUES (12, 'Maternity Leave', 'Paid maternity leave');
 
 INSERT INTO leave_application (id, end_date, start_date, type_id, apply_at, employee_code, remark, status) VALUES (1, '2024-07-01', '2024-06-25', 1, '2024-06-15 08:00:00.000000', 'E001-0001', 'Family event', 'PENDING');
+INSERT INTO employee_code_seq (seq_number,department) values (0002,'C001');
+INSERT INTO employee_code_seq (seq_number,department) values (0002,'D001');
+INSERT INTO employee_code_seq (seq_number,department) values (0002,'M001');
+INSERT INTO employee_code_seq (seq_number,department) values (0002,'E001');
