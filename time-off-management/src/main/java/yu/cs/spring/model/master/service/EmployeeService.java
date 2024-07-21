@@ -43,22 +43,21 @@ public class EmployeeService {
 	private EmployeeCodeSeqRepo employeeCodeSeqRepository;
 
 	public void saveEmployee(EmployeeFormForCreate form) {
+		
+
 
 		String departmentCode = form.department();
 		
-		System.out.println(employeeCodeSeqRepository.findByDepartment(departmentCode));
 
 		// Fetch or create the sequence for the department
 		EmployeeCodeSeq seq = employeeCodeSeqRepository.findByDepartment(departmentCode).orElseGet(() -> {
 			EmployeeCodeSeq newSeq = new EmployeeCodeSeq();
 			newSeq.setDepartment(departmentCode);
-			newSeq.setSeqNumber(0); // Start from 0, it will be incremented in the next() method
 			return newSeq;
 		});
 
 		// Generate the next code
-		String code = seq.next();
-
+		var code = codeGenerator.next(form.department());
 		var password = encoder.encode("123456");
 
 		var entity = form.entity(code, password);
