@@ -1,5 +1,7 @@
 package yu.cs.spring.model.master.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -16,4 +18,6 @@ public interface EmployeeRepo extends BaseRepository<Employee, String>{
 	boolean existsByEmail(String email);
 	
 	long countByEmail(String value);
+
+	List<Employee> findByDepartmentName(String department);
 }

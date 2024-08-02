@@ -1,5 +1,6 @@
 package yu.cs.spring.model.master.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,18 @@ public class LeaveApplicationService {
 			return true;
 		}
 		return false;
+	}
+
+	public List<LeaveApplication> getLeaveApplicationsByDepartment(String departmentName) {
+		return leaveApplicationRepository.findByDepartment_Name(departmentName);
+	}
+
+	public List<LeaveApplication> findAllApprovedOrRejected() {
+		return leaveApplicationRepository.findByStatusIn(Arrays.asList(Status.APPROVED, Status.REJECTED));
+	}
+
+	public List<LeaveApplication> findPendingLeaveApplications() {
+		return leaveApplicationRepository.findByStatus(LeaveApplication.Status.PENDING);
 	}
 
 }

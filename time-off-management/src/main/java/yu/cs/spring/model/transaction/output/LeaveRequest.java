@@ -9,6 +9,7 @@ public record LeaveRequest(
 		long id,
 	    LocalDateTime applyAt,
 	    String employeeName,
+	    String departmentName,
 	    String leaveTypeName,
 	    LocalDate startDate,
 	    LocalDate endDate,

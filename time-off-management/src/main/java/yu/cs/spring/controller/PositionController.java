@@ -59,6 +59,7 @@ public class PositionController {
 	@GetMapping("/positions/codes")
 	@ResponseBody
 	public List<String> getPositionCodesByDepartment(@RequestParam("department") String department) {
+		
 		return positionService.getPositionCodesByDepartment(department);
 	}
 

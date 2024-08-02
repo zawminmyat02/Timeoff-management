@@ -103,4 +103,8 @@ public class EmployeeService {
 		employeeRepo.save(existingEmployee);
 	}
 
+	public List<Employee> findByDepartment(String department) {
+		 return employeeRepo.findByDepartmentName(department);
+	}
+
 }

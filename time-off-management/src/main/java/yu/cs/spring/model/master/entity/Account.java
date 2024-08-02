@@ -39,7 +39,7 @@ public class Account implements Serializable {
 	private boolean activated;
 	
 	public enum Role {
-		Admin, Employee
+		Admin, Employee , HOD
 	}
 	
 	

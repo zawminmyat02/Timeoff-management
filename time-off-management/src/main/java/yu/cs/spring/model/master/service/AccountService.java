@@ -33,4 +33,13 @@ public class AccountService {
 	public String getNameByUserName(String email) {
 		return repo.getNameByUsername(email);
 	}
+
+	  public String getDepartmentByUserName(String username) {
+		  Account account = repo.findByUsername(username)
+					.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		  if (account != null && account.getEmployee() != null && account.getEmployee().getDepartment() != null) {
+	            return account.getEmployee().getDepartment().getName();
+	        }
+	        return null; // or handle this case appropriately
+	    }
 }

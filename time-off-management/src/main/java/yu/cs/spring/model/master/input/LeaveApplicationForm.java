@@ -20,6 +20,7 @@ public record LeaveApplicationForm(@NotNull(message = "Leave type ID is required
 	public LeaveApplication toEntity(Employee employee, LeaveType leaveType) {
 		LeaveApplication leaveApplication = new LeaveApplication();
 		leaveApplication.setEmployee(employee);
+		leaveApplication.setDepartment(employee.getDepartment());
 		leaveApplication.setType(leaveType);
 		leaveApplication.setStartDate(startDate);
 		leaveApplication.setEndDate(endDate);

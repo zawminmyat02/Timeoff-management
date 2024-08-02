@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
+import yu.cs.spring.model.master.entity.Account;
 import yu.cs.spring.model.master.entity.Department;
 import yu.cs.spring.model.master.entity.Employee;
+import yu.cs.spring.model.master.entity.Account.Role;
 import yu.cs.spring.model.master.input.DepartmentFormForManagerChanges;
+import yu.cs.spring.model.master.repo.AccountRepo;
 import yu.cs.spring.model.master.repo.DepartmentRepo;
 import yu.cs.spring.model.master.repo.EmployeeRepo;
 
@@ -32,10 +35,17 @@ public class DepartmentService {
 	public void update(String departmentCode, DepartmentFormForManagerChanges form) {
 	    Department entity = departmentRepo.findById(departmentCode).orElseThrow(() -> new EntityNotFoundException("Department not found"));
 	    Employee manager = employeeRepo.findById(form.headCode()).orElseThrow(() -> new EntityNotFoundException("Employee not found"));
+	    Account account = manager.getAccount();
+	    account.setRole(Role.HOD);
 
 	    entity.setHeadOfDepartment(manager);
 	    
 	    departmentRepo.save(entity);
+	}
+
+	public Department findByName(String userDepartment) {
+		// TODO Auto-generated method stub
+		return departmentRepo.findByName(userDepartment);
 	}
 
 }

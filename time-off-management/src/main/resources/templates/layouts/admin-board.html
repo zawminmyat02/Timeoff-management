@@ -27,32 +27,43 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-        $(document).ready(function() {
-            $('#department').click(function() {
-                var departmentCode = $(this).val();
-                $.ajax({
-                    url: '/positions/codes',
-                    type: 'GET',
-                    data: {
-                        department: departmentCode
-                    },
-                    success: function(data) {
-                        var $positionCode = $('#positionCode');
-                        $positionCode.empty();
-                        $positionCode.append('<option value="">Select Position Code</option>');
-                        $.each(data, function(index, code) {
-                            $positionCode.append($('<option>', {
-                                value: code, // Assuming code is the PositionCode enum name
-                                text: code // Assuming value is the enum name for simplicity
-                            }));
-                        });
-                    },
-                    error: function() {
-                        alert('Error fetching position codes.');
-                    }
-                });
+$(document).ready(function() {
+    $('#department').change(function() {
+        var departmentCode = $(this).val();
+        if(departmentCode) {
+            $.ajax({
+                url: '/positions/codes',
+                type: 'GET',
+                data: {
+                    department: departmentCode
+                },
+                success: function(data) {
+                    var $positionCode = $('#positionCode');
+                    $positionCode.empty();
+                    $positionCode.append('<option value="">Select Position Code</option>');
+                    $.each(data, function(index, code) {
+                        $positionCode.append($('<option>', {
+                            value: code,
+                            text: code
+                        }));
+                    });
+                },
+                error: function() {
+                    alert('Error fetching position codes.');
+                }
             });
-        });
+        } else {
+            $('#positionCode').empty();
+            $('#positionCode').append('<option value="">Select Position Code</option>');
+        }
+    });
+    
+    // Trigger change event if department is already selected
+    var selectedDepartment = $('#department').val();
+    if(selectedDepartment) {
+        $('#department').trigger('change');
+    }
+});
         function initializeCheckboxes() {
             var checkboxes = document.getElementsByClassName('checkbox-column');
             for (var i = 0; i < checkboxes.length; i++) {

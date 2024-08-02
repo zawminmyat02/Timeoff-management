@@ -1,41 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-	<section layout:fragment="sidebar" >
-	
-    <nav th:fragment="sidebar"  class="sidebar ">
-    	
-        <div class="brand">
-            <span class="brand-name" style="color: dark;">TIME-OFF</span>
-        </div>
-        
-     
-        <ul class="menu-items">
-            <li>
-                <a th:href="@{/home}" th:classappend="${page == 'home' ? 'active' : ''}" class="menu-item">
-                    <i class="fas fa-home"></i>
-                    <span>Requests</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/departments}" th:classappend="${page == 'departments' ? 'active' : ''}" class="menu-item">
-                    <i class="fa-solid fa-building"></i>
-                    <span>Department</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/employees}" th:classappend="${page == 'employees' ? 'active' : ''}" class="menu-item">
-                    <i class="fas fa-users"></i>
-                    <span>Employees</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/positions}" th:classappend="${page == 'positions' ? 'active' : ''}" class="menu-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Positions</span>
-                </a>
-            </li>
-           
-        </ul>
-    </nav>
-    </section>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<section layout:fragment="sidebar">
+
+	<nav th:fragment="sidebar" class="sidebar ">
+
+		<div class="brand">
+			<span class="brand-name" style="color: dark;">TIME-OFF</span>
+		</div>
+
+
+		<ul class="menu-items">
+			<li><a th:href="@{/home}"
+				th:classappend="${page == 'home' ? 'active' : ''}" class="menu-item">
+					<i class="fa-solid fa-bell"></i> <span>Requests</span>
+			</a></li>
+
+			<li><a th:href="@{/leave-history}"
+				th:classappend="${page == 'records' ? 'active' : ''}"
+				class="menu-item"> <i class="fa-solid fa-folder-open"></i> <span>Records</span>
+			</a></li>
+			<li sec:authorize="hasAuthority('Admin')"><a
+				th:href="@{/departments}"
+				th:classappend="${page == 'departments' ? 'active' : ''}"
+				class="menu-item"> <i class="fa-solid fa-building"></i> <span>Departments</span>
+			</a></li>
+			<li sec:authorize="hasAuthority('Admin') or hasAuthority('HOD')"><a th:href="@{/employees}" 
+				th:classappend="${page == 'employees' ? 'active' : ''}"
+				class="menu-item"> <i class="fas fa-users"></i> <span>Employees</span>
+			</a></li>
+			<li sec:authorize="hasAuthority('Admin')"><a
+				th:href="@{/positions}"
+				th:classappend="${page == 'positions' ? 'active' : ''}"
+				class="menu-item"> <i class="fas fa-chart-line"></i> <span>Positions</span>
+			</a></li>
+
+			<li sec:authorize="hasAuthority('HOD') or hasAuthority('Employee')"><a
+				th:href="@{/leave-application}"
+				th:classappend="${page == 'form' ? 'active' : ''}" class="menu-item">
+					<i class="fa-solid fa-plus"></i> <span>Leave Form</span>
+			</a></li>
+			<li sec:authorize="hasAuthority('HOD') or hasAuthority('Employee')"><a th:href="@{/reports}"
+				th:classappend="${page == 'reports' ? 'active' : ''}"
+				class="menu-item"> <i class="fa-solid fa-coins"></i> <span>Salaries</span>
+			</a></li>
+
+		</ul>
+	</nav>
+</section>
 </html>

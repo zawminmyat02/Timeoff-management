@@ -9,4 +9,6 @@ public interface DepartmentRepo extends BaseRepository<Department, String> {
 	
 	boolean existsByCode(String code);
 
+	Department findByName(String userDepartment);
+
 }

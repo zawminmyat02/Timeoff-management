@@ -50,7 +50,7 @@ body {
 #employee-table {
 	width: 100%;
 	border-collapse: collapse;
-	margin-top: 35px;
+	margin-top: 25px;
 	color: #000;
 	background-color: #d8efd3;
 	border-radius: 10px;
@@ -58,8 +58,14 @@ body {
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-#employee-table th, #employee-table td {
-	border: 1px solid #444;
+#employee-table th {
+	border: none;
+	padding: 25px 15px;
+	text-align: left;
+}
+
+#employee-table td {
+	border-bottom: 1px solid #55ad9b;
 	padding: 25px 15px;
 	text-align: left;
 }
@@ -144,7 +150,7 @@ body {
 }
 
 .btn-select-active {
-	background-color: #d8efd3; /* Highlight color */
+	background-color: #f8f8f8; /* Highlight color */
 }
 
 .btn-create {
@@ -168,8 +174,9 @@ body {
 	<section layout:fragment="content">
 		<div class="container mt-4">
 			<header class="header">
-				<h1 style="color:#000;">TIME-OFF</h1>
-				<h2 class="brand-title" style="color:#000;">Employee Management</h2>
+				<h1 style="color: #000;">TIME-OFF</h1>
+				<h2 class="brand-title" style="color: #000;">Employee
+					Management</h2>
 			</header>
 			<div class="row mb-4">
 				<div class="col-9 form-group search-container">
@@ -189,6 +196,12 @@ body {
 						<i class="fa-solid fa-bars"></i> Select
 					</button>
 
+				</div>
+				<div class="mt-2" th:if="${errors}">
+					<div th:each="error : ${errors}" class="alert alert-danger"
+						role="alert">
+						<span th:text="${error}"></span>
+					</div>
 				</div>
 				<form id="delete-form" th:action="@{/delete}" method="post">
 					<input type="hidden" id="employee-ids" name="employeeIds">
@@ -216,12 +229,14 @@ body {
 								<td th:text="${employee.status}"></td>
 								<td th:text="${employee.assignAt}"></td>
 								<td th:text="${employee.remark}"></td>
-								<td><a th:href="@{/employees/edit/{id}(id=${employee.code})}">
-										<i class="fas fa-edit"></i>
+								<td><a
+									th:href="@{/employees/edit/{id}(id=${employee.code})}"> <i
+										class="fas fa-edit"></i>
 								</a></td>
 
 								<td class="checkbox-column"><input type="checkbox"
 									name="employeeCode" th:value="${employee.code}"
+									th:disabled="${employee.name == name}"
 									onchange="checkSelected()"></td>
 
 							</tr>

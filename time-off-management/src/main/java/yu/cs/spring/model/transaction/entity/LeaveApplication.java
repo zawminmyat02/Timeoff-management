@@ -11,8 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
 import lombok.Data;
+import yu.cs.spring.model.master.entity.Department;
 import yu.cs.spring.model.master.entity.Employee;
 import yu.cs.spring.model.master.entity.LeaveType;
 
@@ -29,6 +29,9 @@ public class LeaveApplication {
 
 	@ManyToOne
 	private Employee employee;
+	
+	@ManyToOne
+    private Department department;
 
 	@ManyToOne
 	private LeaveType type;
