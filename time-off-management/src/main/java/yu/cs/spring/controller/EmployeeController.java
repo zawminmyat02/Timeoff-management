@@ -1,7 +1,5 @@
 package yu.cs.spring.controller;
 
-
-
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,54 +42,53 @@ public class EmployeeController {
 
 	@Autowired
 	private DepartmentService deService;
-	
+
 	@Autowired
 	private AccountService accountService;
 
-
 	@GetMapping("/employees/new")
 	public String showCreateEmployeeForm(Model model) {
-		
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String username = auth.getName();
+		String username = auth.getName();
 
-	    model.addAttribute("employeeForm", new EmployeeFormForCreate("", "", null, "", "", null, null, null, null, "", null));
-	    model.addAttribute("genders", Arrays.asList(Gender.values()));
-	    model.addAttribute("statuses", Arrays.asList(Status.values()));
+		model.addAttribute("employeeForm",
+				new EmployeeFormForCreate("", "", null, "", "", null, null, null, null, "", null));
+		model.addAttribute("genders", Arrays.asList(Gender.values()));
+		model.addAttribute("statuses", Arrays.asList(Status.values()));
 
-	    // Check if the logged-in user has the HOD role
-	    boolean isHod = auth.getAuthorities().stream()
-	                        .anyMatch(a -> a.getAuthority().equals("HOD"));
+		// Check if the logged-in user has the HOD role
+		boolean isHod = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("HOD"));
 
-	    List<Department> departments;
-	    List<PositionCode> positionCodes = new ArrayList<>();
+		List<Department> departments;
+		List<PositionCode> positionCodes = new ArrayList<>();
 
-	    if (isHod) {
-	        // Get the department of the logged-in user
-	        String userDepartment = accountService.getDepartmentByUserName(username);
-	        Department department = deService.findByName(userDepartment);
-	        departments = Arrays.asList(department);
+		if (isHod) {
+			// Get the department of the logged-in user
+			String userDepartment = accountService.getDepartmentByUserName(username);
+			Department department = deService.findByName(userDepartment);
+			departments = Arrays.asList(department);
 
-	        // Get positions for the department
-	        List<Position> positions = department.getPositions();
-	        for (Position position : positions) {
-	            positionCodes.add(position.getId().getPositionCode());
-	        }
-	    } else {
-	        // Get all departments and positions for non-HOD users
-	        departments = deService.findAll();
-	        for (Department department : departments) {
-	            List<Position> positions = department.getPositions();
-	            for (Position position : positions) {
-	                positionCodes.add(position.getId().getPositionCode());
-	            }
-	        }
-	    }
+			// Get positions for the department
+			List<Position> positions = department.getPositions();
+			for (Position position : positions) {
+				positionCodes.add(position.getId().getPositionCode());
+			}
+		} else {
+			// Get all departments and positions for non-HOD users
+			departments = deService.findAll();
+			for (Department department : departments) {
+				List<Position> positions = department.getPositions();
+				for (Position position : positions) {
+					positionCodes.add(position.getId().getPositionCode());
+				}
+			}
+		}
 
-	    model.addAttribute("departments", departments);
-	    model.addAttribute("positionCode", positionCodes);
+		model.addAttribute("departments", departments);
+		model.addAttribute("positionCode", positionCodes);
 
-	    return "create-employee";
+		return "create-employee";
 	}
 
 	@PostMapping("/employees")
@@ -100,45 +97,43 @@ public class EmployeeController {
 		if (result.hasErrors()) {
 			model.addAttribute("genders", employeeForm.gender());
 			model.addAttribute("statuses", employeeForm.status());
-			model.addAttribute("name",employeeForm.name());
-			model.addAttribute("phone",employeeForm.phone());
-			model.addAttribute("remark",employeeForm.remark());
+			model.addAttribute("name", employeeForm.name());
+			model.addAttribute("phone", employeeForm.phone());
+			model.addAttribute("remark", employeeForm.remark());
 
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		    String username = auth.getName();
+			String username = auth.getName();
 
-		  
-		    // Check if the logged-in user has the HOD role
-		    boolean isHod = auth.getAuthorities().stream()
-		                        .anyMatch(a -> a.getAuthority().equals("HOD"));
+			// Check if the logged-in user has the HOD role
+			boolean isHod = auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("HOD"));
 
-		    List<Department> departments;
-		    List<PositionCode> positionCodes = new ArrayList<>();
+			List<Department> departments;
+			List<PositionCode> positionCodes = new ArrayList<>();
 
-		    if (isHod) {
-		        // Get the department of the logged-in user
-		        String userDepartment = accountService.getDepartmentByUserName(username);
-		        Department department = deService.findByName(userDepartment);
-		        departments = Arrays.asList(department);
+			if (isHod) {
+				// Get the department of the logged-in user
+				String userDepartment = accountService.getDepartmentByUserName(username);
+				Department department = deService.findByName(userDepartment);
+				departments = Arrays.asList(department);
 
-		        // Get positions for the department
-		        List<Position> positions = department.getPositions();
-		        for (Position position : positions) {
-		            positionCodes.add(position.getId().getPositionCode());
-		        }
-		    } else {
-		        // Get all departments and positions for non-HOD users
-		        departments = deService.findAll();
-		        for (Department department : departments) {
-		            List<Position> positions = department.getPositions();
-		            for (Position position : positions) {
-		                positionCodes.add(position.getId().getPositionCode());
-		            }
-		        }
-		    }
+				// Get positions for the department
+				List<Position> positions = department.getPositions();
+				for (Position position : positions) {
+					positionCodes.add(position.getId().getPositionCode());
+				}
+			} else {
+				// Get all departments and positions for non-HOD users
+				departments = deService.findAll();
+				for (Department department : departments) {
+					List<Position> positions = department.getPositions();
+					for (Position position : positions) {
+						positionCodes.add(position.getId().getPositionCode());
+					}
+				}
+			}
 
-		    model.addAttribute("departments", departments);
-		    model.addAttribute("positionCode", positionCodes);
+			model.addAttribute("departments", departments);
+			model.addAttribute("positionCode", positionCodes);
 			return "create-employee";
 		}
 
@@ -148,68 +143,67 @@ public class EmployeeController {
 
 	@GetMapping("/employees")
 	public String showEmployeeList(Model model) {
-		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	        String username = auth.getName();
-	        model.addAttribute("name",username);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		model.addAttribute("name", username);
 
-	        List<Employee> employeeList;
-	        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("HOD"))) {
-	            String department = accountService.getDepartmentByUserName(username);
-	            employeeList = employeeService.findByDepartment(department);
-	        } else {
-	            employeeList = employeeService.findAll();
-	        }
+		List<Employee> employeeList;
+		if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("HOD"))) {
+			String department = accountService.getDepartmentByUserName(username);
+			employeeList = employeeService.findByDepartment(department);
+		} else {
+			employeeList = employeeService.findAll();
+		}
 
-	        List<EmployeeInfo> employeeInfoList = employeeList.stream().map(EmployeeInfo::from)
-	                .collect(Collectors.toList());
-	        model.addAttribute("employees", employeeInfoList);
-	        return "employee-list";
+		List<EmployeeInfo> employeeInfoList = employeeList.stream().map(EmployeeInfo::from)
+				.collect(Collectors.toList());
+		model.addAttribute("employees", employeeInfoList);
+		return "employee-list";
 	}
 
 	@PostMapping("/delete")
-	public String deleteEmployees(@RequestParam("employeeIds") String employeeIds, Principal principal,  RedirectAttributes redirectAttributes) {
-		
+	public String deleteEmployees(@RequestParam("employeeIds") String employeeIds, Principal principal,
+			RedirectAttributes redirectAttributes) {
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = accountService.getNameByUserName(auth.getName());
-		
+
 		redirectAttributes.addAttribute("name", name);
-		 List<String> ids = Arrays.asList(employeeIds.split(","));
-		    String loggedInUserId = principal.getName();
+		List<String> ids = Arrays.asList(employeeIds.split(","));
+		String loggedInUserId = principal.getName();
 
-		    List<String> errors = new ArrayList<>();
-		    for (String id : ids) {
-		        if (!id.equals(loggedInUserId)) { // Ensure the HOD's own ID is excluded
-		            try {
-		                employeeService.deleteById(id);
-		            } catch (DataIntegrityViolationException e) {
-		                // Handle the foreign key constraint violation
-		                errors.add("Cannot delete employee with ID: " + id + " due to HOD employment.");
+		List<String> errors = new ArrayList<>();
+		for (String id : ids) {
+			if (!id.equals(loggedInUserId)) { // Ensure the HOD's own ID is excluded
+				try {
+					employeeService.deleteById(id);
+				} catch (DataIntegrityViolationException e) {
+					// Handle the foreign key constraint violation
+					errors.add("Cannot delete employee with ID: " + id + " due to HOD employment.");
 
-		            }
-		        } else {
-		            errors.add("Cannot delete your own record.");
+				}
+			} else {
+				errors.add("Cannot delete your own record.");
 
-		        }
-		    }
-
-		    if (!errors.isEmpty()) {
-		    	 redirectAttributes.addFlashAttribute("errors", errors);		    }
-
-		    return "redirect:/employees";
+			}
 		}
-	
+
+		if (!errors.isEmpty()) {
+			redirectAttributes.addFlashAttribute("errors", errors);
+		}
+
+		return "redirect:/employees";
+	}
 
 	@GetMapping("/employees/edit/{id}")
-	public String showEditEmployeeForm(@PathVariable("id") String id,
-			Model model) {
+	public String showEditEmployeeForm(@PathVariable("id") String id, Model model) {
 		Employee employee = employeeService.findById(id); // Assuming findById now uses the string ID
-		EmployeeFormForUpdate updateForm =  EmployeeFormForUpdate.from(employee);
+		EmployeeFormForUpdate updateForm = EmployeeFormForUpdate.from(employee);
 
 		model.addAttribute("employeeForm", updateForm);
-		
+
 		model.addAttribute("status", updateForm.status());
 		model.addAttribute("statuses", Arrays.asList(Status.values()));
-
 
 		return "update-employee";
 	}
@@ -225,5 +219,17 @@ public class EmployeeController {
 		employeeService.updateEmployee(id, employeeForm);
 		return "redirect:/employees";
 	}
+
+	@GetMapping("/search")
+	public String search(@RequestParam(value = "query", required = false) String query, Model model) {
+		List<Employee> employees = employeeService.searchByEmployeeCode(query);
+		
+		List<EmployeeInfo> employeeInfoList = employees.stream().map(EmployeeInfo::from)
+				.collect(Collectors.toList());
+		model.addAttribute("employees", employeeInfoList);
+		return "employee-list";
+	}
+	
+	
 
 }

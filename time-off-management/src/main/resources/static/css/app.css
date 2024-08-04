@@ -72,7 +72,7 @@ main {
 }
 
 .search .form-control {
-	padding-left: 2.375rem;
+	padding-left: 1rem;
 	color: #000;
 	background-color: #d8efd3;
 	border-radius: 10px;
@@ -267,3 +267,29 @@ main {
             font-size: 1.2em;
             margin-bottom: 0;
         }
+        
+        
+.btn-search {
+	margin-left: 15px;
+	background-color: #55ad9b;
+	color: #000;
+	border: none;
+	padding: 8px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+   
+   
+.btn-search i {
+    margin-right: 5px; /* Adjust the spacing between icon and text */
+    vertical-align: middle; /* Ensure vertical alignment */
+}
+
+ 
+
+ 

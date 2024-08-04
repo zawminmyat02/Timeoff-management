@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{/layouts/admin-board.html}"><head>
-    <title>Leave History</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	layout:decorate="~{/layouts/admin-board.html}">
+<head>
+<title>Leave History</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 <style>
 body {
 	font-family: Arial, sans-serif;
 	background-color: #d8efd3;
 }
- .header {
+
+.header {
 	color: #000;
 	text-align: left;
 	margin-bottom: 20px;
@@ -17,45 +19,110 @@ body {
 
 .brand-title {
 	font-size: 26px;
-	
+}
+
+.btn-search {
+	margin-left: 15px;
+	margin-top: 25px;
+}
+
+label {
+	color: black;
+	margin-left: 10px;
+	font-size: 13px;
+	font-family: sans-serif;
 }
 </style>
 </head>
 
-<body layout:fragment="content" >
-   	<div class="container mt-4">
-			<header class="header">
-				<h2 class="brand-title" style="color: #000;">Leave
-					History</h2>
-					<h6 style="color:#000;" class="text-muted d-none d-lg-block mt-3">Here're your
-						leave records</h6>
-			</header>
-        <table class="table table-striped mt-5">
-            <thead>
-                <tr>
-                    <th>Apply At</th>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Leave Type</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Remark</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="leaveApplication : ${leaveHistory}" >
-                    <td th:text="${leaveApplication.applyAt}"></td>
-                    <td th:text="${leaveApplication.employee.account.name}"></td>
-                    <td th:text="${leaveApplication.department.name}"></td>
-                    <td th:text="${leaveApplication.type.name}"></td>
-                    <td th:text="${leaveApplication.startDate}"></td>
-                    <td th:text="${leaveApplication.endDate}"></td>
-                    <td th:text="${leaveApplication.remark}"></td>
-                    <td th:text="${leaveApplication.status}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<body layout:fragment="content">
+	<div class="container mt-4">
+		<header class="header">
+			<h2 class="brand-title" style="color: #000;">Leave History</h2>
+			<h6 style="color: #000;" class="text-muted d-none d-lg-block mt-3">Here're
+				your leave records</h6>
+		</header>
+
+
+		<div class="row  mt-4 mb-5">
+			<form th:action="@{/leave-history}" method="get">
+
+				<div class="row  mt-4 flex">
+
+					<div class="col-2 form-group search">
+						<label for="fromDate">From Date </label> <input type="date"
+							name="fromDate" class="form-control" th:value="${fromDate}">
+					</div>
+					<div class="col-2 form-group search">
+						<label for="toDate">To Date </label> <input type="date"
+							name="toDate" class="form-control" placeholder="To Date"
+							th:value="${toDate}">
+					</div>
+					<div class="col-2 form-group search">
+						<label for="leaveType">Type </label> <select name="leaveType"
+							class="form-control">
+							<option value="">Select Leave Type</option>
+							<option value="Sick Leave"
+								th:selected="${leaveType == 'Sick Leave'}">Sick Leave</option>
+							<option value="Vacation Leave"
+								th:selected="${leaveType == 'Vacation Leave'}">Vacation
+								Leave</option>
+						</select>
+					</div>
+
+					<div class="col-2 form-group search">
+						<label for="status">Status </label> <select name="status"
+							class="form-control">
+							<option value="">Select Status</option>
+							<option value="APPROVED" th:selected="${status == 'APPROVED'}">Approved</option>
+							<option value="REJECTED" th:selected="${status == 'REJECTED'}">Rejected</option>
+						</select>
+					</div>
+
+					<div class="col-2 form-group search" th:if="${name == 'Admin'}">
+						<label for="leaveType">Department </label> <select
+							name="department" class="form-control">
+							<option value="">Select Department</option>
+							<option th:each="dept : ${departments}" th:value="${dept}"
+								th:text="${dept}" th:selected="${department == dept}"></option>
+						</select>
+					</div>
+
+					<div class="col-2 form-group search gutter">
+						<button type="submit" class="btn-search">
+							<i class="fas fa-search"></i>Search
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<table class="table table-striped mt-5">
+			<thead>
+				<tr>
+					<th>Apply At</th>
+					<th>Name</th>
+					<th>Department</th>
+					<th>Leave Type</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Remark</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="leaveApplication : ${leaveHistory}">
+					<td th:text="${leaveApplication.applyAt}"></td>
+					<td th:text="${leaveApplication.employee.account.name}"></td>
+					<td th:text="${leaveApplication.department.name}"></td>
+					<td th:text="${leaveApplication.type.name}"></td>
+					<td th:text="${leaveApplication.startDate}"></td>
+					<td th:text="${leaveApplication.endDate}"></td>
+					<td th:text="${leaveApplication.remark}"></td>
+					<td th:text="${leaveApplication.status}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

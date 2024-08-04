@@ -5,7 +5,57 @@
 <head>
 <title>Leave Requests</title>
 <style>
-	
+	label{
+	color:black;
+	margin-left:10px;
+	font-size: 13px;
+	font-family: sans-serif;
+}
+          
+.btn-search {
+	margin-left: 15px;
+	margin-top:25px;
+	background-color: #55ad9b;
+	color: #000;
+	border: none;
+	padding: 8px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+   
+   
+.btn-search i {
+    margin-right: 5px; /* Adjust the spacing between icon and text */
+    vertical-align: middle; /* Ensure vertical alignment */
+}
+
+  
+.row {
+    --bs-gutter-x: 4rem !important;
+    }
+
+.mb-5 {
+	margin-bottom: 5rem !important;
+}
+
+.ml-5{
+	margin-left: 2rem;
+}
+
+.flex{
+	display: flex;
+}
+
+.gutter{
+    --bs-gutter-x: 0.5rem !important;
+
+} 
+  
 </style>
 </head>
 <body>
@@ -59,11 +109,34 @@
 		</header>
 
 
-		<div class="row px-5 mt-4">
-			<div class="form-group search">
-				<input type="text" class="form-control" placeholder="Search leaves">
-			</div>
+		<div class="row ml-5 mt-4 mb-5">
+			<form th:action="@{/home}" method="get">
+					
+				<div class="row px-5 mt-4 flex">
+					
+					<div class="col-3 form-group search">
+						<label for="fromDate">From Date </label> <input type="date"
+							name="fromDate" class="form-control"  th:value="${fromDate}" >
+					</div>
+					<div class="col-3 form-group search">
+					<label for="toDate">To Date </label>
+						<input type="date" name="toDate" class="form-control"
+							placeholder="To Date"  th:value="${toDate}">
+					</div>
+					<div class="col-3 form-group search">
+					<label for="leaveType">Type </label>
+						<select name="leaveType" class="form-control">
+							<option value="">Select Leave Type</option>
+							<option value="Sick Leave"  th:selected="${leaveType == 'Sick Leave'}">Sick Leave</option>
+							<option value="Vacation Leave"  th:selected="${leaveType == 'Vacation Leave'}">Vacation Leave</option>
+						</select>
+					</div>
 
+					<div class="col-3 form-group search gutter">
+						<button type="submit" class="btn-search"><i class="fas fa-search"></i>Search</button>
+					</div>
+				</div>
+			</form>
 		</div>
 		
 		  <div class="row mt-5" id="noRequests" th:if="${pending.isEmpty()}" >

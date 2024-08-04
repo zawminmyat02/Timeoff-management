@@ -7,7 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Department List</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap')
+	;
 
 body {
 	margin: 0;
@@ -26,12 +28,12 @@ body {
 .brand-title {
 	font-size: 24px;
 }
+
 main {
 	min-height: 100vh;
 	padding: 20px 0;
 	margin-left: 250px; /* Adjust this margin to fit the sidebar */
 }
-
 
 .btn-create i {
 	margin-right: 8px;
@@ -96,7 +98,7 @@ main {
 	border-radius: 10px;
 }
 
-.btn-secondary:focus{
+.btn-secondary:focus {
 	color: #000;
 	background-color: #55ad9b;
 	border-color: #55ad9b;
@@ -157,50 +159,59 @@ main {
 	padding: 20px;
 }
 
- .search-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-        .search-container input {
-            background-color: #d8efd3;
-            color: #000;
-            padding-left: 40px; /* Adjust the padding to make space for the icon */
-            width: 100%;
-            height: 40px; /* Adjust the height as needed */
-            border: 1px solid #000;
-            border-radius: 10px;
-        }
-        .search-container .fas {
-            position: absolute;
-            left: 23px;
-            color: #000;
-        }
-        
-         .btn-create {
-            margin-left: 10px;
-            background-color: #95d2b3;
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            text-decoration: none;
-        }
-        .btn-create:hover {
-            background-color: #2d3340;
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        .btn-create i {
-            margin-right: 8px;
-        }
-        
-        input#headCode.form-control:focus{
-        	color: #000;
-        }
+.search-container {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.search-container input {
+	background-color: #d8efd3;
+	color: #000;
+	padding-left: 40px; /* Adjust the padding to make space for the icon */
+	width: 100%;
+	height: 40px; /* Adjust the height as needed */
+	border: 1px solid #000;
+	border-radius: 10px;
+}
+
+.custom-icon {
+	position: absolute;
+	left: 23px;
+	color: #000;
+}
+
+.btn-create {
+	background-color: #55ad9b;
+	color: #000;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+}
+
+.btn-create:hover {
+	background-color: #2d3340;
+	color: white;
+	transform: scale(1.05);
+}
+
+.btn-create i {
+	margin-right: 8px;
+}
+
+input#headCode.form-control:focus {
+	color: #000;
+}
+
+.btn-search i {
+	margin-right: 5px; /* Adjust the spacing between icon and text */
+	vertical-align: middle;
+	position: initial;
+	/* Ensure vertical alignment */
+}
 </style>
 </head>
 <body>
@@ -208,19 +219,26 @@ main {
 		<div class="container row px-5 mt-4">
 			<header class="header col-12  mb-4">
 				<h1 style="color: #000;">TIME-OFF</h1>
-				<h2 class="brand-title" style="color:#000">Department Management</h2>
+				<h2 class="brand-title" style="color: #000">Department
+					Management</h2>
 			</header>
 		</div>
 
-		 <div class="row mb-4">
-                <div class="col-9 form-group search-container">
-                    <i class="fas fa-search"></i>
-                    <input type="text" class="form-control" placeholder="Search Departments">
-                </div>
-                <div class="col-3 text-right py-2">
-                    <a th:href="@{/departments/new}" class="btn-create"><i class="fas fa-plus-circle"></i> Create</a>
-                </div>
-         </div>
+		<div class="row mb-4">
+			<form class="col-9 form-group search-container"
+				th:action="@{/find}" method="get">
+				<i class="fas fa-search custom-icon"></i> <input type="text"
+					class="form-control" name="query"
+					placeholder="Search by department code">
+				<button type="submit" class="btn-search">
+					<i class="fas fa-search custom-icon"></i>Search
+				</button>
+			</form>
+			<div class="col-3 text-right py-2">
+				<a th:href="@{/departments/new}" class="btn-create"><i
+					class="fas fa-plus-circle"></i> Create</a>
+			</div>
+		</div>
 
 		<table id="department-table">
 			<thead>
@@ -255,14 +273,16 @@ main {
 							data-department-code="${department.code}"
 							data-manager-code="${department.managerCode}"
 							data-manager-name="${department.managerName}"
-							data-manager-phone="${department.managerPhone}">Update HOD</button>
-						<!-- Modal -->
-						<div class="modal fade" th:id="'exampleModal' + ${department.code}" tabindex="-1"
+							data-manager-phone="${department.managerPhone}">Update
+							HOD</button> <!-- Modal -->
+						<div class="modal fade"
+							th:id="'exampleModal' + ${department.code}" tabindex="-1"
 							aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" style="color:#000" id="exampleModalLabel">Update HOD</h5>
+										<h5 class="modal-title" style="color: #000"
+											id="exampleModalLabel">Update HOD</h5>
 										<button type="button" class="btn-close btn btn-secondary"
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
@@ -274,9 +294,11 @@ main {
 													name="departmentCode" th:value="${department.code}">
 												<div class="form-group mb-3">
 													<h5 class="px-2" style="color: #000">HOD Code</h5>
-													<input type="text" class="form-control" id="headCode" name="headCode" th:value="${headCode}" placeholder="Code">
+													<input type="text" class="form-control" id="headCode"
+														name="headCode" th:value="${headCode}" placeholder="Code">
 												</div>
-												<button type="submit" class="btn btn-primary" style="background-color:#55ad9b">Save changes</button>
+												<button type="submit" class="btn btn-primary"
+													style="background-color: #55ad9b">Save changes</button>
 											</form>
 										</div>
 									</div>

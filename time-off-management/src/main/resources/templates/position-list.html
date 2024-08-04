@@ -129,7 +129,7 @@ body {
 }
 
 .btn-create:hover {
-	background-color: #000;
+	background-color: #5c636a;
 	color: white;
 	transform: scale(1.05);
 }
@@ -149,6 +149,32 @@ body {
     border-color: #292a2c;
     border-radius: 10px;
     }
+    
+  .form-control{
+  	background-color: #d8efd3 !important;
+  }
+  
+  
+.btn-create {
+	background-color: #55ad9b;
+	color: #000;
+	border: none;
+	padding: 8px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+}
+
+.flex{
+	display:flex;
+}
+
+.btn-search i {
+    margin-right: 5px; /* Adjust the spacing between icon and text */
+    vertical-align: middle; /* Ensure vertical alignment */
+}
+  
 </style>
 </head>
 <body>
@@ -180,18 +206,18 @@ body {
             </div>
         </div>
 
-        <div class="col-md-1 mb-2">
+        <div class="col-md-4 mb-2 flex">
             <div class="text-center">
-                <button id="search-button" class="btn btn-secondary" type="submit">Search</button>
+                <button  class=" btn-search btn btn-secondary" type="submit"><i class="fas fa-search"></i>Search</button>
             </div>
+            <div><a class="btn btn-secondary btn-create" th:href="@{/positions/new}"
+						><i class="fas fa-plus-circle"></i>
+						Create</a>
+						</div> 
         </div>
         
         
-				<div class="col-md-3 mb-2 text-right ">
-					<a id="create-button" class="btn btn-secondary" th:href="@{/positions/new}"
-						><i class="fas fa-plus-circle"></i>
-						Create</a>
-				</div>
+				
     </div>
 
 </form>

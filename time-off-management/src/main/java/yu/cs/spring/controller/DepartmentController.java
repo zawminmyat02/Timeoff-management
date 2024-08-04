@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import yu.cs.spring.model.master.entity.Department;
+import yu.cs.spring.model.master.entity.Employee;
 import yu.cs.spring.model.master.input.DepartmentFormForCreate;
 import yu.cs.spring.model.master.input.DepartmentFormForManagerChanges;
 import yu.cs.spring.model.master.output.DepartmentInfo;
+import yu.cs.spring.model.master.output.EmployeeInfo;
 import yu.cs.spring.model.master.service.DepartmentService;
 
 @Controller
@@ -62,6 +64,17 @@ public class DepartmentController {
        
         return "redirect:/departments"; // Replace with the appropriate page
     }
+    
+    @GetMapping("/find")
+	public String search(@RequestParam(value = "query", required = false) String query, Model model) {
+		List<Department> departments = departmentService.searchByDepartmentCode(query);
+		
+		List<DepartmentInfo> departmentInfoList = departments.stream().map(DepartmentInfo::from)
+				.collect(Collectors.toList());
+		model.addAttribute("departments", departmentInfoList);
+		return "department-list";
+	}
+	
     
     
 }

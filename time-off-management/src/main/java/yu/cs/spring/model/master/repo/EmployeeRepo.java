@@ -20,4 +20,6 @@ public interface EmployeeRepo extends BaseRepository<Employee, String>{
 	long countByEmail(String value);
 
 	List<Employee> findByDepartmentName(String department);
+	
+	List<Employee> findByCodeContaining(String code);
 }

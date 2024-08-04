@@ -1,5 +1,6 @@
 package yu.cs.spring.model.master.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,11 +44,8 @@ public class EmployeeService {
 	private EmployeeCodeSeqRepo employeeCodeSeqRepository;
 
 	public void saveEmployee(EmployeeFormForCreate form) {
-		
-
 
 		String departmentCode = form.department();
-		
 
 		// Fetch or create the sequence for the department
 		EmployeeCodeSeq seq = employeeCodeSeqRepository.findByDepartment(departmentCode).orElseGet(() -> {
@@ -104,7 +102,14 @@ public class EmployeeService {
 	}
 
 	public List<Employee> findByDepartment(String department) {
-		 return employeeRepo.findByDepartmentName(department);
+		return employeeRepo.findByDepartmentName(department);
+	}
+
+	public List<Employee> searchByEmployeeCode(String query) {
+		if (query == null || query.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return employeeRepo.findByCodeContaining(query);
 	}
 
 }

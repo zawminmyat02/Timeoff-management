@@ -41,7 +41,7 @@ body {
 	border-radius: 15px;
 }
 
-.search-container .fas {
+.search-container .custom-icon {
 	position: absolute;
 	left: 23px;
 	color: #000;
@@ -168,6 +168,28 @@ body {
 .btn-create-hidden {
 	display: none;
 }
+
+.btn-search {
+  margin-left: 10px;
+	background-color: #55ad9b;
+	color: #000;
+	border: none;
+	padding: 8px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+	  display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.btn-search i {
+    margin-right: 5px; /* Adjust the spacing between icon and text */
+    vertical-align: middle; /* Ensure vertical alignment */
+}
 </style>
 </head>
 <body>
@@ -179,10 +201,12 @@ body {
 					Management</h2>
 			</header>
 			<div class="row mb-4">
-				<div class="col-9 form-group search-container">
-					<i class="fas fa-search"></i> <input type="text"
-						class="form-control" placeholder="Search for team members">
-				</div>
+				<form class="col-9 form-group search-container" th:action="@{/search}" method="get">
+					<i class="fas fa-search custom-icon"></i> <input type="text"
+						class="form-control"  name="query" placeholder="Search by employee code">
+					 <button type="submit" class="btn-search"><i class="fas fa-search"></i>Search</button>
+				</form>
+			     
 				<div class="col-3 text-right py-2">
 					<a id="create-button" th:href="@{/employees/new}"
 						class="btn-create"><i class="fas fa-plus-circle"></i> Create</a>
