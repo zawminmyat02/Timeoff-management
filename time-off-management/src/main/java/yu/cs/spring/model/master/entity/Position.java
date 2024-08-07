@@ -26,16 +26,18 @@ public class Position {
 	
 	@Column(nullable = false)
 	private BigDecimal basicSalary;
-
-	@Column(nullable = false)
-	private BigDecimal otFeesPerHour;
 	
 	@Column(nullable = false)
-	private int anualLeaves;
+	private int sickLeaves;
+	
+	@Column(nullable = false)
+	private int casualLeaves;
+	
+	@Column(nullable = false)
+	private int maternityLeaves;
 	
 	@OneToMany(mappedBy = "position")
 	private List<Employee> employees;
-
 	
 	
 }

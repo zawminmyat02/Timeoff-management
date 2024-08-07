@@ -22,4 +22,10 @@ public interface EmployeeRepo extends BaseRepository<Employee, String>{
 	List<Employee> findByDepartmentName(String department);
 	
 	List<Employee> findByCodeContaining(String code);
+	
+	@Query("SELECT e.sickLeaves, e.casualLeaves, e.maternityLeaves, e.unpaidLeaves FROM Employee e JOIN e.leaveApplications la WHERE e.code = :employeeCode AND la.id = :id")
+		List<Object[]> findLeaveBalancesByEmployeeCodeAndLeaveApplicationId(@Param("employeeCode") String employeeCode, @Param("id") long id);
+
+    @Query("SELECT e.sickLeaves, e.casualLeaves, e.maternityLeaves,e.unpaidLeaves FROM Employee e WHERE e.code = :employeeCode")
+    List<Object[]> findLeaveBalancesByEmployeeCode(String employeeCode);
 }

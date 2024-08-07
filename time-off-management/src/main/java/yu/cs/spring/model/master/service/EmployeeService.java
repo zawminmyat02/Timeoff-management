@@ -43,6 +43,7 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeCodeSeqRepo employeeCodeSeqRepository;
 
+
 	public void saveEmployee(EmployeeFormForCreate form) {
 
 		String departmentCode = form.department();
@@ -70,6 +71,12 @@ public class EmployeeService {
 
 		entity.setDepartment(department.get());
 		entity.setPosition(position.get());
+		
+		entity.setSickLeaves(position.get().getSickLeaves());
+		entity.setCasualLeaves(position.get().getCasualLeaves());
+		entity.setMaternityLeaves(position.get().getMaternityLeaves());
+		entity.setMonthlySalaries(position.get().getBasicSalary());
+
 		employeeRepo.saveAndFlush(entity);
 	}
 

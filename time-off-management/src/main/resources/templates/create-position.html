@@ -132,18 +132,27 @@ body {
 							th:errors="*{basicSalary}" class="text-danger"></div>
 					</div>
 					<div class="form-group">
-						<label for="otPerHour">OT Fees Per Hour</label> <input
-							type="number" id="otPerHour" th:field="*{otPerHour}"
+						<label for="sickLeaves">Sick Leaves</label> <input
+							type="number" id="sickLeaves" th:field="*{sickLeaves}"
 							class="form-control" required>
-						<div th:if="${#fields.hasErrors('otPerHour')}"
-							th:errors="*{otPerHour}" class="text-danger"></div>
+						<div th:if="${#fields.hasErrors('sickLeaves')}"
+							th:errors="*{sickLeaves}" class="text-danger"></div>
 					</div>
-					<div class="form-group">
-						<label for="anualLeaves">Annual Leaves</label> <input
-							type="number" id="anualLeaves" th:field="*{anualLeaves}"
+					
+						<div class="form-group">
+						<label for="casualLeaves">Casual Leaves</label> <input
+							type="number" id="casualLeaves" th:field="*{casualLeaves}"
 							class="form-control" required>
-						<div th:if="${#fields.hasErrors('anualLeaves')}"
-							th:errors="*{anualLeaves}" class="text-danger"></div>
+						<div th:if="${#fields.hasErrors('casualLeaves')}"
+							th:errors="*{casualLeaves}" class="text-danger"></div>
+					</div>
+					
+						<div class="form-group">
+						<label for="materntiyLeaves">Maternity Leaves</label> <input
+							type="number" id="materntiyLeaves" th:field="*{maternityLeaves}"
+							class="form-control" required>
+						<div th:if="${#fields.hasErrors('maternityLeaves')}"
+							th:errors="*{maternityLeaves}" class="text-danger"></div>
 					</div>
 					<div class="btn-container">
 						<button type="submit" class="btn-submit" style="background-color: #55ad9b; color:#000;">

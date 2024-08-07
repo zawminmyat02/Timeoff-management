@@ -52,7 +52,7 @@ public class PositionController {
 
 		model.addAttribute("positionCode", Arrays.asList(PositionCode.values()));
 
-		model.addAttribute("positionForm", new PositionFormForCreate("", "", null, null, null));
+		model.addAttribute("positionForm", new PositionFormForCreate("", "", null, null,null,null));
 		return "create-position";
 	}
 

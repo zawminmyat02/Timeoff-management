@@ -257,13 +257,20 @@ body {
 							<strong><i class="fas fa-money-bill icon"></i> Basic
 								Salary:</strong> <span th:text="${position.basicSalary}"></span>
 						</p>
-						<p class="card-text">
-							<strong><i class="fas fa-clock icon"></i> OT Fees Per
-								Hour:</strong> <span th:text="${position.otFeesPerHour}"></span>
-						</p>
+						
 						<p class="card-text">
 							<strong><i class="fas fa-calendar-alt icon"></i> Annual
-								Leaves:</strong> <span th:text="${position.anualLeaves}"></span>
+								Leaves:</strong> <span th:text="${position.sickLeaves}"></span>
+						</p>
+						
+						<p class="card-text">
+							<strong><i class="fas fa-calendar-alt icon"></i> Casual
+								Leaves:</strong> <span th:text="${position.casualLeaves}"></span>
+						</p>
+						
+						<p class="card-text">
+							<strong><i class="fas fa-calendar-alt icon"></i> Maternity
+								Leaves:</strong> <span th:text="${position.maternityLeaves}"></span>
 						</p>
 					</div>
 				</div>

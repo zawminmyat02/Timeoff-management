@@ -50,8 +50,8 @@ public class SecurityConfig implements WebMvcConfigurer {
 
 		http.authorizeHttpRequests(request -> {
 			request.requestMatchers("/resources/**", "/login", "images/**", "css/**", "bootstrap/css/**",
-					"bootstrap/js/**", "/change-password", "/changeStatus/**", "/home").permitAll()
-					.requestMatchers("/home").hasAnyAuthority(Role.Admin.name(), Role.Employee.name(), Role.HOD.name())
+					"bootstrap/js/**", "/change-password", "/checkOverlap/**","/changeStatus/**", "/home").permitAll()
+					.requestMatchers("/home","/checkOverlap/**").hasAnyAuthority(Role.Admin.name(), Role.Employee.name(), Role.HOD.name())
 					.requestMatchers("/employees/**", "/positions/codes/**").hasAnyAuthority(Role.HOD.name(),Role.Admin.name())
 					.requestMatchers("departments/**","/positions/**").hasAuthority(Role.Admin.name())
 					.anyRequest()

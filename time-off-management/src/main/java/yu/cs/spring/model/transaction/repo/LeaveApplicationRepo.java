@@ -1,5 +1,6 @@
 package yu.cs.spring.model.transaction.repo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +23,14 @@ public interface LeaveApplicationRepo extends BaseRepository<LeaveApplication, L
 	List<LeaveApplication> findByStatusIn(List<Status> asList);
 
 	List<LeaveApplication> findByStatus(Status pending);
+    
+    @Query("SELECT la FROM LeaveApplication la WHERE la.employee.code = :employeeCode AND la.status = 'APPROVED'")
+    List<LeaveApplication> findApprovedLeaveApplicationsByEmployeeCode(String employeeCode);
+
+    @Query("SELECT la FROM LeaveApplication la WHERE la.employee.code = :employeeCode AND la.id= :id AND la.status = 'APPROVED'")
+	List<LeaveApplication> findApprovedLeaveApplicationsByEmployeeCodeAndLeaveApplicationId(@Param("employeeCode") String employeeCode, @Param("id") long id );
+    
+    @Query("SELECT la FROM LeaveApplication la WHERE la.startDate <= :endDate AND la.endDate >= :startDate AND la.employee.code = :employeeCode AND la.status != 'REJECTED'")
+    List<LeaveApplication> findOverlappingLeaves(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate,@Param("employeeCode") String employeeCode);
+
 }

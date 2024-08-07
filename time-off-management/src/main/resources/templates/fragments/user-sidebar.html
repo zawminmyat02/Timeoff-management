@@ -20,6 +20,7 @@
 				th:classappend="${page == 'records' ? 'active' : ''}"
 				class="menu-item"> <i class="fa-solid fa-folder-open"></i> <span>Records</span>
 			</a></li>
+			
 			<li sec:authorize="hasAuthority('Admin')"><a
 				th:href="@{/departments}"
 				th:classappend="${page == 'departments' ? 'active' : ''}"
@@ -38,10 +39,16 @@
 			<li sec:authorize="hasAuthority('HOD') or hasAuthority('Employee')"><a
 				th:href="@{/leave-application}"
 				th:classappend="${page == 'form' ? 'active' : ''}" class="menu-item">
-					<i class="fa-solid fa-plus"></i> <span>Leave Form</span>
+					<i class="fa-solid fa-plus"></i> <span>Leave</span>
 			</a></li>
-			<li sec:authorize="hasAuthority('HOD') or hasAuthority('Employee')"><a th:href="@{/reports}"
-				th:classappend="${page == 'reports' ? 'active' : ''}"
+			
+			<li sec:authorize="hasAuthority('HOD') or hasAuthority('Employee')"><a th:href="@{/leave-balance}"
+				th:classappend="${page == 'leave-balance' ? 'active' : ''}"
+				class="menu-item"> <i class="fas fa-chart-bar"></i><span>Balance</span>
+			</a></li>
+			
+			<li sec:authorize="hasAuthority('HOD') or hasAuthority('Employee')"><a th:href="@{/salaries}"
+				th:classappend="${page == 'salaries' ? 'active' : ''}"
 				class="menu-item"> <i class="fa-solid fa-coins"></i> <span>Salaries</span>
 			</a></li>
 

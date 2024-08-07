@@ -15,10 +15,12 @@ public record PositionFormForCreate(
 		String position,
 		@NotNull(message = "Please enter basic salary.")
 		BigDecimal basicSalary,
-		@NotNull(message = "Please enter OT fees.")
-		BigDecimal otPerHour,
-		@NotNull(message = "Please enter anual leaves.")
-		Integer anualLeaves
+		@NotNull(message = "Please enter sick leaves.")
+		Integer sickLeaves,
+		@NotNull(message = "Please enter casual leaves.")
+		Integer casualLeaves,
+		@NotNull(message = "Please enter maternity leaves.")
+		Integer maternitylLeaves
 		) {
 
 	public Position entity() {
@@ -29,8 +31,9 @@ public record PositionFormForCreate(
 		var entity = new Position();
 		entity.setId(id);
 		entity.setBasicSalary(basicSalary);
-		entity.setOtFeesPerHour(otPerHour);
-		entity.setAnualLeaves(anualLeaves);
+		entity.setSickLeaves(sickLeaves);
+		entity.setCasualLeaves(casualLeaves);
+		entity.setMaternityLeaves(maternitylLeaves);
 		return entity;
 	}
 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/user-board.html}">
+<head>
+<style>
+	 .leave-item {
+	 		margin-left:20px;
+            margin-right: 40px; /* Add space between items */
+        }
+        
+       span{
+       	color: #000;
+       	font-family: sans-serif;
+       	font-size: 16px;
+       }
+</style>
+</head>
+
+<body layout:fragment="content">
+
+	<div class="container">
+		<header class="header mb-5">
+			<h2 class="brand-title" style="color: #000;">Leave Balance</h2>
+			<h6 style="color: #000;" class="text-muted d-none d-lg-block mt-3">Here're
+				your remaining leaves</h6>
+				
+		<div class="mt-5 mb-5">
+					<span th:each="leaveEntry : ${leaveCounts}" class="leave-item mt-5 mb-5">
+						<span th:text="${leaveEntry.key}">Leave Type</span>: <span
+						th:text="${leaveEntry.value + ' days'}">Leave Balance</span>
+					</span>
+				</div>
+		</header>
+
+
+		<div class="chart-container mt-3">
+			<div class="chart-wrapper">
+				
+				<canvas id="leaveBalanceChart"></canvas>
+			</div>
+		</div>
+	</div>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var leaveCounts = /*[[${leaveCounts}]]*/{};
+
+		var ctx = document.getElementById('leaveBalanceChart').getContext('2d');
+		var chart = new Chart(ctx, {
+			type : 'bar', // You can change this to 'line', 'pie', etc.
+			data : {
+				labels : Object.keys(leaveCounts),
+				datasets : [ {
+					label : 'Leave Balance',
+					data : Object.values(leaveCounts),
+					backgroundColor : 'rgba(60, 179, 113, 0.5)',
+					borderColor : 'rgba(75, 192, 192, 1)',
+					borderWidth : 1
+				} ]
+			},
+			options : {
+				scales : {
+					y : {
+						beginAtZero : true
+					}
+				},
+				responsive : true,
+				maintainAspectRatio : false
+			}
+		});
+		/*]]>*/
+	</script>
+</body>
+</html>

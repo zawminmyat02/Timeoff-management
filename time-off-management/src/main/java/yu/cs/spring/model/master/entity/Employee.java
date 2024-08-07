@@ -1,5 +1,6 @@
 package yu.cs.spring.model.master.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 import yu.cs.spring.model.transaction.entity.LeaveApplication;
 
@@ -51,6 +51,21 @@ public class Employee {
 
 	@Column(nullable = false, name = "assign_date")
 	private LocalDate assignDate;
+	
+	@Column(nullable = false)
+	private int sickLeaves;
+	
+	@Column(nullable = false)
+	private int casualLeaves;
+	
+	@Column(nullable = false)
+	private int maternityLeaves;
+	
+	@Column
+	private int unpaidLeaves;
+	
+	@Column
+	private BigDecimal monthlySalaries;
 
 	private String remark;
 
@@ -61,4 +76,5 @@ public class Employee {
 	public enum Status {
 		Probation, Permanent
 	}
+	
 }

@@ -2,8 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layouts/user-board.html}">
+
 <head>
-<meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <title>Title</title>
 <style>
 .rounded-circle {
@@ -231,36 +233,35 @@ button:active {
 	font-size: 16px;
 	transition: background-color 0.3s ease, box-shadow 0.3s ease;
 	color: #000;
-	
 }
-h2,h4,p{
-	color : #000;
+
+h2, h4, p {
+	color: #000;
 }
+
 .btn-secondary {
 	background: #d8efd3;
 	color: #000;
-	border : 2px solid #000;
-	margin-top:10px;
+	border: 2px solid #000;
+	margin-top: 10px;
 }
 
 .btn-secondary:hover {
 	background: #d8efd4;
 	color: #000;
-	border : 2px solid #000;
+	border: 2px solid #000;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		margin-top:10px;
-	
+	margin-top: 10px;
 }
 
 .btn-primary {
 	background: #55ad9b;
-	color:#000;
+	color: #000;
 }
 
 .btn-primary:hover {
 	background: #55ad9c;
-	
-	color:#000;
+	color: #000;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -275,7 +276,8 @@ h2,h4,p{
 
 .alert {
 	color: #ff0000;
-	margin-bottom: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	font-size: 14px;
 }
 </style>
@@ -283,173 +285,228 @@ h2,h4,p{
 
 <body>
 	<section layout:fragment="content">
-
-
-		
-			<div class="container">
-				<h1 style="color: #000">Leave Request</h1>
-				<div class="progress-tracker">
-					<div id="step1-indicator" class="progress-step active">Step
-						1: Details</div>
-					<div id="step2-indicator" class="progress-step">Step 2:
-						Review</div>
-					<div id="step3-indicator" class="progress-step">Step 3:
-						Submit</div>
-				</div>
-				<form id="leaveRequestForm" th:action="@{/leave-application/submit}"
-					method="post"  >
-					<!-- Step 1: Details -->
-					<div id="step1" class="step-content active">
-						<label for="leaveType">Leave Type:</label> <select id="leaveType"
-							name="leaveTypeId" required>
-							<option th:each="leaveType : ${leaveTypes}"
-								th:value="${leaveType.id}" th:text="${leaveType.name}"></option>
-						</select> <label for="startDate">Start Date:</label> <input type="date"
-							id="startDate" name="startDate" required> <label
-							for="endDate">End Date:</label> <input type="date" id="endDate"
-							name="endDate" required> <label for="remark">Remark:</label>
-						<textarea id="remark" name="remark" rows="4" required></textarea>
-						<button id="nextStep1" type="button">Next Step</button>
-					</div>
-					<!-- Step 2: Review -->
-					<div id="step2" class="step-content" style="display: none;">
-						<h2>Review Details</h2>
-						<p>Please review your leave request details:</p>
-						<div id="reviewDetails" class="review-details">
-							<!-- Leave request details will be dynamically populated here -->
-						</div>
-						<div class="button-group">
-							<button id="prevStep2" type="button" class="btn btn-secondary">Previous
-								Step</button>
-							<button id="nextStep2" type="button" class="btn btn-primary">Next
-								Step</button>
-						</div>
-					</div>
-
-					<!-- Step 3: Submit -->
-					<div id="step3" class="step-content" style="display: none;">
-						<div class="mb-5"></div>
-						<h2>Confirmation</h2>
-						<p>Your leave request is about to submit!!</p>
-						<!-- Additional confirmation message or summary can be added here -->
-						<div class="confirmation-message">
-							<p>Wishing you can take a leave.</p>
-							<p>And get back soon.</p>
-
-						</div>
-						<div class="alert alert-danger" id="errorAlert"
-							>Please fill out all required fields.
-						</div>
-						<div class="button-group">
-							<button id="prevStep3" type="button" class="btn btn-secondary">Previous
-								Step</button>
-							<button id="submit" type="submit" class="btn btn-primary" >Submit</button>
-						</div>
-					</div>
-				</form>
+		<div class="container">
+			<h1 style="color: #000; font-size: 24px;">Leave Request</h1>
+			<div class="progress-tracker">
+				<div id="step1-indicator" class="progress-step active">Step 1:
+					Details</div>
+				<div id="step2-indicator" class="progress-step">Step 2: Review</div>
+				<div id="step3-indicator" class="progress-step">Step 3: Submit</div>
 			</div>
+			<form id="leaveRequestForm" th:action="@{/leave-application/submit}"
+				method="post">
+				<!-- Step 1: Details -->
+				<div id="step1" class="step-content active">
+					<input type="hidden" id="employeeCode" name="employeeCode"
+						th:value="${employeeCode}"> <label for="leaveType">Leave
+						Type:</label> <select id="leaveType" name="leaveTypeId" required>
+						<option th:each="leaveType : ${leaveTypes}"
+							th:value="${leaveType.id}" th:text="${leaveType.name}"></option>
+					</select> <label for="startDate">Start Date:</label> <input type="date"
+						id="startDate" name="startDate" required> <label
+						for="endDate">End Date:</label> <input type="date" id="endDate"
+						name="endDate" required> <label for="remark">Remark:</label>
+					<textarea id="remark" name="remark" rows="4" required></textarea>
+					<div class="alert alert-danger" id="errorAlert"></div>
+					<button id="nextStep1" type="button">Next Step</button>
+				</div>
+				<!-- Step 2: Review -->
+				<div id="step2" class="step-content" style="display: none;">
+					<h2>Review Details</h2>
+					<p>Please review your leave request details:</p>
+					<div id="reviewDetails" class="review-details"></div>
+					<div class="button-group">
+						<button id="prevStep2" type="button" class="btn btn-secondary">Previous
+							Step</button>
+						<button id="nextStep2" type="button" class="btn btn-primary">Next
+							Step</button>
+					</div>
+				</div>
+				<!-- Step 3: Submit -->
+				<div id="step3" class="step-content" style="display: none;">
+					<div class="mb-5"></div>
+					<h2>Confirmation</h2>
+					<p>Your leave request is about to submit!!</p>
+					<div class="confirmation-message">
+						<p>We would like to remind you of our leave policy regarding
+							unpaid leave.</p>
+						<p>If you take unpaid leave, 80% of your daily salary will be
+							deducted for each day of unpaid leave.</p>
+						<p>To avoid any unexpected deductions, we encourage you to
+							check your available leave balance in your leave balance box
+							before applying for leave.</p>
+						<p>Thank you for your understanding and cooperation.</p>
+						<p>And get back soon.</p>
+					</div>
 
+					<div class="button-group">
+						<button id="prevStep3" type="button" class="btn btn-secondary">Previous
+							Step</button>
+						<button id="submit" type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
 
 		<script>
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
-    const step3 = document.getElementById('step3');
-    const step1Indicator = document.getElementById('step1-indicator');
-    const step2Indicator = document.getElementById('step2-indicator');
-    const step3Indicator = document.getElementById('step3-indicator');
-    const nextStep1Button = document.getElementById('nextStep1');
-    const nextStep2Button = document.getElementById('nextStep2');
-    const prevStep2Button = document.getElementById('prevStep2');
-    const prevStep3Button = document.getElementById('prevStep3');
-    const submit = document.getElementById('submit');
-    
-  	submit.addEventListener('click',function(){
-  		validateForm();
-  	});
-    
-
-    nextStep1Button.addEventListener('click', function() {
-        step1.style.display = 'none';
-        step2.style.display = 'block';
-        step1.classList.remove('active');
-        step2.classList.add('active');
-        step1Indicator.classList.remove('active');
-        step2Indicator.classList.add('active');
-        populateReviewDetails(); // Populate review details when moving to Step 2
-        validateForm();
-
-    });
-
-    nextStep2Button.addEventListener('click', function() {
-        step2.style.display = 'none';
-        step3.style.display = 'block';
-        step2.classList.remove('active');
-        step3.classList.add('active');
-        step2Indicator.classList.remove('active');
-        step3Indicator.classList.add('active');
-        validateForm();
-
-        
-    });
-
-    prevStep2Button.addEventListener('click', function() {
-        step2.style.display = 'none';
-        step1.style.display = 'block';
-        step2.classList.remove('active');
-        step1.classList.add('active');
-        step2Indicator.classList.remove('active');
-        step1Indicator.classList.add('active');
-        validateForm();
-
-    });
-
-    prevStep3Button.addEventListener('click', function() {
-        step3.style.display = 'none';
-        step2.style.display = 'block';
-        step3.classList.remove('active');
-        step2.classList.add('active');
-        step3Indicator.classList.remove('active');
-        step2Indicator.classList.add('active');
-        validateForm();
-
-    });
-
-    function populateReviewDetails() {
-    	 const leaveTypeElement = document.getElementById('leaveType');
-    	    const leaveTypeName = leaveTypeElement.options[leaveTypeElement.selectedIndex].text;
-    	    const startDate = document.getElementById('startDate').value;
-    	    const endDate = document.getElementById('endDate').value;
-    	    const remark = document.getElementById('remark').value;
-
-    	    const reviewDetails = document.getElementById('reviewDetails');
-    	    reviewDetails.innerHTML = `
-    	        <p><strong>Leave Type:</strong> ${leaveTypeName}</p>
-    	        <p><strong>Start Date:</strong> ${startDate}</p>
-    	        <p><strong>End Date:</strong> ${endDate}</p>
-    	        <p><strong>Remark:</strong> ${remark}</p>
-    	    `;
-    }
-    
-    function validateForm() {
-        var leaveType = document.getElementById('leaveType').value;
-        var startDate = document.getElementById('startDate').value;
-        var endDate = document.getElementById('endDate').value;
-        var remark = document.getElementById('remark').value;
-
-        // Check if any of the required fields are empty
-        if (!leaveType || !startDate || !endDate || !remark) {
-            document.getElementById('errorAlert').style.display = 'block';
-            return false; // Prevent form submission
-        } else {
+        document.addEventListener("DOMContentLoaded", function () {
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const step3 = document.getElementById('step3');
+            const step1Indicator = document.getElementById('step1-indicator');
+            const step2Indicator = document.getElementById('step2-indicator');
+            const step3Indicator = document.getElementById('step3-indicator');
+            const nextStep1Button = document.getElementById('nextStep1');
+            const nextStep2Button = document.getElementById('nextStep2');
+            const prevStep2Button = document.getElementById('prevStep2');
+            const prevStep3Button = document.getElementById('prevStep3');
+            const submitButton = document.getElementById('submit');
             document.getElementById('errorAlert').style.display = 'none';
-            return true; // Allow form submission
-        }
-    }
-</script>
 
+
+            function getCsrfToken() {
+                return document.querySelector('meta[name="_csrf"]').getAttribute('content');
+            }
+
+            function getCsrfHeaderName() {
+                return document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+            }
+
+            async function checkDateOverlap(startDate, endDate, employeeCode) {
+                const csrfToken = getCsrfToken();
+                const csrfHeaderName = getCsrfHeaderName();
+
+                const response = await fetch('/checkOverlap', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        [csrfHeaderName]: csrfToken
+                    },
+                    body: JSON.stringify({
+                        startDate: startDate,
+                        endDate: endDate,
+                        employeeCode: employeeCode
+                    })
+                });
+
+                const result = await response.json();
+                return result.isOverlap;
+            }
+
+
+            async function validateForm() {
+                const leaveType = document.getElementById('leaveType').value;
+                const startDateValue = document.getElementById('startDate').value;
+                const endDateValue = document.getElementById('endDate').value;
+                const remark = document.getElementById('remark').value;
+                const employeeCode = document.getElementById('employeeCode').value; // Get the employeeCode from the form
+                const error = document.getElementById('errorAlert');
+                const today = new Date();
+                const startDate = new Date(startDateValue);
+                const endDate = new Date(endDateValue);
+                today.setHours(0, 0, 0, 0);
+                
+                console.log(startDate.toISOString())
+
+                error.innerHTML = '';
+
+                if (!leaveType || !startDate || !endDate || !remark) {
+                    document.getElementById('errorAlert').style.display = 'block';
+                    error.innerHTML += '<p>All fields are required.</p>';
+                    return false;
+                }
+
+                if (startDate < today) {
+                    document.getElementById('errorAlert').style.display = 'block';
+                    error.innerHTML += '<p>Start date cannot be earlier than today.</p>';
+                    return false;
+                }
+
+                if (endDate < startDate) {
+                    document.getElementById('errorAlert').style.display = 'block';
+                    error.innerHTML += '<p>End date must be later than start date.</p>';
+                    return false;
+                }
+
+                try {
+                	 const startDateUTC = startDate.toISOString().split('T')[0];
+                     const endDateUTC = endDate.toISOString().split('T')[0];
+                     const isOverlap = await checkDateOverlap(startDateUTC, endDateUTC, document.getElementById('employeeCode').value);
+                     if (isOverlap) {
+                        document.getElementById('errorAlert').style.display = 'block';
+                        error.innerHTML += '<p>The selected dates overlap with an existing leave.</p>';
+                        return false;
+                    } else {
+                        document.getElementById('errorAlert').style.display = 'none';
+                        return true;
+                    }
+                } catch (e) {
+                    console.error("Error checking date overlap:", e);
+                    document.getElementById('errorAlert').style.display = 'block';
+                    error.innerHTML += '<p>There was an error checking date overlap. Please try again.</p>';
+                    return false;
+                }
+            }
+
+            function populateReviewDetails() {
+                const leaveTypeElement = document.getElementById('leaveType');
+                const leaveTypeName = leaveTypeElement.options[leaveTypeElement.selectedIndex].text;
+                const startDate = document.getElementById('startDate').value;
+                const endDate = document.getElementById('endDate').value;
+                const remark = document.getElementById('remark').value;
+
+                const reviewDetails = document.getElementById('reviewDetails');
+                reviewDetails.innerHTML = `
+                    <p><strong>Leave Type:</strong> ${leaveTypeName}</p>
+                    <p><strong>Start Date:</strong> ${startDate}</p>
+                    <p><strong>End Date:</strong> ${endDate}</p>
+                    <p><strong>Remark:</strong> ${remark}</p>
+                `;
+            }
+
+            nextStep1Button.addEventListener('click', async function () {
+                const isValid = await validateForm();
+                if (isValid) {
+                    step1.style.display = 'none';
+                    step2.style.display = 'block';
+                    step1.classList.remove('active');
+                    step2.classList.add('active');
+                    step1Indicator.classList.remove('active');
+                    step2Indicator.classList.add('active');
+                    populateReviewDetails();
+                }
+            });
+
+            nextStep2Button.addEventListener('click', function () {
+                step2.style.display = 'none';
+                step3.style.display = 'block';
+                step2.classList.remove('active');
+                step3.classList.add('active');
+                step2Indicator.classList.remove('active');
+                step3Indicator.classList.add('active');
+            });
+
+            prevStep2Button.addEventListener('click', function () {
+                step2.style.display = 'none';
+                step1.style.display = 'block';
+                step2.classList.remove('active');
+                step1.classList.add('active');
+                step2Indicator.classList.remove('active');
+                step1Indicator.classList.add('active');
+            });
+
+            prevStep3Button.addEventListener('click', function () {
+                step3.style.display = 'none';
+                step2.style.display = 'block';
+                step3.classList.remove('active');
+                step2.classList.add('active');
+                step3Indicator.classList.remove('active');
+                step2Indicator.classList.add('active');
+            });
+
+           
+        });
+    </script>
 	</section>
-
-
 </body>
-
 </html>

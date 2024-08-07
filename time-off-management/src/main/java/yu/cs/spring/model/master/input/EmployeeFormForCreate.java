@@ -58,6 +58,7 @@ public record EmployeeFormForCreate(
 		employee.setAssignDate(assignDate);
 		
 		employee.setRemark(remark);
+		employee.setUnpaidLeaves(0);
 		
 		return employee;
 	}

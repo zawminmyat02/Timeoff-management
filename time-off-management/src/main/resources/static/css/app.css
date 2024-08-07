@@ -289,7 +289,21 @@ main {
     margin-right: 5px; /* Adjust the spacing between icon and text */
     vertical-align: middle; /* Ensure vertical alignment */
 }
-
- 
-
- 
+      .chart-container {
+            display: flex;
+            justify-content: center;
+            height: 100vh; /* Adjust as needed */
+        }
+        #leaveBalanceChart {
+            width: 500px; /* Adjust as needed */
+            height: 350px; /* Adjust as needed */
+        }
+        
+      .chart-wrapper {
+            width: 900px; /* Set the desired width */
+            height: 500px; /* Set the desired height */
+        }
+        #leaveBalanceChart {
+            width: 100% !important;
+            height: 100% !important;
+        }

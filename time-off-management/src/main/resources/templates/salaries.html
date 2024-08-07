@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/user-board.html}">
+<head>
+<title>Employee Salary Details</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #d8efd3;
+	color: #55ad9b;
+	margin: 0;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.main-content {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+}
+
+.container {
+	background-color: #f1f8e8;
+	border-radius: 25px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+	transition: transform 0.3s, box-shadow 0.3s;
+	padding: 30px;
+	width: 100%;
+	max-width: 1200px;
+}
+
+.container:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+.empDetail {
+	width: 100%;
+	text-align: left;
+	border: 1px solid black;
+	border-radius: 25px;
+}
+
+.companyName {
+	text-align: right;
+	font-size: 24px;
+	font-family: sans-serif;
+	padding: 10px;
+	margin: 10px;
+	padding: 10px;
+}
+
+.myBackground {
+	padding-top: 10px;
+	text-align: left;
+	border: 1px solid black;
+	background-color: #95d2b3;
+}
+
+.myAlign {
+	border-right: 1px solid black;
+}
+
+th, td {
+	padding: 6px;
+	color: #000;
+	font-size: 16px;
+	font-family: sans-serif;
+	font-weight: 500;
+	
+}
+
+td{
+	color: #151515;
+}
+
+
+.border-center {
+	text-align: center;
+}
+
+.border-center th, .border-center td {
+	border: 1px solid black;
+}
+
+.table-border-bottom {
+	border-bottom: 1px solid;
+}
+
+.table-border-right {
+	border-right: 1px solid;
+}
+
+table {
+	line-height: 50px;
+	border-radius: 25px;
+}
+</style>
+</head>
+<body>
+	<section class="main-content" layout:fragment="content">
+		<div class="container salary-slip">
+			<table class="table empDetail">
+				<thead>
+					<tr style='background-color: #95d2b3'>
+						<th colspan="8" class="companyName">Time off management</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th >Name</th>
+						<td th:text="${employee.account.name}">Example</td>
+						<td></td>
+						<th>Department Code</th>
+						<td th:text="${employee.department.code}">ABC123</td>
+						<td></td>
+						<th>Position Code</th>
+						<td th:text="${employee.position.id.positionCode.name}">123</td>
+					</tr>
+					<tr>
+						<th>Employee Code</th>
+						<td th:text="${employee.code}">XXXXXXXXXXX</td>
+						<td></td>
+						<th>Department Name</th>
+						<td th:text="${employee.department.name}">XXXXXXXXXXX</td>
+						<td></td>
+						<th>Position Name</th>
+						<td th:text="${employee.position.id.positionCode.value}">Manager</td>
+					</tr>
+					<tr>
+						<th>Sick Leave</th>
+						<td th:text="${employee.sickLeaves + ' days'}">20</td>
+						<td></td>
+						<th>Maternity Leave</th>
+						<td th:text="${employee.maternityLeaves + ' days'}">20</td>
+						<td></td>
+						<th>Casual Leave</th>
+						<td th:text="${employee.casualLeaves + ' days'}">20</td>
+					</tr>
+					<tr>
+						<th colspan="2">Payments</th>
+						<th></th>
+						<th class="table-border-right">Amount (Ks.)</th>
+						<th colspan="2">Deductions</th>
+						<th></th>
+						<th>Amount (Ks.)</th>
+					</tr>
+					<tr>
+						<th colspan="2">Monthly Salary</th>
+						<td></td>
+						<td class="myAlign" th:text="${monthSalary}">4935.00</td>
+						<th colspan="2">Unpaid Leaves</th>
+						<td></td>
+						<td class="myAlign" th:text="${employee.unpaidLeaves  + ' days'}">00.00</td>
+					</tr>
+					<tr class="myBackground">
+						<th colspan="3">Daily Salary</th>
+						<td class="myAlign" th:text="${dailySalary}">10000</td>
+						<th colspan="3" >Total Deductions</th>
+						<td class="myAlign" th:text="${totalDeduction}">1000</td>
+					</tr>
+					<tr class="mb-5 myBackground">
+						<th colspan="2"></th>
+						<th></th>
+						<td></td>
+						<th colspan="2" class="table-border-bottom">Net Salary</th>
+						<td></td>
+						<td th:text="${newSalary}">XXXXXXXXXX</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+	</body>
+</html>
