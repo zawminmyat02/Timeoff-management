@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import yu.cs.spring.model.master.entity.Department;
@@ -57,8 +58,18 @@ public class DepartmentController {
     @PostMapping("/update-manager")
     public String updateManager(@RequestParam("departmentCode") String departmentCode,
                                 DepartmentFormForManagerChanges form,
-                                BindingResult bindingResult,
-                                Model model) {
+                                BindingResult result,
+                                RedirectAttributes model) {
+    	
+    	 // Validate the HOD code
+        if (!departmentService.isHeadCodeValid(form.headCode(), departmentCode)) {
+        	 model.addFlashAttribute("error", "Invalid HOD Code for the department.");
+             model.addFlashAttribute("departmentCode", departmentCode);
+             model.addFlashAttribute("headCode", form.headCode());
+             model.addFlashAttribute("showModal", true);  // Indicator to reopen the modal
+             return "redirect:/departments"; // Replace with the appropriate page
+        }
+        
       
     	departmentService.update(departmentCode, form);
        

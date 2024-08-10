@@ -5,16 +5,16 @@
 <head>
 <title>Leave Requests</title>
 <style>
-	label{
-	color:black;
-	margin-left:10px;
+label {
+	color: black;
+	margin-left: 10px;
 	font-size: 13px;
 	font-family: sans-serif;
 }
-          
+
 .btn-search {
 	margin-left: 15px;
-	margin-top:25px;
+	margin-top: 25px;
 	background-color: #55ad9b;
 	color: #000;
 	border: none;
@@ -27,35 +27,152 @@
 	align-items: center;
 	justify-content: center;
 }
-   
-   
+
 .btn-search i {
-    margin-right: 5px; /* Adjust the spacing between icon and text */
-    vertical-align: middle; /* Ensure vertical alignment */
+	margin-right: 5px; /* Adjust the spacing between icon and text */
+	vertical-align: middle; /* Ensure vertical alignment */
 }
 
-  
-.row {
-    --bs-gutter-x: 4rem !important;
-    }
+#leaveRequests {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px; /* Adjust gap value as needed */
+}
+
+.col-md-4 {
+	flex: 1 1 30%; /* Adjust the basis value (30%) as needed */
+	max-width: 30%;
+	display: flex;
+}
+
+.card-wrapper {
+	flex: 1 1 calc(33.333% - 16px);
+	max-width: calc(33.333% - 16px);
+	margin-bottom: 16px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+}
 
 .mb-5 {
 	margin-bottom: 5rem !important;
 }
 
-.ml-5{
-	margin-left: 2rem;
+.ml-5 {
+	margin-left: 2rem !important;
 }
 
-.flex{
+.flex {
 	display: flex;
 }
 
-.gutter{
-    --bs-gutter-x: 0.5rem !important;
+.gutter {
+	--bs-gutter-x: 0.5rem !important;
+}
 
-} 
-  
+label {
+	color: black;
+	margin-left: 10px;
+	font-size: 13px;
+	font-family: sans-serif;
+}
+
+.btn-search {
+	margin-left: 15px;
+	margin-top: 27px;
+	background-color: #55ad9b;
+	color: #000;
+	border: none;
+	padding: 8px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-search i {
+	margin-right: 5px; /* Adjust the spacing between icon and text */
+	vertical-align: middle; /* Ensure vertical alignment */
+}
+
+.my-row {
+	--bs-gutter-x: 5rem !important;
+}
+
+/* Media Query for Small Screens (up to 768px) */
+@media ( max-width : 768px) {
+	.card-wrapper {
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+	#noRequests {
+		margin-left: 10px;
+	}
+	.pending-text {
+		margin: 15px;
+		margin-top: 15px;
+	}
+	#leaveRequests {
+		margin-left: 15px;
+	}
+	.flex-fill {
+		display: none;
+	}
+	.navbar {
+		position: relative;
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: flex-start;
+		justify-content: space-between;
+		padding-top: 0px;
+		padding-bottom: .5rem;
+	}
+	.m-4 {
+		margin-bottom: 0px !important;
+		padding-left: 5px;
+		margin-left: 45px !important;
+	}
+	.text {
+		font-size: 28px;
+		color: gray;
+	}
+	.ml-5 {
+		margin-left: 0px !important;
+	}
+	.btn-search {
+		margin-left: 8px;
+	}
+	.my-row {
+		--bs-gutter-x: 2rem !important;
+	}
+}
+
+/* Media Query for Medium Screens (768px to 991px) */
+@media ( min-width : 768px) and (max-width: 991px) {
+	.card-wrapper {
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+	.my-row {
+		--bs-gutter-x: 2rem !important;
+	}
+}
+
+/* Media Query for Larger Screens (992px to 1000px) */
+@media ( min-width : 992px) and (max-width: 1000px) {
+	.card-wrapper {
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+	.my-row {
+		--bs-gutter-x: 2rem !important;
+	}
+}
 </style>
 </head>
 <body>
@@ -64,15 +181,18 @@
 		<header class="margin-left" th:fragement="header">
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="m-4">
-					<h1 style="color: #000;" class="d-lg-inline mb-4">Leave
+					<h1 style="color: #000;"
+						class="d-lg-inline d-md-inline d-none mb-4 text">Leave
 						Requests</h1>
-					<h6 style="color: #000;" class="text-muted d-none d-lg-block mt-3">Here're
+					<h1 class="text-muted d-block d-lg-none d-md-none pending-text">PENDING</h1>
+					<h6 style="color: #000;"
+						class="text-muted d-lg-block d-md-block d-sm-block mt-3 text-mute pending-text">Here're
 						your leave requests</h6>
 				</div>
 				<div class="flex-fill"></div>
 
 
-				<div class="navbar nav">
+				<div class="navbar nav mt-2">
 					<li class="nav-item dropdown"><a href="#"
 						class="d-flex align-items-center nav-link dropdown-toggle"
 						data-bs-toggle="dropdown">
@@ -109,50 +229,59 @@
 		</header>
 
 
-		<div class="row ml-5 mt-4 mb-5">
+		<div class="row ml-5 mt-4 mb-5 ">
 			<form th:action="@{/home}" method="get">
-					
-				<div class="row px-5 mt-4 flex">
-					
-					<div class="col-3 form-group search">
+
+				<div class="row my-row px-5 mt-4 flex">
+
+					<div class="col-lg-3 col-md-3 col-sm-12  form-group search">
 						<label for="fromDate">From Date </label> <input type="date"
-							name="fromDate" class="form-control"  th:value="${fromDate}" >
+							name="fromDate" class="form-control" th:value="${fromDate}">
 					</div>
-					<div class="col-3 form-group search">
-					<label for="toDate">To Date </label>
-						<input type="date" name="toDate" class="form-control"
-							placeholder="To Date"  th:value="${toDate}">
+					<div class="col-lg-3 col-md-3 col-sm-12  form-group search">
+						<label for="toDate">To Date </label> <input type="date"
+							name="toDate" class="form-control" placeholder="To Date"
+							th:value="${toDate}">
 					</div>
-					<div class="col-3 form-group search">
-					<label for="leaveType">Type </label>
-						<select name="leaveType" class="form-control">
+					<div class="col-lg-3 col-md-3 col-sm-12  form-group search">
+						<label for="leaveType">Type </label> <select name="leaveType"
+							class="form-control">
 							<option value="">Select Leave Type</option>
-							<option value="Sick Leave"  th:selected="${leaveType == 'Sick Leave'}">Sick Leave</option>
-							<option value="Vacation Leave"  th:selected="${leaveType == 'Vacation Leave'}">Vacation Leave</option>
+							<option value="Sick Leave"
+								th:selected="${leaveType == 'Sick Leave'}">Sick Leave</option>
+							<option value="Casual Leave"
+								th:selected="${leaveType == 'Casual Leave'}">Casual
+								Leave</option>
+
+							<option value="Maternity Leave"
+								th:selected="${leaveType == 'Maternity Leave'}">Maternity
+								Leave</option>
 						</select>
 					</div>
 
-					<div class="col-3 form-group search gutter">
-						<button type="submit" class="btn-search"><i class="fas fa-search"></i>Search</button>
+					<div class="col-lg-3 col-md-3 col-sm-12  form-group search gutter">
+						<button type="submit" class="btn-search">
+							<i class="fas fa-search"></i>Search
+						</button>
 					</div>
 				</div>
 			</form>
 		</div>
-		
-		  <div class="row mt-5" id="noRequests" th:if="${pending.isEmpty()}" >
-            <div class="col-1"></div>
-            <div class="col-10 nocard">
-                <h5>No Pending Leave Requests</h5>
-                <p>There are currently no pending leave requests.</p>
-            </div>
-            <div class="col-1"></div>
-        </div>
 
-		<div class="mt-5 px-4 mx-3  " style="margin-left: 0px;">
+		<div class="row" id="noRequests" th:if="${pending.isEmpty()}">
+			<div class="col-1"></div>
+			<div class="col-10 nocard">
+				<h5>No Pending Leave Requests</h5>
+				<p>There are currently no pending leave requests.</p>
+			</div>
+			<div class="col-1"></div>
+		</div>
+
+		<div class="mt-5 px-4 mx-3 ml-5" style="margin-left: 0px;">
 
 			<div class="container" th:unless="${pending.isEmpty()}">
-				<div class="row">
-					<div class="col-md-4 mt-3"
+				<div id="leaveRequests">
+					<div class="card-wrapper "
 						th:each="leaveApplication : ${leaveApplications}">
 						<div class="card" th:id="'card-' + ${leaveApplication.id}">
 							<div class="card-header" style="background-color: #55ad9b;">

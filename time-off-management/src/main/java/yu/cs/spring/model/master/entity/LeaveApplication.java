@@ -1,4 +1,4 @@
-package yu.cs.spring.model.transaction.entity;
+package yu.cs.spring.model.master.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,9 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
-import yu.cs.spring.model.master.entity.Department;
-import yu.cs.spring.model.master.entity.Employee;
-import yu.cs.spring.model.master.entity.LeaveType;
 
 @Data
 @Entity

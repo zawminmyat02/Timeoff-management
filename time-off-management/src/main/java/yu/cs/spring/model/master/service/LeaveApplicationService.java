@@ -20,13 +20,13 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import yu.cs.spring.model.master.entity.Employee;
+import yu.cs.spring.model.master.entity.LeaveApplication;
 import yu.cs.spring.model.master.entity.LeaveType;
+import yu.cs.spring.model.master.entity.LeaveApplication.Status;
 import yu.cs.spring.model.master.input.LeaveApplicationForm;
 import yu.cs.spring.model.master.repo.EmployeeRepo;
+import yu.cs.spring.model.master.repo.LeaveApplicationRepo;
 import yu.cs.spring.model.master.repo.LeaveTypeRepo;
-import yu.cs.spring.model.transaction.entity.LeaveApplication;
-import yu.cs.spring.model.transaction.entity.LeaveApplication.Status;
-import yu.cs.spring.model.transaction.repo.LeaveApplicationRepo;
 
 @Service
 public class LeaveApplicationService {

@@ -12,11 +12,8 @@
 	;
 
 body {
-	margin: 0;
-	padding: 0;
-	font-family: 'Roboto', sans-serif;
-	background: #d8efd3;
-	color: #55ad9b;
+	font-family: Arial, sans-serif;
+	background-color: #d8efd3;
 }
 
 .header {
@@ -27,12 +24,6 @@ body {
 
 .brand-title {
 	font-size: 24px;
-}
-
-main {
-	min-height: 100vh;
-	padding: 20px 0;
-	margin-left: 250px; /* Adjust this margin to fit the sidebar */
 }
 
 .btn-create i {
@@ -159,16 +150,10 @@ main {
 	padding: 20px;
 }
 
-.search-container {
-	position: relative;
-	display: flex;
-	align-items: center;
-}
-
 .search-container input {
 	background-color: #d8efd3;
 	color: #000;
-	padding-left: 40px; /* Adjust the padding to make space for the icon */
+	padding-left: 20px; /* Adjust the padding to make space for the icon */
 	width: 100%;
 	height: 40px; /* Adjust the height as needed */
 	border: 1px solid #000;
@@ -185,11 +170,15 @@ main {
 	background-color: #55ad9b;
 	color: #000;
 	border: none;
-	padding: 10px 20px;
+	margin-left: 30px;
+	padding: 8px 20px;
 	border-radius: 5px;
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.3s;
 	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .btn-create:hover {
@@ -212,103 +201,197 @@ input#headCode.form-control:focus {
 	position: initial;
 	/* Ensure vertical alignment */
 }
+
+@media ( max-width : 768px) {
+	.m-4 {
+		margin-bottom: 0px !important;
+		padding-left: 5px;
+		margin-left: 45px !important;
+	}
+	.btn-search {
+		margin-left: 0px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.btn-create {
+		margin-left: 0px;
+	}
+	.header {
+		margin-bottom: 10px !important;
+	}
+}
+
+/* Media Query for Medium Screens (768px to 991px) */
+@media ( min-width : 768px) and (max-width: 991px) {
+	.btn-search {
+		margin-left: 0px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.btn-create {
+		margin-left: 0px;
+	}
+}
+
+/* Media Query for Larger Screens (992px to 1000px) */
+@media ( min-width : 991px) and (max-width: 1000px) {
+	.btn-search {
+		margin-left: 0px;
+	}
+	.btn-create {
+		margin-left: 60px;
+	}
+}
+
+/* Media Query for Larger Screens (992px to 1000px) */
+@media ( min-width : 1000px) and (max-width: 1200px) {
+	.btn-search {
+		margin-left: 0px !important;
+	}
+	.btn-create {
+		margin-left: 70px !important;
+	}
+}
+
+@media ( min-width : 1200px) {
+	.btn-search {
+		margin-left: 0px !important;
+	}
+	.btn-create {
+		margin-left: 40px !important;
+	}
+}
 </style>
+
 </head>
 <body>
 	<section layout:fragment="content">
-		<div class="container row px-5 mt-4">
-			<header class="header col-12  mb-4">
-				<h1 style="color: #000;">TIME-OFF</h1>
-				<h2 class="brand-title" style="color: #000">Department
-					Management</h2>
-			</header>
-		</div>
+		<div class="m-4">
+			<div class="container mt-4 ">
+				<header class="header mb-4">
+					<h1 style="color: #000;" class="d-lg-inline d-md-inline d-none">TIME-OFF</h1>
+					<h2 class="brand-title mt-3" style="color: #000;">Department
+						Management</h2>
 
-		<div class="row mb-4">
-			<form class="col-9 form-group search-container"
-				th:action="@{/find}" method="get">
-				<i class="fas fa-search custom-icon"></i> <input type="text"
-					class="form-control" name="query"
-					placeholder="Search by department code">
-				<button type="submit" class="btn-search">
-					<i class="fas fa-search custom-icon"></i>Search
-				</button>
-			</form>
-			<div class="col-3 text-right py-2">
-				<a th:href="@{/departments/new}" class="btn-create"><i
-					class="fas fa-plus-circle"></i> Create</a>
+				</header>
 			</div>
-		</div>
 
-		<table id="department-table">
-			<thead>
-				<tr>
-					<th>Code</th>
-					<th>Name</th>
-					<th>Manager Code</th>
-					<th>Manager Name</th>
-					<th>Manager Phone</th>
-					<th>Number of Employees</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="department : ${departments}">
-					<td th:text="${department.code}"></td>
-					<td th:text="${department.name}"></td>
-					<td th:text="${department.managerCode}"></td>
-					<td th:text="${department.managerName}"></td>
-					<td th:text="${department.managerPhone}"></td>
-					<td th:text="${department.employees}"></td>
-					<td>
-						<button type="button" data-bs-toggle="modal"
-							th:attr="data-bs-target='#exampleModal' + ${department.code}"
-							class="btn-secondary assign-manager-btn"
-							th:if="${department.managerCode == null}"
-							data-department-code="${department.code}">Assign HOD</button>
-						<button type="button" data-bs-toggle="modal"
-							th:attr="data-bs-target='#exampleModal' + ${department.code}"
-							class="btn-secondary update-manager-btn"
-							th:if="${department.managerCode != null}"
-							data-department-code="${department.code}"
-							data-manager-code="${department.managerCode}"
-							data-manager-name="${department.managerName}"
-							data-manager-phone="${department.managerPhone}">Update
-							HOD</button> <!-- Modal -->
-						<div class="modal fade"
-							th:id="'exampleModal' + ${department.code}" tabindex="-1"
-							aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" style="color: #000"
-											id="exampleModalLabel">Update HOD</h5>
-										<button type="button" class="btn-close btn btn-secondary"
-											data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-										<div class="update-manager-form">
-											<form id="updateManagerForm" th:action="@{/update-manager}"
-												method="post">
-												<input type="hidden" id="departmentCode"
-													name="departmentCode" th:value="${department.code}">
-												<div class="form-group mb-3">
-													<h5 class="px-2" style="color: #000">HOD Code</h5>
-													<input type="text" class="form-control" id="headCode"
-														name="headCode" th:value="${headCode}" placeholder="Code">
-												</div>
-												<button type="submit" class="btn btn-primary"
-													style="background-color: #55ad9b">Save changes</button>
-											</form>
+			<div class="row mb-4">
+				<form class="search-container" th:action="@{/find}" method="get">
+					<div class="row  mt-4 flex">
+						<div class="col-lg-8 col-md-12 col-sm-12">
+							<input type="text" class="form-control" name="query"
+								placeholder="Search by department code">
+						</div>
+						<div class="col-lg-1 col-md-12 col-sm-12 d-flex">
+							<button type="submit" class="btn-search btn-block">
+								<i class="fas fa-search custom-icon"></i>Search
+							</button>
+						</div>
+						<div class="col-lg-1 col-md-12 col-sm-12 d-flex ">
+							<a th:href="
+							@{/departments/new}"
+								class="btn-create btn-block"> <i class="fas fa-plus-circle"></i>
+								Create
+							</a>
+						</div>
+
+
+					</div>
+				</form>
+			</div>
+
+			<table id="department-table">
+				<thead>
+					<tr>
+						<th>Code</th>
+						<th>Name</th>
+						<th>Manager Code</th>
+						<th>Manager Name</th>
+						<th>Manager Phone</th>
+						<th>Number of Employees</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="department : ${departments}">
+						<td th:text="${department.code}"></td>
+						<td th:text="${department.name}"></td>
+						<td th:text="${department.managerCode}"></td>
+						<td th:text="${department.managerName}"></td>
+						<td th:text="${department.managerPhone}"></td>
+						<td th:text="${department.employees}"></td>
+						<td>
+							<button type="button" data-bs-toggle="modal"
+								th:attr="data-bs-target='#exampleModal' + ${department.code}"
+								class="btn-secondary assign-manager-btn"
+								th:if="${department.managerCode == null}"
+								data-department-code="${department.code}">Assign HOD</button>
+							<button type="button" data-bs-toggle="modal"
+								th:attr="data-bs-target='#exampleModal' + ${department.code}"
+								class="btn-secondary update-manager-btn"
+								th:if="${department.managerCode != null}"
+								data-department-code="${department.code}"
+								data-manager-code="${department.managerCode}"
+								data-manager-name="${department.managerName}"
+								data-manager-phone="${department.managerPhone}">Update
+								HOD</button> <!-- Modal -->
+							<div class="modal fade"
+								th:id="'exampleModal' + ${department.code}" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" style="color: #000"
+												id="exampleModalLabel">Update HOD</h5>
+											<button type="button" class="btn-close btn btn-secondary"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<div class="update-manager-form">
+												<form id="updateManagerForm" th:action="@{/update-manager}"
+													method="post">
+													<input type="hidden" id="departmentCode"
+														name="departmentCode" th:value="${department.code}">
+													<div class="form-group mb-3">
+														<h5 class="px-2" style="color: #000">HOD Code</h5>
+														<input type="text" class="form-control" id="headCode"
+															name="headCode" th:value="${headCode}" placeholder="Code">
+													</div>
+													<div th:if="${error}" class="alert alert-danger"
+														role="alert">
+														<span th:text="${error}"></span>
+													</div>
+													<button type="submit" class="btn btn-primary"
+														style="background-color: #55ad9b">Save changes</button>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+			document.addEventListener("DOMContentLoaded", function() {
+				var showModal = /*[[${showModal}]]*/false;
+				if (showModal) {
+					var modalId = '#exampleModal'
+							+ /*[[${departmentCode}]]*/'';
+					var modalElement = document.querySelector(modalId);
+					if (modalElement) {
+						var modalInstance = new bootstrap.Modal(modalElement);
+						modalInstance.show();
+					}
+				}
+			});
+			/*]]>*/
+		</script>
+
 	</section>
 </body>
 </html>

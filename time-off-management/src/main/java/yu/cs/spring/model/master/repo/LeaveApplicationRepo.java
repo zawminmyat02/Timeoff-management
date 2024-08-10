@@ -1,4 +1,4 @@
-package yu.cs.spring.model.transaction.repo;
+package yu.cs.spring.model.master.repo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import yu.cs.spring.model.BaseRepository;
-import yu.cs.spring.model.transaction.entity.LeaveApplication;
-import yu.cs.spring.model.transaction.entity.LeaveApplication.Status;
+import yu.cs.spring.model.master.entity.LeaveApplication;
+import yu.cs.spring.model.master.entity.LeaveApplication.Status;
 
 public interface LeaveApplicationRepo extends BaseRepository<LeaveApplication, Long> {
 

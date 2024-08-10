@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <section layout:fragment="sidebar">
 
-	<nav th:fragment="usersidebar" class="sidebar ">
+<div class="nav-container" tabindex="0">
+  <div class="nav-toggle">
+
+	<nav th:fragment="usersidebar" class="sidebar">
 
 		<div class="brand">
-            <span class="brand-name" style="color: dark;">TIME-OFF</span>
-        </div>
-        
+			<span class="brand-name" style="color: dark;">TIME-OFF</span>
+		</div>
 
 
-		<ul class="menu-items">
+		<ul class="menu-items nav-items">
 			<li><a th:href="@{/home}"
 				th:classappend="${page == 'home' ? 'active' : ''}" class="menu-item">
-					<i class="fa-solid fa-bell"></i> <span>Requests</span>
+					<i class="fa-solid fa-bell nav-item"></i> <span >Requests</span>
 			</a></li>
-
 			<li><a th:href="@{/leave-history}"
 				th:classappend="${page == 'records' ? 'active' : ''}"
 				class="menu-item"> <i class="fa-solid fa-folder-open"></i> <span>Records</span>
@@ -54,5 +56,8 @@
 
 		</ul>
 	</nav>
+	</div>
+	</div>
 </section>
 </html>
+

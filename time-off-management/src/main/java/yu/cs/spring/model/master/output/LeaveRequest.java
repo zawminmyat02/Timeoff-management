@@ -1,9 +1,9 @@
-package yu.cs.spring.model.transaction.output;
+package yu.cs.spring.model.master.output;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import yu.cs.spring.model.transaction.entity.LeaveApplication;
+import yu.cs.spring.model.master.entity.LeaveApplication;
 
 public record LeaveRequest(  
 		long id,

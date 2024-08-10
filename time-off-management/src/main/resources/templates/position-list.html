@@ -27,21 +27,16 @@ body {
 	color: #55ad9b;
 }
 
-.card-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
 .card {
-	margin: 15px;
-	width: calc(33.333% - 30px);
+	display: flex;
 	background-color: #d8efd3;
 	color: #000;
 	border: none;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 	transition: transform 0.3s, box-shadow 0.3s;
+	    min-width: 350px; /* Ensure a minimum width for cards */
+	
 }
 
 .card:hover {
@@ -50,7 +45,7 @@ body {
 }
 
 .card-body {
-	padding: 20px;
+    padding: 15px; /* Reduce padding to give more space to text */
 }
 
 .card-title {
@@ -63,6 +58,9 @@ body {
 .card-text {
 	margin-bottom: 10px;
 	font-size: 16px;
+	white-space: nowrap; /* Prevents text from wrapping to a new line */
+	overflow: hidden; /* Hides any text that overflows the card */
+	text-overflow: ellipsis
 }
 
 .card-text strong {
@@ -116,18 +114,6 @@ body {
 	margin-bottom: 30px;
 }
 
-.btn-create {
-	margin-left: 10px;
-	background-color: #d8efd3;
-	color: #55ad9b;
-	border: none;
-	padding: 10px 20px;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s, transform 0.3s;
-	text-decoration: none;
-}
-
 .btn-create:hover {
 	background-color: #5c636a;
 	color: white;
@@ -138,140 +124,209 @@ body {
 	width: 70%;
 }
 
-.custom{
+.custom {
 	border-radius: 15px;
 	border: 1px solid #000;
 }
 
-    .btn-secondary {
-    color: #000;
-    background-color: #55ad9b;
-    border-color: #292a2c;
-    border-radius: 10px;
-    }
-    
-  .form-control{
-  	background-color: #d8efd3 !important;
-  }
-  
-  
+.btn-secondary {
+	color: #000;
+	background-color: #55ad9b;
+	border-color: #292a2c;
+	border-radius: 10px;
+}
+
+.container.mt-4{
+	padding: 10px;
+}
+
+.form-control {
+	background-color: #d8efd3 !important;
+}
+
 .btn-create {
 	background-color: #55ad9b;
 	color: #000;
 	border: none;
-	padding: 8px 20px;
+	padding: 8px 23px;
 	border-radius: 5px;
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.3s;
 	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 15px;
 }
 
-.flex{
-	display:flex;
+.flex {
+	display: flex;
 }
 
 .btn-search i {
-    margin-right: 5px; /* Adjust the spacing between icon and text */
-    vertical-align: middle; /* Ensure vertical alignment */
+	margin-right: 5px; /* Adjust the spacing between icon and text */
+	vertical-align: middle; /* Ensure vertical alignment */
 }
-  
+
+.card-wrapper {
+	flex: 1 1 calc(33.333% - 16px);
+	max-width: calc(33.333% - 16px);
+	margin-bottom: 16px;
+}
+
+.card-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	padding: 10px;
+	margin-left: 30px;
+}
+
+@media ( max-width : 768px) {
+	.d-flex {
+		flex-direction: column;
+	}
+	.btn-search, .btn-create {
+		margin-left: 0px;
+	}
+	.card-wrapper {
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+	.card-container {
+		margin-left: 15px;
+		width: 100%;
+	}
+}
+
+/* Media Query for Medium Screens (768px to 991px) */
+@media ( min-width : 768px) and (max-width: 991px) {
+	.card-wrapper {
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+}
+
+/* Media Query for Larger Screens (992px to 1000px) */
+@media ( min-width : 992px) and (max-width: 1000px) {
+	.card-wrapper {
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+}
 </style>
 </head>
 <body>
 	<section layout:fragment="content">
-		<div class="container mt-4">
-			<header class="header">
-				<h1 style="color:#000;">TIME-OFF</h1>
-			</header>
-			<div class="row mb-4">
-			<div class="col-1"></div>
-				<div class="col-11">
-					<form th:action="@{/positions}" method="get">
 
-    <div class="row align-items-center">
-        <div class="col-md-4 mb-2">
-            <div class="input-group">
-               
-                <input type="text" class="form-control custom" id="department" name="department"
-                       th:value="${search != null ? search.department() : ''}"
-                       placeholder="Search by Department Code" />
-            </div>
-        </div>
-        <div class="col-md-4 mb-2">
-            <div class="input-group">
-              
-                <input type="text" class="form-control custom" id="position" name="position"
-                       th:value="${search != null ? search.position() : ''}"
-                       placeholder="Search by Position Code" />
-            </div>
-        </div>
+		<div class="m-4">
 
-        <div class="col-md-4 mb-2 flex">
-            <div class="text-center">
-                <button  class=" btn-search btn btn-secondary" type="submit"><i class="fas fa-search"></i>Search</button>
-            </div>
-            <div><a class="btn btn-secondary btn-create" th:href="@{/positions/new}"
-						><i class="fas fa-plus-circle"></i>
-						Create</a>
-						</div> 
-        </div>
-        
-        
-				
-    </div>
+			<div class="container mt-4">
+				<header class="header mb-4">
+					<h1 style="color: #000;" class="d-lg-inline d-md-inline d-none">TIME-OFF</h1>
+					<h2 class="brand-title mt-3 d-sm-inline d-lg-none d-md-none"
+						style="color: #000;">Position Management</h2>
 
-</form>
+				</header>
+				<div class="row mb-5">
+					<div class="col-1"></div>
+					<div class="col-11">
+						<form th:action="@{/positions}" method="get">
 
+							<div class="row align-items-center">
+								<div class="col-md-4 mb-2">
+									<div class="input-group">
+
+										<input type="text" class="form-control custom" id="department"
+											name="department"
+											th:value="${search != null ? search.department() : ''}"
+											placeholder="Search by Department Code" />
+									</div>
+								</div>
+								<div class="col-md-4  mb-2">
+									<div class="input-group">
+
+										<input type="text" class="form-control custom" id="position"
+											name="position"
+											th:value="${search != null ? search.position() : ''}"
+											placeholder="Search by Position Code" />
+									</div>
+								</div>
+
+								<div class="col-md-4  mb-2 d-flex">
+									<div class="text-center">
+										<button class=" btn-search btn btn-secondary mb-2"
+											type="submit">
+											<i class="fas fa-search"></i>Search
+										</button>
+									</div>
+									<div>
+										<a class="btn btn-secondary btn-create "
+											th:href="@{/positions/new}"><i
+											class="fas fa-plus-circle"></i> Create</a>
+									</div>
+								</div>
+
+
+
+							</div>
+
+						</form>
+
+
+					</div>
 
 				</div>
+				<div class="card-container">
+					<div class="card-wrapper" th:each="position : ${positions}">
+						<div class="card">
+							<div class="card-header" style="color: #000;">Position
+								Details</div>
+							<div class="card-body">
+								<h5 class="card-title">
+									<i class="fas fa-briefcase icon"></i> Position Info
+								</h5>
+								<p class="card-text">
+									<strong><i class="fas fa-code icon"></i> Code:</strong> <span
+										th:text="${position.getCode()}"></span>
+								</p>
+								<p class="card-text">
+									<strong><i class="fas fa-id-badge icon"></i> Position
+										Code:</strong> <span th:text="${position.getPositionCode()}"></span>
+								</p>
+								<p class="card-text">
+									<strong><i class="fas fa-user-tag icon"></i> Position
+										Name:</strong> <span th:text="${position.getPositionName()}"></span>
+								</p>
+								<p class="card-text">
+									<strong><i class="fas fa-building icon"></i>
+										Department Code:</strong> <span th:text="${position.departmentCode}"></span>
+								</p>
+								<p class="card-text">
+									<strong><i class="fas fa-building icon"></i>
+										Department Name:</strong> <span th:text="${position.departmentName}"></span>
+								</p>
+								<p class="card-text">
+									<strong><i class="fas fa-money-bill icon"></i> Basic
+										Salary:</strong> <span th:text="${position.basicSalary}"></span>
+								</p>
 
-			</div>
-			<div class="card-container">
-				<div class="card" th:each="position : ${positions}">
-					<div class="card-header" style="color:#000;">Position Details</div>
-					<div class="card-body">
-						<h5 class="card-title">
-							<i class="fas fa-briefcase icon"></i> Position Info
-						</h5>
-						<p class="card-text">
-							<strong><i class="fas fa-code icon"></i> Code:</strong> <span
-								th:text="${position.getCode()}"></span>
-						</p>
-						<p class="card-text">
-							<strong><i class="fas fa-id-badge icon"></i> Position
-								Code:</strong> <span th:text="${position.getPositionCode()}"></span>
-						</p>
-						<p class="card-text">
-							<strong><i class="fas fa-user-tag icon"></i> Position
-								Name:</strong> <span th:text="${position.getPositionName()}"></span>
-						</p>
-						<p class="card-text">
-							<strong><i class="fas fa-building icon"></i> Department
-								Code:</strong> <span th:text="${position.departmentCode}"></span>
-						</p>
-						<p class="card-text">
-							<strong><i class="fas fa-building icon"></i> Department
-								Name:</strong> <span th:text="${position.departmentName}"></span>
-						</p>
-						<p class="card-text">
-							<strong><i class="fas fa-money-bill icon"></i> Basic
-								Salary:</strong> <span th:text="${position.basicSalary}"></span>
-						</p>
-						
-						<p class="card-text">
-							<strong><i class="fas fa-calendar-alt icon"></i> Annual
-								Leaves:</strong> <span th:text="${position.sickLeaves}"></span>
-						</p>
-						
-						<p class="card-text">
-							<strong><i class="fas fa-calendar-alt icon"></i> Casual
-								Leaves:</strong> <span th:text="${position.casualLeaves}"></span>
-						</p>
-						
-						<p class="card-text">
-							<strong><i class="fas fa-calendar-alt icon"></i> Maternity
-								Leaves:</strong> <span th:text="${position.maternityLeaves}"></span>
-						</p>
+								<p class="card-text">
+									<strong><i class="fas fa-calendar-alt icon"></i>
+										Annual Leaves:</strong> <span th:text="${position.sickLeaves}"></span>
+								</p>
+
+								<p class="card-text">
+									<strong><i class="fas fa-calendar-alt icon"></i>
+										Casual Leaves:</strong> <span th:text="${position.casualLeaves}"></span>
+								</p>
+
+								<p class="card-text">
+									<strong><i class="fas fa-calendar-alt icon"></i>
+										Maternity Leaves:</strong> <span th:text="${position.maternityLeaves}"></span>
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

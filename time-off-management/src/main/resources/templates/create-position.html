@@ -95,13 +95,26 @@ body {
 	justify-content: space-between;
 	margin-top: 20px;
 }
+
+@media ( max-width : 767px) {
+	main.col-10 {
+		margin-left: 20px;
+		/* Sidebar is always visible, so push the content */
+	}
+	.form-container {
+		margin-left: 20px;
+	}
+	.header {
+		margin-left: 20px;
+	}
+}
 </style>
 </head>
 <body>
 	<section layout:fragment="content">
 		<div class="container mt-4">
 			<header class="header">
-				<h1 class="brand-title" style="color:#000;">Enter new position details</h1>
+				<h2 class="brand-title" style="color:#000;">Enter new position details.</h2>
 			</header>
 			<div class="form-container">
 				<form th:action="@{/positions}" th:object="${positionForm}"

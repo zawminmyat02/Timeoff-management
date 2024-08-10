@@ -280,13 +280,21 @@ h2, h4, p {
 	margin-bottom: 10px;
 	font-size: 14px;
 }
+
+
+@media (max-width: 767px) {
+
+	 main.col-10 {
+        margin-left: 50px; /* Sidebar is always visible, so push the content */
+    }
+}
 </style>
 </head>
 
 <body>
 	<section layout:fragment="content">
 		<div class="container">
-			<h1 style="color: #000; font-size: 24px;">Leave Request</h1>
+			<h1 style="color: #000; font-size: 24px; margin-top: 10px; margin-bottom: 40px">Leave Request</h1>
 			<div class="progress-tracker">
 				<div id="step1-indicator" class="progress-step active">Step 1:
 					Details</div>
@@ -362,6 +370,10 @@ h2, h4, p {
             const prevStep3Button = document.getElementById('prevStep3');
             const submitButton = document.getElementById('submit');
             document.getElementById('errorAlert').style.display = 'none';
+            
+            const maternityLeaveDuration = parseInt(`[[${maternity}]]`, 10); // Ensure it's a number
+            console.log("Maternity Leave Duration:", maternityLeaveDuration);
+
 
 
             function getCsrfToken() {
@@ -391,6 +403,40 @@ h2, h4, p {
 
                 const result = await response.json();
                 return result.isOverlap;
+            }
+            
+            function updateEndDateIfMaternityLeave() {
+                const startDateElement = document.getElementById('startDate');
+                const leaveTypeElement = document.getElementById('leaveType');
+                const endDateElement = document.getElementById('endDate');
+
+
+
+            	const selectedLeaveType = leaveTypeElement.value;
+                const startDateValue = startDateElement.value;
+
+                // Assuming 'Maternity Leave' has a specific ID (replace with actual ID)
+                const maternityLeaveTypeId = 3; // Replace with actual ID for "Maternity Leave"
+
+                if (selectedLeaveType == maternityLeaveTypeId && startDateValue) {// Replace "3" with your actual maternity leave type ID
+                	const startDate = new Date(startDateValue);
+
+                    // Create a new date object for endDate without mutating the startDate
+                    const endDate = new Date(startDate.getTime());
+
+                    // Add the maternity leave duration in days and subtract 1 day
+                    endDate.setUTCDate(startDate.getUTCDate() + maternityLeaveDuration - 1);
+
+                    // Format the date as YYYY-MM-DD and set it to endDate input field
+                    const formattedEndDate = endDate.toISOString().split('T')[0];
+                    endDateElement.value = formattedEndDate;
+
+                    console.log("Maternity Leave Duration:", maternityLeaveDuration);
+                    console.log("Start Date:", startDate);
+                    console.log("Calculated End Date:", endDate);
+                    console.log("Adjusted End Date:", formattedEndDate);
+                  
+                }
             }
 
 
@@ -447,6 +493,10 @@ h2, h4, p {
                     return false;
                 }
             }
+            
+            document.getElementById('leaveType').addEventListener("change", updateEndDateIfMaternityLeave);
+            document.getElementById('startDate').addEventListener("change", updateEndDateIfMaternityLeave);
+
 
             function populateReviewDetails() {
                 const leaveTypeElement = document.getElementById('leaveType');
@@ -506,7 +556,13 @@ h2, h4, p {
 
            
         });
+        
+        document.addEventListener("DOMContentLoaded", function () {
+          
+        });
+
     </script>
+
 	</section>
 </body>
 </html>

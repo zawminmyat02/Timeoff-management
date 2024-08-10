@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{/layouts/user-board.html}">
+	layout:decorate="~{/layouts/admin-board.html}">
 <head>
 <title>Employee Salary Details</title>
 <link
@@ -103,14 +103,10 @@ body {
 	.col-10 {
 		width: 100%
 	}
-	
-	.nav-container{
-    width: 40px;
-		
+	.nav-container {
+		width: 40px;
 	}
-	
-	
-	.m-4{
+	.m-4 {
 		margin-left: 50px !important;
 	}
 }
@@ -119,41 +115,40 @@ body {
 <body>
 	<section layout:fragment="content">
 		<div class="m-4">
-		<div class="card">
-			<div class="card-header">Employee Salary Details</div>
-			<div class="card-body">
-				<table class="table table-bordered">
-					<tbody>
-						<!-- Employee Information -->
-						<tr>
-							<th>Name</th>
-							<td th:text="${employee.account.name}">John Doe</td>
-							<th>Employee Code</th>
-							<td th:text="${employee.code}">EMP12345</td>
-						</tr>
-						<tr>
-							<th>Department Code</th>
-							<td th:text="${employee.department.code}">ABC123</td>
-							<th>Department Name</th>
-							<td th:text="${employee.department.name}">Human Resources</td>
-						</tr>
-						<tr>
-							<th>Position Code</th>
-							<td th:text="${employee.position.id.positionCode.name}">POS456</td>
-							<th>Position Name</th>
-							<td th:text="${employee.position.id.positionCode.value}">Manager</td>
-						</tr>
-						
-						<tr>
+			<div class="card">
+				<div class="card-header">Employee Salary Details</div>
+				<div class="card-body">
+					<table class="table table-bordered">
+						<tbody>
+							<!-- Employee Information -->
+							<tr>
+								<th>Name</th>
+								<td th:text="${employee.account.name}">John Doe</td>
+								<th>Employee Code</th>
+								<td th:text="${employee.code}">EMP12345</td>
+							</tr>
+							<tr>
+								<th>Department Code</th>
+								<td th:text="${employee.department.code}">ABC123</td>
+								<th>Department Name</th>
+								<td th:text="${employee.department.name}">Human Resources</td>
+							</tr>
+							<tr>
+								<th>Position Code</th>
+								<td th:text="${employee.position.id.positionCode.name}">POS456</td>
+								<th>Position Name</th>
+								<td th:text="${employee.position.id.positionCode.value}">Manager</td>
+							</tr>
+
+							<tr>
 								<th>Email</th>
 								<td th:text="${employee.email}"></td>
 								<th>Unpaid Leaves</th>
 								<td th:text="${unpaid + ' days'}">2 days</td>
-						</tr>
-						
+							</tr>
 
-						<!-- Leave Information -->
-						<tr>
+							<!-- Leave Information -->
+							<tr>
 								<th>Sick Leave</th>
 								<td th:text="${employee.position.sickLeaves + ' days'}">5 days</td>
 								<th>Remaining :</th>
@@ -174,29 +169,31 @@ body {
 								<td th:text="${remainMaternityLeave + ' days'}">12 days</td>
 							</tr>
 						
-						
-
-						<!-- Salary Information -->
-						<tr>
-							<th colspan="2">Monthly Salary</th>
-							<td colspan="2" class="amount" th:text="${monthSalary + ' Ks.'}">4935.00 Ks.</td>
-						</tr>
-						<tr>
-							<th colspan="2">Daily Salary</th>
-							<td colspan="2" class="amount" th:text="${dailySalary + ' Ks.'}">10000 Ks.</td>
-						</tr>
-						<tr>
-							<th colspan="2">Total Deductions</th>
-							<td colspan="2" class="amount" th:text="${totalDeduction + ' Ks.'}">1000 Ks.</td>
-						</tr>
-						<tr class="total-row">
-							<th colspan="2">Net Salary</th>
-							<td colspan="2" class="amount" th:text="${newSalary + ' Ks.'}">XXXXXX Ks.</td>
-						</tr>
-					</tbody>
-				</table>
+							<!-- Salary Information -->
+							<tr>
+								<th colspan="2">Monthly Salary</th>
+								<td colspan="2" class="amount" th:text="${monthSalary + ' Ks.'}">4935.00
+									Ks.</td>
+							</tr>
+							<tr>
+								<th colspan="2">Daily Salary</th>
+								<td colspan="2" class="amount" th:text="${dailySalary + ' Ks.'}">10000
+									Ks.</td>
+							</tr>
+							<tr>
+								<th colspan="2">Total Deductions</th>
+								<td colspan="2" class="amount"
+									th:text="${totalDeduction + ' Ks.'}">1000 Ks.</td>
+							</tr>
+							<tr class="total-row">
+								<th colspan="2">Net Salary</th>
+								<td colspan="2" class="amount" th:text="${newSalary + ' Ks.'}">XXXXXX
+									Ks.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
 		</div>
 	</section>
 </body>

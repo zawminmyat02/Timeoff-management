@@ -1,6 +1,5 @@
 package yu.cs.spring.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,38 +20,34 @@ import yu.cs.spring.model.master.service.LeaveTypeService;
 public class LeaveController {
 
 	@Autowired
-    private LeaveTypeService leaveTypeService;
+	private LeaveTypeService leaveTypeService;
 
-    @Autowired
-    private LeaveApplicationService leaveApplicationService;
-    
-    
-    
-    @Autowired 
-    private EmployeeService employeeService;
+	@Autowired
+	private LeaveApplicationService leaveApplicationService;
 
-    @GetMapping
-    public String showLeaveApplicationForm(Model model) {
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    	var employee = employeeService.getEmployeeByUsername(auth.getName());
-        model.addAttribute("leaveTypes", leaveTypeService.findAll());
-        model.addAttribute("leaveApplicationForm", new LeaveApplicationForm(null, null, null, ""));
-        model.addAttribute("employeeCode",employee.getCode());
-        return "leave-application";
-    }
+	@Autowired
+	private EmployeeService employeeService;
 
-    @PostMapping("/submit")
-    public String submitLeaveApplication(@ModelAttribute LeaveApplicationForm leaveApplicationForm,Model model) {
-    	
-    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    	var employee = employeeService.getEmployeeByUsername(auth.getName());
-        model.addAttribute("employeeCode",employee.getCode());
+	@GetMapping
+	public String showLeaveApplicationForm(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		var employee = employeeService.getEmployeeByUsername(auth.getName());
+		model.addAttribute("maternity", employee.getMaternityLeaves());
+		model.addAttribute("leaveTypes", leaveTypeService.findAll());
+		model.addAttribute("leaveApplicationForm", new LeaveApplicationForm(null, null, null, ""));
+		model.addAttribute("employeeCode", employee.getCode());
+		return "leave-application";
+	}
 
-        leaveApplicationService.createLeaveApplication(leaveApplicationForm, employee);
-        return "redirect:/home";
-    }
-    
+	@PostMapping("/submit")
+	public String submitLeaveApplication(@ModelAttribute LeaveApplicationForm leaveApplicationForm, Model model) {
 
-    
-  
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		var employee = employeeService.getEmployeeByUsername(auth.getName());
+		model.addAttribute("employeeCode", employee.getCode());
+
+		leaveApplicationService.createLeaveApplication(leaveApplicationForm, employee);
+		return "redirect:/home";
+	}
+
 }

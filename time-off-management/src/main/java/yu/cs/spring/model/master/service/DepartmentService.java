@@ -61,6 +61,10 @@ public class DepartmentService {
                                    .map(Department::getName)
                                    .collect(Collectors.toList());
     }
+	
+	public boolean isHeadCodeValid(String headCode,String departmentCode) {
+	    return employeeRepo.existsByCodeAndDepartment(headCode,departmentCode); // Assuming headCode corresponds to an employee's ID
+	}
 
 
 }

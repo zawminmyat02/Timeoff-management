@@ -1,9 +1,12 @@
 package yu.cs.spring.controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,8 @@ import yu.cs.spring.model.master.output.EmployeeInfo;
 import yu.cs.spring.model.master.service.AccountService;
 import yu.cs.spring.model.master.service.DepartmentService;
 import yu.cs.spring.model.master.service.EmployeeService;
+import yu.cs.spring.model.master.service.LeaveApplicationService;
+import yu.cs.spring.model.master.service.LeaveBalanceService;
 
 @Controller
 public class EmployeeController {
@@ -45,6 +50,9 @@ public class EmployeeController {
 
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private LeaveBalanceService leaveService;
 
 	@GetMapping("/employees/new")
 	public String showCreateEmployeeForm(Model model) {
@@ -229,6 +237,41 @@ public class EmployeeController {
 		model.addAttribute("employees", employeeInfoList);
 		return "employee-list";
 	}
+	
+	@GetMapping("/salary")
+	public String getEmployeeSalaries(@RequestParam String employeeCode, Model model) {
+	    // Fetch employee data based on employeeCode
+	    Employee employee = employeeService.findById(employeeCode);
+	    model.addAttribute("employee", employee);
+	    
+
+		BigDecimal monthSalary = employee.getPosition().getBasicSalary();
+		BigDecimal salary = employee.getMonthlySalaries(); // This method returns BigDecimal
+		BigDecimal dailySalary = monthSalary.divide(BigDecimal.valueOf(30), RoundingMode.HALF_UP); // Assuming a 30-day month for simplicity
+		BigDecimal totalDeduction = dailySalary.multiply(BigDecimal.valueOf(employee.getUnpaidLeaves())).multiply(BigDecimal.valueOf(0.80));
+		 Map<String, Integer> leaveCounts = leaveService.getLeaveBalances(employee.getCode());
+	     model.addAttribute("leaveCounts", leaveCounts);
+	     model.addAttribute("remainSickLeave",leaveCounts.get("Sick Leaves"));
+	     model.addAttribute("remainCasualLeave",leaveCounts.get("Casual Leaves"));
+	     model.addAttribute("remainMaternityLeave",leaveCounts.get("Maternity Leaves"));
+	     model.addAttribute("unpaid",leaveCounts.get("Unpaid"));
+	     
+	     if(employee.getGender()== Gender.Male) {
+	    	 model.addAttribute("totalMaternity",60);
+	     }else {
+	    	 model.addAttribute("totalMaternity",employee.getPosition().getMaternityLeaves());
+
+	     }
+
+		
+		model.addAttribute("dailySalary",dailySalary );
+		model.addAttribute("monthSalary",monthSalary );
+		model.addAttribute("totalDeduction",totalDeduction);
+		model.addAttribute("newSalary",salary);
+	    // Add other required attributes for the view
+	    return "each-salaries"; // Thymeleaf template name for salary details
+	}
+
 	
 	
 

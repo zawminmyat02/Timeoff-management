@@ -13,7 +13,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
-import yu.cs.spring.model.transaction.entity.LeaveApplication;
 
 @Data
 @Entity

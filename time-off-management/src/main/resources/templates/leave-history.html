@@ -32,14 +32,27 @@ label {
 	font-size: 13px;
 	font-family: sans-serif;
 }
+
+@media (max-width: 768px) {
+    .m-4 {
+        margin-bottom: 0px !important;
+        padding-left: 5px;
+        margin-left: 55px !important;
+    }
+    
+    .btn-search{
+    	margin-left: 0px !important;
+    }
+
+}
 </style>
 </head>
 
 <body layout:fragment="content">
-	<div class="container mt-4">
+	<div class="container mt-4 m-4">
 		<header class="header">
 			<h2 class="brand-title" style="color: #000;">Leave History</h2>
-			<h6 style="color: #000;" class="text-muted d-none d-lg-block mt-3">Here're
+			<h6 style="color: #000;" class="text-muted d-lg-block mt-3">Here're
 				your leave records</h6>
 		</header>
 
@@ -49,28 +62,32 @@ label {
 
 				<div class="row  mt-4 flex">
 
-					<div class="col-2 form-group search">
+					<div class="col-lg-2 col-md-12 col-sm-12 form-group search">
 						<label for="fromDate">From Date </label> <input type="date"
 							name="fromDate" class="form-control" th:value="${fromDate}">
 					</div>
-					<div class="col-2 form-group search">
+					<div class="col-lg-2 col-md-12 col-sm-12 form-group search">
 						<label for="toDate">To Date </label> <input type="date"
 							name="toDate" class="form-control" placeholder="To Date"
 							th:value="${toDate}">
 					</div>
-					<div class="col-2 form-group search">
+					<div class="col-lg-2 col-md-12 col-sm-12 form-group search">
 						<label for="leaveType">Type </label> <select name="leaveType"
 							class="form-control">
 							<option value="">Select Leave Type</option>
 							<option value="Sick Leave"
 								th:selected="${leaveType == 'Sick Leave'}">Sick Leave</option>
-							<option value="Vacation Leave"
-								th:selected="${leaveType == 'Vacation Leave'}">Vacation
+							<option value="Casual Leave"
+								th:selected="${leaveType == 'Casual Leave'}">Casual
+								Leave</option>
+								
+							<option value="Maternity Leave"
+								th:selected="${leaveType == 'Maternity Leave'}">Maternity
 								Leave</option>
 						</select>
 					</div>
 
-					<div class="col-2 form-group search">
+					<div class="col-lg-2 col-md-12 col-sm-12 form-group search">
 						<label for="status">Status </label> <select name="status"
 							class="form-control">
 							<option value="">Select Status</option>
@@ -79,7 +96,7 @@ label {
 						</select>
 					</div>
 
-					<div class="col-2 form-group search" th:if="${name == 'Admin'}">
+					<div class="col-lg-2 col-md-12 col-sm-12 form-group search" th:if="${name == 'Admin'}">
 						<label for="leaveType">Department </label> <select
 							name="department" class="form-control">
 							<option value="">Select Department</option>
@@ -88,7 +105,7 @@ label {
 						</select>
 					</div>
 
-					<div class="col-2 form-group search gutter">
+					<div class="col-lg-2 col-md-12 col-sm-12 form-group search gutter">
 						<button type="submit" class="btn-search">
 							<i class="fas fa-search"></i>Search
 						</button>

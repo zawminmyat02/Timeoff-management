@@ -14,10 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import yu.cs.spring.model.master.entity.LeaveApplication;
 import yu.cs.spring.model.master.service.AccountService;
 import yu.cs.spring.model.master.service.DepartmentService;
 import yu.cs.spring.model.master.service.LeaveApplicationService;
-import yu.cs.spring.model.transaction.entity.LeaveApplication;
 
 @Controller
 public class LeaveHistoryController {

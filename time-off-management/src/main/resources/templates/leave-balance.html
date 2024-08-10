@@ -4,40 +4,57 @@
 	layout:decorate="~{/layouts/user-board.html}">
 <head>
 <style>
-	 .leave-item {
-	 		margin-left:20px;
-            margin-right: 40px; /* Add space between items */
-        }
-        
-       span{
-       	color: #000;
-       	font-family: sans-serif;
-       	font-size: 16px;
-       }
+.leave-item {
+	margin-left: 20px;
+	margin-right: 40px; /* Add space between items */
+}
+
+span {
+	color: #000;
+	font-family: sans-serif;
+	font-size: 16px;
+}
+
+@media ( max-width : 768px) {
+	
+	.header{
+		text-align: left;
+		
+	}
+	
+	.m-4{
+		margin-left: 50px !important;
+	}
+}
 </style>
 </head>
 
 <body layout:fragment="content">
 
-	<div class="container">
-		<header class="header mb-5">
-			<h2 class="brand-title" style="color: #000;">Leave Balance</h2>
-			<h6 style="color: #000;" class="text-muted d-none d-lg-block mt-3">Here're
-				your remaining leaves</h6>
-				
-		<div class="mt-5 mb-5">
-					<span th:each="leaveEntry : ${leaveCounts}" class="leave-item mt-5 mb-5">
-						<span th:text="${leaveEntry.key}">Leave Type</span>: <span
+	<div class="m-4">
+
+
+		<div class="container">
+			<header class="header mb-5">
+				<h2 class="brand-title" style="color: #000;">Leave Balance</h2>
+				<h6 style="color: #000;" class="text-muted d-sm-block d-md-block d-lg-block mt-3">Here're
+					your remaining leaves</h6>
+
+				<div class="mt-5 mb-5 ">
+					<span th:each="leaveEntry : ${leaveCounts}"
+						class="leave-item mt-5 mb-5 d-lg-inline d-md-inline d-none"> <span
+						th:text="${leaveEntry.key}">Leave Type</span>: <span
 						th:text="${leaveEntry.value + ' days'}">Leave Balance</span>
 					</span>
 				</div>
-		</header>
+			</header>
 
 
-		<div class="chart-container mt-3">
-			<div class="chart-wrapper">
-				
-				<canvas id="leaveBalanceChart"></canvas>
+			<div class="chart-container mt-3">
+				<div class="chart-wrapper">
+
+					<canvas id="leaveBalanceChart"></canvas>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -7,11 +7,11 @@ import jakarta.validation.constraints.NotNull;
 import yu.cs.spring.model.master.entity.Account;
 import yu.cs.spring.model.master.entity.Account.Role;
 import yu.cs.spring.model.master.entity.Employee;
+import yu.cs.spring.model.master.entity.LeaveApplication;
 import yu.cs.spring.model.master.entity.Employee.Gender;
 import yu.cs.spring.model.master.entity.Employee.Status;
 import yu.cs.spring.model.master.validators.DepartmentCodeForValid;
 import yu.cs.spring.model.master.validators.EmployeeEmailForUnique;
-import yu.cs.spring.model.transaction.entity.LeaveApplication;
 
 
 public record EmployeeFormForCreate(

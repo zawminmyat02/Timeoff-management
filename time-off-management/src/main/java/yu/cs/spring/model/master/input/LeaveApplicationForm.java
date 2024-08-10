@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import yu.cs.spring.model.master.entity.Employee;
+import yu.cs.spring.model.master.entity.LeaveApplication;
 import yu.cs.spring.model.master.entity.LeaveType;
-import yu.cs.spring.model.transaction.entity.LeaveApplication;
 
 public record LeaveApplicationForm(@NotNull(message = "Leave type ID is required.") Long leaveTypeId,
 

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import yu.cs.spring.model.master.repo.EmployeeRepo;
-import yu.cs.spring.model.transaction.repo.LeaveApplicationRepo;
+import yu.cs.spring.model.master.repo.LeaveApplicationRepo;
 
 @Service
 public class LeaveBalanceService {

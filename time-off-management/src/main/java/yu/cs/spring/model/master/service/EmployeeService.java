@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import yu.cs.spring.model.master.EmployeeCodeGenerator;
 import yu.cs.spring.model.master.entity.Department;
 import yu.cs.spring.model.master.entity.Employee;
+import yu.cs.spring.model.master.entity.Employee.Gender;
 import yu.cs.spring.model.master.entity.EmployeeCodeSeq;
 import yu.cs.spring.model.master.entity.Position;
 import yu.cs.spring.model.master.entity.PositionPk;
@@ -74,7 +75,16 @@ public class EmployeeService {
 		
 		entity.setSickLeaves(position.get().getSickLeaves());
 		entity.setCasualLeaves(position.get().getCasualLeaves());
-		entity.setMaternityLeaves(position.get().getMaternityLeaves());
+		
+		if(entity.getGender() == Gender.Male) {
+			entity.setMaternityLeaves(60);
+
+		}
+		else {
+			entity.setMaternityLeaves(position.get().getMaternityLeaves());
+
+		}
+		
 		entity.setMonthlySalaries(position.get().getBasicSalary());
 
 		employeeRepo.saveAndFlush(entity);

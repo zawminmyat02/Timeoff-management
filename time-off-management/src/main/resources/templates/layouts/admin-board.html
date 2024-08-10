@@ -107,7 +107,7 @@ $(document).ready(function() {
             var checkboxes = document.querySelectorAll('.checkbox-column input[type="checkbox"]:checked');
             var deleteButton = document.getElementById('delete-button');
             var createButton = document.getElementById('create-button');
-            deleteButton.style.display = checkboxes.length > 0 ? 'inline-block' : 'none';
+            deleteButton.style.display = checkboxes.length > 0 ? 'flex' : 'none';
             createButton.classList.toggle('btn-create-hidden', checkboxes.length > 0);
             createButton.classList.toggle('btn-create-show', checkboxes.length < 0);
 
@@ -123,40 +123,83 @@ $(document).ready(function() {
         }
 
         window.onload = initializeCheckboxes;
-		
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const navContainer = document.querySelector('.nav-container');
+            const sidebar = document.querySelector('.sidebar');
+
+            if (navContainer && sidebar) {
+                navContainer.addEventListener('click', function () {
+                    navContainer.classList.toggle('is-active');
+                    sidebar.classList.toggle('show');
+                });
+            }
+        });
         
 	</script>
-        
-    
-   
+
+
+
 
 
 </head>
 
 <style>
+.custom-row {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px !important;
+}
 
+.title {
+	text-align: center;
+	position: absolute;
+	top: 8px;
+	left: 5px;
+	font-family: sans-serif;
+	font-size: 26px;
+	color: #000;
+	margin: 0;
+}
 </style>
 <body>
 	<div class="container-fluid">
 
-		<div class="row ">
-			<!--Main content-->
+		<div class="custom-row row">
 
-			<nav class="col-2">
-				<span th:replace="~{fragments/sidebar :: sidebar}"></span>
 
-			</nav>
+			<div class="nav-container d-lg-none" tabindex="0">
 
-			<main class="col-10">
+				<div class="nav-toggle"></div>
+				<div class="nav-toggle"></div>
+				<div class="nav-toggle"></div>
 
-				<div layout:fragment="content">
-					<!--dynamic content-->
-					<!--you can replace this using page-->
-				</div>
-			</main>
+
+			</div>
+
+			<h1 class="d-inline d-lg-none d-md-none title">TIME-OFF</h1>
 
 
 		</div>
+
+
+		<!--Main content-->
+
+		<nav class="col-2">
+			<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+		</nav>
+
+		<main class="col-10 ">
+
+			<div layout:fragment="content">
+				<!--dynamic content-->
+				<!--you can replace this using page-->
+			</div>
+		</main>
+
+
+	</div>
 	</div>
 
 </body>

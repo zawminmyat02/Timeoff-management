@@ -28,4 +28,9 @@ public interface EmployeeRepo extends BaseRepository<Employee, String>{
 
     @Query("SELECT e.sickLeaves, e.casualLeaves, e.maternityLeaves,e.unpaidLeaves FROM Employee e WHERE e.code = :employeeCode")
     List<Object[]> findLeaveBalancesByEmployeeCode(String employeeCode);
+    
+    // Method to check if an Employee with a given code exists in a specific department
+    @Query("SELECT CASE WHEN COUNT(e) > 0 THEN true ELSE false END FROM Employee e WHERE e.code = :code AND e.department.code = :departmentCode")
+    boolean existsByCodeAndDepartment(@Param("code") String code, @Param("departmentCode") String departmentCode);
+
 }

@@ -25,26 +25,14 @@ body {
 	font-size: 24px;
 }
 
-.search-container {
-	position: relative;
-	display: flex;
-	align-items: center;
-}
-
 .search-container input {
 	background-color: #d8efd3;
 	color: #000;
-	padding-left: 40px; /* Adjust the padding to make space for the icon */
+	padding-left: 20px; /* Adjust the padding to make space for the icon */
 	width: 100%;
 	height: 40px; /* Adjust the height as needed */
 	border: 1px solid #000;
 	border-radius: 15px;
-}
-
-.search-container .custom-icon {
-	position: absolute;
-	left: 23px;
-	color: #000;
 }
 
 #employee-table {
@@ -92,7 +80,7 @@ body {
 }
 
 .btn-create {
-	margin-left: 10px;
+	margin-left: 40px;
 	background-color: #55ad9b;
 	color: #000;
 	border: none;
@@ -110,30 +98,36 @@ body {
 }
 
 .btn-delete {
-	margin-left: 10px;
+	margin-left: 50px;
 	background-color: #55ad9b;
 	color: #000;
 	border: none;
-	padding: 8px 20px;
+	padding: 6px 24px;
 	border-radius: 5px;
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.3s;
 	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .btn-select {
-	margin-left: 10px;
 	background-color: #55ad9b;
 	color: #000;
 	border: none;
-	padding: 8px 20px;
+	margin-left: 10px;
+	padding: 8px 21px;
 	border-radius: 5px;
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.3s;
 	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.btn-create i {
+.btn-create i, .btn-select i {
 	margin-right: 8px;
 }
 
@@ -154,23 +148,7 @@ body {
 }
 
 .btn-create {
-	margin-left: 10px;
-	background-color: #55ad9b;
-	color: #000;
-	border: none;
-	padding: 10px 20px;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s, transform 0.3s;
-	text-decoration: none;
-}
-
-.btn-create-hidden {
-	display: none;
-}
-
-.btn-search {
-  margin-left: 10px;
+	margin-left: 50px;
 	background-color: #55ad9b;
 	color: #000;
 	border: none;
@@ -179,95 +157,201 @@ body {
 	cursor: pointer;
 	transition: background-color 0.3s, transform 0.3s;
 	text-decoration: none;
-	  display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
+.btn-create-hidden {
+	display: none;
+}
 
+.btn-search {
+	margin-left: 1px;
+	background-color: #55ad9b;
+	color: #000;
+	border: none;
+	padding: 8px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
 .btn-search i {
-    margin-right: 5px; /* Adjust the spacing between icon and text */
-    vertical-align: middle; /* Ensure vertical alignment */
+	margin-right: 5px; /* Adjust the spacing between icon and text */
+	vertical-align: middle; /* Ensure vertical alignment */
 }
+
+@media ( max-width : 768px) {
+	.m-4 {
+		margin-bottom: 0px !important;
+		padding-left: 5px;
+		margin-left: 45px !important;
+	}
+	.btn-search {
+		margin-left: 0px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.btn-create, .btn-select , .btn-delete{
+		margin-left: 0px;
+		margin-bottom: 5px;
+	}
+	
+	
+	.header {
+		margin-bottom: 10px !important;
+	}
+}
+
+
+@media (min-width: 768px) and (max-width: 1500px) {
+   .btn-search {
+		margin-left: 0px;
+		margin-right: 20px;
+	
+	}
+	.btn-create, .btn-select , .btn-delete{
+		margin-left: 60px;
+	}
+	
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1500px) {
+   .btn-search {
+		margin-left: 0px;
+		margin-right: 20px;
+	
+	}
+	.btn-create, .btn-select , .btn-delete{
+		margin-left: 60px;
+	}
+	
+}
+
 </style>
 </head>
 <body>
 	<section layout:fragment="content">
-		<div class="container mt-4">
-			<header class="header">
-				<h1 style="color: #000;">TIME-OFF</h1>
-				<h2 class="brand-title" style="color: #000;">Employee
-					Management</h2>
-			</header>
-			<div class="row mb-4">
-				<form class="col-9 form-group search-container" th:action="@{/search}" method="get">
-					<i class="fas fa-search custom-icon"></i> <input type="text"
-						class="form-control"  name="query" placeholder="Search by employee code">
-					 <button type="submit" class="btn-search"><i class="fas fa-search"></i>Search</button>
-				</form>
-			     
-				<div class="col-3 text-right py-2">
-					<a id="create-button" th:href="@{/employees/new}"
-						class="btn-create"><i class="fas fa-plus-circle"></i> Create</a>
+		<div class="m-4">
 
-					<button id="delete-button" onclick="submitDeleteForm()"
-						class="btn-delete">
-						<i class="fas fa-trash"></i> Delete
-					</button>
-					<button id="select-button" onclick="toggleCheckboxes()"
-						class="btn-select">
-						<i class="fa-solid fa-bars"></i> Select
-					</button>
+			<div class="container mt-4">
+				<header class="header mb-5">
+					<h1 style="color: #000;" class="d-lg-inline d-md-inline d-none">TIME-OFF</h1>
+					<h2 class="brand-title mt-3" style="color: #000;">Employee
+						Management</h2>
+
+				</header>
+				<div class="mb-4 mt-5">
+
+					<form class="search-container mt-5" th:action="@{/search}" method="get">
+						<div class="row  mt-5 d-flex">
+
+							<div class="col-lg-7 col-md-7 col-sm-12 ">
+								<input type="text" class="form-control" name="query"
+									placeholder="Search by employee code">
+							</div>
+
+							<div class="col-lg-1 col-md-1 col-sm-12 ">
+								<button type="submit" class="btn-search">
+									<i class="fas fa-search"></i>Search
+								</button>
+							</div>
+
+							<div class="col-lg-2 col-md-2 col-sm-12 d-flex ">
+								<a id="create-button" th:href="@{/employees/new}"
+									class="btn-create"><i class="fas fa-plus-circle"></i>
+									Create</a>
+									
+								<a id="delete-button" onclick="submitDeleteForm()"
+									class="btn-delete">
+									<i class="fas fa-trash"></i> Delete
+								</a>
+							</div>
+
+
+								
+							<div class="col-lg-2 col-md-2 col-sm-12 d-flex">
+								<a id="select-button" onclick="toggleCheckboxes()"
+									class="btn-select btn-block">
+									<i class="fa-solid fa-bars"></i> Select
+								</a>
+							</div>
+						</div>
+					</form>
+
+
 
 				</div>
-				<div class="mt-2" th:if="${errors}">
-					<div th:each="error : ${errors}" class="alert alert-danger"
-						role="alert">
-						<span th:text="${error}"></span>
-					</div>
-				</div>
-				<form id="delete-form" th:action="@{/delete}" method="post">
-					<input type="hidden" id="employee-ids" name="employeeIds">
-					<table id="employee-table">
-						<thead>
-							<tr>
-								<th>Code</th>
-								<th>Name</th>
-								<th>Phone</th>
-								<th>Department</th>
-								<th>Position</th>
-								<th>Status</th>
-								<th>Assign Date</th>
-								<th>Remark</th>
-								<th>Update</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="employee : ${employees}">
-								<td th:text="${employee.code}"></td>
-								<td th:text="${employee.name}"></td>
-								<td th:text="${employee.phone}"></td>
-								<td th:text="${employee.department}"></td>
-								<td th:text="${employee.getPositionName()}"></td>
-								<td th:text="${employee.status}"></td>
-								<td th:text="${employee.assignAt}"></td>
-								<td th:text="${employee.remark}"></td>
-								<td><a
-									th:href="@{/employees/edit/{id}(id=${employee.code})}"> <i
-										class="fas fa-edit"></i>
-								</a></td>
-
-								<td class="checkbox-column"><input type="checkbox"
-									name="employeeCode" th:value="${employee.code}"
-									th:disabled="${employee.name == name}"
-									onchange="checkSelected()"></td>
-
-							</tr>
-						</tbody>
-					</table>
-				</form>
 			</div>
+			<div class="mt-2" th:if="${errors}">
+				<div th:each="error : ${errors}" class="alert alert-danger"
+					role="alert">
+					<span th:text="${error}"></span>
+				</div>
+			</div>
+			<form id="delete-form" th:action="@{/delete}" method="post">
+				<input type="hidden" id="employee-ids" name="employeeIds">
+				<table id="employee-table">
+					<thead>
+						<tr>
+							<th>Code</th>
+							<th>Name</th>
+							<th>Phone</th>
+							<th>Department</th>
+							<th>Position</th>
+							<th>Status</th>
+							<th>Assign Date</th>
+							<th>Remark</th>
+							<th>Update</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="employee : ${employees}"  th:data-employee-code="${employee.code}"  onclick="redirectToSalaries(event, this)">
+							<td th:text="${employee.code}"></td>
+							<td th:text="${employee.name}"></td>
+							<td th:text="${employee.phone}"></td>
+							<td th:text="${employee.department}"></td>
+							<td th:text="${employee.getPositionName()}"></td>
+							<td th:text="${employee.status}"></td>
+							<td th:text="${employee.assignAt}"></td>
+							<td th:text="${employee.remark}"></td>
+							<td><a
+								th:href="@{/employees/edit/{id}(id=${employee.code})}"> <i
+									class="fas fa-edit"></i>
+							</a></td>
+
+							<td class="checkbox-column"><input type="checkbox"
+								name="employeeCode" th:value="${employee.code}"
+								th:disabled="${employee.name == name}"
+								onchange="checkSelected()"></td>
+
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	<script>
+	function redirectToSalaries(event, row) {
+        // Check if the clicked element is a checkbox
+        if (event.target.type === 'checkbox') {
+            // Prevent the row click event from triggering
+            event.stopPropagation();
+        } else {
+            // Proceed with the redirection
+            const employeeCode = row.getAttribute('data-employee-code');
+            const url = `/salary?employeeCode=${employeeCode}`;
+            window.location.href = url;
+        }
+    }
+</script>
+	
 	</section>
 </body>
 
