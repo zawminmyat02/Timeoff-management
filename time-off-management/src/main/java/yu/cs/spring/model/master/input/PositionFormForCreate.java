@@ -18,9 +18,7 @@ public record PositionFormForCreate(
 		@NotNull(message = "Please enter sick leaves.")
 		Integer sickLeaves,
 		@NotNull(message = "Please enter casual leaves.")
-		Integer casualLeaves,
-		@NotNull(message = "Please enter maternity leaves.")
-		Integer maternityLeaves
+		Integer casualLeaves
 		) {
 
 	public Position entity() {
@@ -33,7 +31,6 @@ public record PositionFormForCreate(
 		entity.setBasicSalary(basicSalary);
 		entity.setSickLeaves(sickLeaves);
 		entity.setCasualLeaves(casualLeaves);
-		entity.setMaternityLeaves(maternityLeaves);
 		return entity;
 	}
 

@@ -48,7 +48,7 @@ public class SalariesController {
 	     if(employee.getGender()== Gender.Male) {
 	    	 model.addAttribute("totalMaternity",60);
 	     }else {
-	    	 model.addAttribute("totalMaternity",employee.getPosition().getMaternityLeaves());
+	    	 model.addAttribute("totalMaternity",90);
 
 	     }
 

@@ -312,3 +312,15 @@ main {
             height: 100% !important;
         }
         
+   /* Style each option element */
+.form-control option {
+    background-color: #d8efd3; /* Default background color for the options */
+    color: #212529;
+}
+        
+  .form-control option:hover {
+    background-color: #d8efd3; /* Background color when hovering over an option */
+    color: white; /* Text color when hovering over an option */
+}
+
+        

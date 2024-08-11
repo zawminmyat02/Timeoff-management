@@ -11,7 +11,7 @@ import yu.cs.spring.model.master.entity.PositionPk;
 import yu.cs.spring.model.master.entity.Position_;
 
 public record PositionInfo(PositionPk id, String departmentCode, String departmentName, BigDecimal basicSalary,
-		int sickLeaves, int casualLeaves, int maternityLeaves) {
+		int sickLeaves, int casualLeaves) {
 
 	public String getCode() {
 		return id.getCode();
@@ -27,8 +27,7 @@ public record PositionInfo(PositionPk id, String departmentCode, String departme
 
 	public static PositionInfo from(Position entity) {
 		return new PositionInfo(entity.getId(), entity.getDepartment().getCode(), entity.getDepartment().getName(),
-				entity.getBasicSalary(), entity.getSickLeaves(), entity.getCasualLeaves(),
-				entity.getMaternityLeaves());
+				entity.getBasicSalary(), entity.getSickLeaves(), entity.getCasualLeaves());
 		
 	}
 
@@ -42,7 +41,6 @@ public record PositionInfo(PositionPk id, String departmentCode, String departme
 		list.add(root.get(Position_.basicSalary));
 		list.add(root.get(Position_.sickLeaves));
 		list.add(root.get(Position_.casualLeaves));
-		list.add(root.get(Position_.maternityLeaves));
 
 		return list.toArray(size -> new Selection<?>[size]);
 	}

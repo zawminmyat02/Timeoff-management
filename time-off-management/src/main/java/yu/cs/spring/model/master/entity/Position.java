@@ -33,9 +33,6 @@ public class Position {
 	@Column(nullable = false)
 	private int casualLeaves;
 	
-	@Column(nullable = false)
-	private int maternityLeaves;
-	
 	@OneToMany(mappedBy = "position")
 	private List<Employee> employees;
 	

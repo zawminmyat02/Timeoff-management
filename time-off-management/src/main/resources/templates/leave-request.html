@@ -150,6 +150,11 @@ label {
 	.my-row {
 		--bs-gutter-x: 2rem !important;
 	}
+	
+		.mar{
+		margin-left: 15px;
+	}
+	
 }
 
 /* Media Query for Medium Screens (768px to 991px) */
@@ -268,7 +273,7 @@ label {
 			</form>
 		</div>
 
-		<div class="row" id="noRequests" th:if="${pending.isEmpty()}">
+		<div class="row mar" id="noRequests" th:if="${pending.isEmpty()}">
 			<div class="col-1"></div>
 			<div class="col-10 nocard">
 				<h5>No Pending Leave Requests</h5>

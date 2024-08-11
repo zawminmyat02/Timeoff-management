@@ -47,6 +47,8 @@ body {
 	border-top: 1px solid #dee2e6;
 }
 
+
+
 .table th {
 	background-color: #f9fbf4;
 	font-weight: bold;
@@ -81,7 +83,18 @@ body {
 
 @media ( max-width : 768px) {
 	.card {
-		padding: 15px;
+		padding: 0px;
+	}
+	.table {
+		table-layout: auto; /* Allows dynamic adjustment of column widths */
+	}
+	.email {
+		max-width: 200px; /* Adjust based on your layout needs */
+		overflow-wrap: break-word;
+	}
+	
+	.card-body{
+		padding: 5px;
 	}
 	.navbar {
 		position: relative;
@@ -141,31 +154,32 @@ body {
 							</tr>
 
 							<tr>
-								<th>Email</th>
-								<td th:text="${employee.email}"></td>
+								
 								<th>Unpaid Leaves</th>
 								<td th:text="${unpaid + ' days'}">2 days</td>
+								<th>Email</th>
+								<td th:text="${employee.email}" class="email">Email</td>
 							</tr>
 
 							<!-- Leave Information -->
 							<tr>
 								<th>Sick Leave</th>
 								<td th:text="${employee.position.sickLeaves + ' days'}">5 days</td>
-								<th>Remaining :</th>
+								<th>Remaining:</th>
 								<td th:text="${remainSickLeave + ' days'}">30 days</td>
 							</tr>
 
 							<tr>
 								<th>Casual Leave</th>
 								<td th:text="${employee.position.casualLeaves + ' days'}">12 days</td>
-								<th>Remaining :</th>
+								<th>Remaining:</th>
 								<td th:text="${remainCasualLeave + ' days'}">12 days</td>
 							</tr>
 							<tr>
 								<th>Maternity Leave</th>
 								<td th:text="${totalMaternity + ' days'}">12 days</td>
 
-								<th>Remaining :</th>
+								<th>Remaining:</th>
 								<td th:text="${remainMaternityLeave + ' days'}">12 days</td>
 							</tr>
 						

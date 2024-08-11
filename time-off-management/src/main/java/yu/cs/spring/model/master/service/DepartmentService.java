@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -13,6 +16,7 @@ import yu.cs.spring.model.master.entity.Account.Role;
 import yu.cs.spring.model.master.entity.Department;
 import yu.cs.spring.model.master.entity.Employee;
 import yu.cs.spring.model.master.input.DepartmentFormForManagerChanges;
+import yu.cs.spring.model.master.repo.AccountRepo;
 import yu.cs.spring.model.master.repo.DepartmentRepo;
 import yu.cs.spring.model.master.repo.EmployeeRepo;
 
@@ -23,7 +27,31 @@ public class DepartmentService {
 	private DepartmentRepo departmentRepo;
 	
 	@Autowired
+	private AccountRepo accountRepo;
+	
+	@Autowired
 	private EmployeeRepo employeeRepo;
+	
+	@Autowired
+	private SessionRegistry sessionRegistry;
+
+	private void invalidateUserSessions(String username) {
+	    List<Object> principals = sessionRegistry.getAllPrincipals();
+
+	    for (Object principal : principals) {
+	        if (principal instanceof UserDetails) {
+	            String principalName = ((UserDetails) principal).getUsername();
+
+	            if (principalName.equals(username)) {
+	                List<SessionInformation> sessions = sessionRegistry.getAllSessions(principal, false);
+
+	                for (SessionInformation sessionInfo : sessions) {
+	                    sessionInfo.expireNow(); // Mark the session as expired
+	                }
+	            }
+	        }
+	    }}
+	    
 
 	public void saveDepartment(Department department) {
 		departmentRepo.save(department);
@@ -38,10 +66,21 @@ public class DepartmentService {
 	    Employee manager = employeeRepo.findById(form.headCode()).orElseThrow(() -> new EntityNotFoundException("Employee not found"));
 	    Account account = manager.getAccount();
 	    account.setRole(Role.HOD);
+	    
+	    if( entity.getHeadOfDepartment() != null) {
+		    var previousAccount = entity.getHeadOfDepartment().getAccount();
+	    	previousAccount.setRole(Role.Employee);
+	    	accountRepo.save(previousAccount);
+	    	invalidateUserSessions(previousAccount.getUsername());
 
+	    }
+	   
 	    entity.setHeadOfDepartment(manager);
 	    
 	    departmentRepo.save(entity);
+	    
+	    invalidateUserSessions(account.getUsername());
+
 	}
 
 	public Department findByName(String userDepartment) {
