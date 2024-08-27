@@ -36,6 +36,7 @@ public class LeaveBalanceController {
 		Employee employee = employeeRepo.findByAccountUsername(name);
         Map<String, Integer> leaveCounts = leaveService.getLeaveBalances(employee.getCode());
         model.addAttribute("leaveCounts", leaveCounts);
+        model.addAttribute("unpaid",leaveCounts.get(3));
         return "leave-balance";
     }
  

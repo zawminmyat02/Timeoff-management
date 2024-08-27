@@ -16,13 +16,10 @@ span {
 }
 
 @media ( max-width : 768px) {
-	
-	.header{
+	.header {
 		text-align: left;
-		
 	}
-	
-	.m-4{
+	.m-4 {
 		margin-left: 50px !important;
 	}
 }
@@ -37,16 +34,18 @@ span {
 		<div class="container">
 			<header class="header mb-5">
 				<h2 class="brand-title" style="color: #000;">Leave Balance</h2>
-				<h6 style="color: #000;" class="text-muted d-sm-block d-md-block d-lg-block mt-3">Here're
+				<h6 style="color: #000;"
+					class="text-muted d-sm-block d-md-block d-lg-block mt-3">Here're
 					your remaining leaves</h6>
 
 				<div class="mt-5 mb-5 ">
 					<span th:each="leaveEntry : ${leaveCounts}"
-						class="leave-item mt-5 mb-5 d-lg-inline d-md-inline d-none"> <span
-						th:text="${leaveEntry.key}">Leave Type</span>: <span
+						class="leave-item mt-5 mb-5 d-lg-inline d-md-inline d-none">
+						<span th:text="${leaveEntry.key}">Leave Type</span>: <span
 						th:text="${leaveEntry.value + ' days'}">Leave Balance</span>
 					</span>
 				</div>
+
 			</header>
 
 
@@ -61,31 +60,41 @@ span {
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		var leaveCounts = /*[[${leaveCounts}]]*/{};
+		var unpaid = {};
 
 		var ctx = document.getElementById('leaveBalanceChart').getContext('2d');
+		var colors = Object.keys(leaveCounts).map((label, index, arr) => 
+	    index === arr.length - 1 ? 'rgba(255, 0, 0, 0.5)' : 'rgba(60, 179, 113, 0.5)'
+	);
+
 		var chart = new Chart(ctx, {
-			type : 'bar', // You can change this to 'line', 'pie', etc.
-			data : {
-				labels : Object.keys(leaveCounts),
-				datasets : [ {
-					label : 'Leave Balance',
-					data : Object.values(leaveCounts),
-					backgroundColor : 'rgba(60, 179, 113, 0.5)',
-					borderColor : 'rgba(75, 192, 192, 1)',
-					borderWidth : 1
-				} ]
-			},
-			options : {
-				scales : {
-					y : {
-						beginAtZero : true
-					}
-				},
-				responsive : true,
-				maintainAspectRatio : false
-			}
+		    type: 'bar',
+		    data: {
+		        labels: Object.keys(leaveCounts), // Labels for the x-axis
+		        datasets: [{
+		            label: 'Leave Balance',
+		            data: Object.values(leaveCounts), // Data for Leave Balance
+		            backgroundColor: colors, // Background colors for bars
+		            borderColor: 'rgba(75, 192, 192, 1)', // Border color for bars
+		            borderWidth: 0 // Border width for bars
+		        },{
+		            label: 'Unpaid Leave',
+		            data: Object.values(unpaid), // Data for Unpaid Leave
+		            backgroundColor: 'rgba(246, 30, 30, 0.8)', // Different colors for Unpaid Leave bars
+		            borderColor: 'rgba(246, 30, 30, 0.8)', // Different border color for Unpaid Leave bars
+		            borderWidth: 0 // Border width for bars
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            y: {
+		                beginAtZero: true // Start y-axis at zero
+		            }
+		        },
+		        responsive: true,
+		        maintainAspectRatio: false // Allow chart to resize correctly
+		    }
 		});
-		/*]]>*/
-	</script>
+</script>
 </body>
 </html>

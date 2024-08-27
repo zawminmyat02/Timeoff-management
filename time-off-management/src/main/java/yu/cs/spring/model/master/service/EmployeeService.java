@@ -81,7 +81,7 @@ public class EmployeeService {
 
 		}
 		else {
-			entity.setMaternityLeaves(90);
+			entity.setMaternityLeaves(180);
 
 		}
 		

@@ -299,12 +299,12 @@ main {
             height: 100vh; /* Adjust as needed */
         }
         #leaveBalanceChart {
-            width: 500px; /* Adjust as needed */
+            width: 200px; /* Adjust as needed */
             height: 350px; /* Adjust as needed */
         }
         
       .chart-wrapper {
-            width: 900px; /* Set the desired width */
+            width: 700px; /* Set the desired width */
             height: 500px; /* Set the desired height */
         }
         #leaveBalanceChart {
