@@ -1,7 +1,5 @@
 package yu.cs.spring.model.master.entity;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,10 +10,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Account implements Serializable {
-
-	
-	private static final long serialVersionUID = 1L;
+public class Account {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

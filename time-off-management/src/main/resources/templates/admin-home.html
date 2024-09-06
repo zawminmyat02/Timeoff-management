@@ -206,6 +206,10 @@ label {
 							<li>
 								<h6 class="dropdown-item" th:text="${email}"></h6>
 							</li>
+							
+							<li><a th:href="@{/change-password}" id="signoutLink"
+								class="dropdown-item">Change Password</a></li>
+							
 							<li><a th:href="@{/logout}" id="signoutLink"
 								class="dropdown-item">Log out</a></li>
 						</ul></li>
